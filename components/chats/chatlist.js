@@ -1,22 +1,34 @@
 /* eslint-disable react/jsx-key */
 import React, { useEffect, useState } from "react";
-import axios from "../axios";
-import { useDispatch } from "react-redux";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setChatbotChat,
   setChatbotChatlist,
   setChatSlotIntent,
 } from "../../redux/analytics/analyticsslice";
+import { selectUser } from "../../redux/authentication/authslice";
 
 function ChatList() {
+  const user = useSelector(selectUser);
+  const schema = user.user.schema;
+  const token = user.user.token;
+
   const [chatbotchat, setchatbotchat] = useState([]);
   const [chatslotintents, setchatslotintents] = useState([]);
   const [listchatslotintents, setlistchatslotintents] = useState([]);
 
   const dispatch = useDispatch();
 
+  const authAxios = axios.create({
+    baseURL: `http://${schema}127.0.0.1:8000/api/`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
   const getChatbotChat = async () => {
-    const { data } = axios
+    const { data } = authAxios
       .get(`retrievechatbotchats/${id}/`)
       .then((response) => {
         console.log(response.data);
@@ -47,7 +59,9 @@ function ChatList() {
 
   const getChatSlotIntentFilling = async () => {
     const { data1 } = axios
-      .get(`retrieveupdateslotintents/${id}/`)
+      .get(
+        `http://${schema}127.0.0.1:8000/api/retrieveupdateslotintents/${id}/`
+      )
       .then((response) => {
         console.log(response.data);
         dispatch(
@@ -77,7 +91,7 @@ function ChatList() {
 
   const getChatbotChatList = async () => {
     const { data } = axios
-      .get(`listchats/`)
+      .get(`http://${schema}127.0.0.1:8000/api/listchats/`)
       .then((response) => {
         console.log(response.data);
         dispatch(

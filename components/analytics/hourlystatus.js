@@ -1,8 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import axios from "../../components/axios";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { selectUser } from "../../redux/authentication/authslice";
 
 function Hourlystatus() {
+  const user = useSelector(selectUser);
+  const schema = user.user.schema;
+  const token = user.user.token;
+
   const [hourlyengagement, sethourlyengagement] = useState([]);
   const [hourlychats, sethourlychats] = useState([]);
   const [hourlycountescalatedissues, sethourlycountescalatedissues] = useState(
@@ -13,14 +19,20 @@ function Hourlystatus() {
   const [hourlyaverageresponsetime, sethourlyaverageresponsetime] = useState(
     []
   );
+  const authAxios = axios.create({
+    baseURL: `http://${schema}127.0.0.1:8000/api/`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   const dispatch = useDispatch();
 
   const getHourlyChats = async () => {
     //const dispatch = useDispatch();
 
-    const { data } = axios
-      .get(`/hourlychats `)
+    const { data } = authAxios
+      .get(`hourlychats `)
       .then((response) => {
         console.log(response.data);
         //dispatch(
@@ -50,8 +62,8 @@ function Hourlystatus() {
   const getHourlyAverageResponseTime = async () => {
     //const dispatch = useDispatch();
 
-    const { data } = axios
-      .get(`/hourlyaverageresponsetime `)
+    const { data } = authAxios
+      .get(`hourlyaverageresponsetime `)
       .then((response) => {
         console.log(response.data);
         //dispatch(
@@ -82,8 +94,8 @@ function Hourlystatus() {
   const getHourlyEscalatedIssues = async () => {
     //const dispatch = useDispatch();
 
-    const { data } = axios
-      .get(`/hourlycountescalatedissues `)
+    const { data } = authAxios
+      .get(`hourlycountescalatedissues `)
       .then((response) => {
         console.log(response.data);
         //dispatch(
@@ -113,8 +125,8 @@ function Hourlystatus() {
   const getHourlyQueriesReceived = async () => {
     //const dispatch = useDispatch();
 
-    const { data } = axios
-      .get(`/hourlyqueriesreceived `)
+    const { data } = authAxios
+      .get(`hourlyqueriesreceived `)
       .then((response) => {
         console.log(response.data);
         //dispatch(
@@ -144,7 +156,7 @@ function Hourlystatus() {
   const getHourlyClientSatisfaction = async () => {
     //const dispatch = useDispatch();
 
-    const { data } = axios
+    const { data } = authAxios
       .get(`/hourlyclientsatisfaction `)
       .then((response) => {
         console.log(response.data);

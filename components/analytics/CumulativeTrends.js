@@ -1,22 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import coverpage from "../../images/darkbrainlogo.jpg";
-import { useDispatch } from "react-redux";
-import axios from "../../components/axios";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { selectUser } from "../../redux/authentication/authslice";
 
 function CumulativeTrends() {
+  const user = useSelector(selectUser);
+  const schema = user.user.schema;
+  const token = user.user.token;
+
   const [countallchats, setcountallchats] = useState([]);
   const [countescalatedissues, setcountescalatedissues] = useState([]);
   const [averageinteractiontime, setaverageinteractiontime] = useState([]);
+  const authAxios = axios.create({
+    baseURL: `http://${schema}127.0.0.1:8000/api/`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   const dispatch = useDispatch();
 
   const getEscalatedissues = async () => {
     //const dispatch = useDispatch();
 
-    const { data } = axios
-      .get(`/countescalatedissues `)
+    const { data } = authAxios
+      .get(`countescalatedissues `)
       .then((response) => {
         console.log(response.data);
         //dispatch(
@@ -47,7 +59,7 @@ function CumulativeTrends() {
     //const dispatch = useDispatch();
 
     const { data } = axios
-      .get(`/averageinteractiontime `)
+      .get(`http://${schema}127.0.0.1:8000/api/averageinteractiontime `)
       .then((response) => {
         console.log(response.data);
         //dispatch(
@@ -79,7 +91,7 @@ function CumulativeTrends() {
     //const dispatch = useDispatch();
 
     const { data } = axios
-      .get(`/countallchats `)
+      .get(`http://${schema}127.0.0.1:8000/api/countallchats `)
       .then((response) => {
         console.log(response.data);
         //dispatch(

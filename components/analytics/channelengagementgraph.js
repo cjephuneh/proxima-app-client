@@ -1,24 +1,38 @@
 import React, { useState } from "react";
 import Chart from "chart.js/auto";
-import axios from "../../components/axios";
-import { useDispatch } from "react-redux";
+import axios from "axios";
+//import { useSelector } from "react-redux";
 
 import { Bar } from "react-chartjs-2";
 import { setCommunicationChannel } from "../../redux/analytics/analyticsslice";
+import { selectUser } from "../../redux/authentication/authslice";
 
 const engagementdata = [];
-const getChannelengagementData = async () => {
-  //const dispatch = useDispatch();
 
-  const { data } = axios
-    .get(`/communicationchannel `)
+const GetChannelengagementData = async () => {
+  //Getting the user so that we can get token and schema
+  const user = useSelector(selectUser);
+  const schema = user.user.schema;
+  const token = user.user.token;
+
+  const dispatch = useDispatch();
+
+  const authAxios = axios.create({
+    baseURL: `http://${schema}127.0.0.1:8000/api/`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const { data } = authAxios
+    .get(`communicationchannel`)
     .then((response) => {
       console.log(response.data);
-      //dispatch(
-      //  setCommunicationChannel({
-      //    communicationchannel: response.data,
-      // })
-      //);
+      dispatch(
+        setCommunicationChannel({
+          communicationchannel: response.data,
+        })
+      );
       engagementdata.append(response.data);
     })
     .catch(function (error) {

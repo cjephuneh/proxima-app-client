@@ -12,6 +12,8 @@ function Navbar() {
   const dispatch = useDispatch();
 
   //const user = useSelector(selectUser);
+  //const token = user.user.token;
+
   //console.log(user);
   const user = true;
 

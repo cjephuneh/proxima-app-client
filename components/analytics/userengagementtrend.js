@@ -2,17 +2,26 @@
 /* eslint-disable react/display-name */
 import React from "react";
 import Chart from "chart.js/auto";
-import axios from "../../components/axios";
+import axios from "axios";
 import { selectEngagementFreqency } from "../../redux/analytics/analyticsslice";
 
 const monthlydata = [];
 
-const getEngagementFrequency = async () => {
+const GetEngagementFrequency = async () => {
+  const user = useSelector(selectUser);
+  const schema = user.user.schema;
+  const token = user.user.token;
   //The userengagemenmt trend data
   //const engagementfreqency = useSelector(selectEngagementFreqency)
+  const authAxios = axios.create({
+    baseURL: `http://${schema}127.0.0.1:8000/api/`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-  const { data } = axios
-    .get(`/engagementfrequency`)
+  const { data } = authAxios
+    .get(`engagementfrequency`)
     .then((response) => {
       console.log(response.data);
       //dispatch(
@@ -42,6 +51,7 @@ const getEngagementFrequency = async () => {
 
 import { Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/authentication/authslice";
 
 const data = {
   labels: [

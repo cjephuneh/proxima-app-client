@@ -1,14 +1,24 @@
 /* eslint-disable react/jsx-no-undef */
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 import Channelengagementgraph from "../components/analytics/channelengagementgraph";
 import CumulativeTrends from "../components/analytics/CumulativeTrends";
 import Hourlystatus from "../components/analytics/hourlystatus";
 import Userengagementtrend from "../components/analytics/userengagementtrend";
 import Navbar from "../components/ui/Header";
+import { selectUser } from "../redux/authentication/authslice";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const router = useRouter();
+
+  const user = useSelector(selectUser);
+  const token = user.user.token;
+
+  if (typeof window !== "undefined" && user == null)
+    router.push("/authentication/signin");
   return (
     <div className="">
       <Head>
