@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the FontAwesomeIcon component
-import { faGoogle } from "@fortawesome/free-solid-svg-icons"; // import the icons you need
 import { useRouter } from "next/router";
 import axios from "axios";
 import {
@@ -115,7 +114,6 @@ const Login = (props) => {
       <div className="">
         <div className="text-center">
           <button className="bg-blue-900 text-white p-2 rounded-xl m-12 mt-8 hover:animate-pulse">
-            <FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon>
             Sign in with Google
           </button>
         </div>
