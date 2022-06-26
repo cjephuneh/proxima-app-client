@@ -16,7 +16,7 @@ function CumulativeTrends() {
   const [countescalatedissues, setcountescalatedissues] = useState([]);
   const [averageinteractiontime, setaverageinteractiontime] = useState([]);
   const authAxios = axios.create({
-    baseURL: `http://${schema}127.0.0.1:8000/api/`,
+    baseURL: `http://${schema}proximaawsserver.xyz:8000/api/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
