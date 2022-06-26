@@ -15,11 +15,11 @@ export default function Home() {
   const router = useRouter();
   try {
     const user = useSelector(selectUser);
+    const token = user.user.token;
   } catch (err) {
     const user = null;
     router.push("/authentication/signin");
   }
-  const token = user.user.token;
 
   if (typeof window !== "undefined" && user == null)
     router.push("/authentication/signin");
