@@ -16,6 +16,7 @@ export default function Home() {
   try {
     const user = useSelector(selectUser);
   } catch (err) {
+    const user = null;
     router.push("/authentication/signin");
   }
   const token = user.user.token;
