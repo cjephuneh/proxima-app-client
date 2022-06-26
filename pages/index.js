@@ -13,8 +13,11 @@ import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const router = useRouter();
-
-  const user = useSelector(selectUser);
+  try {
+    const user = useSelector(selectUser);
+  } catch (err) {
+    router.push("/authentication/signin");
+  }
   const token = user.user.token;
 
   if (typeof window !== "undefined" && user == null)
