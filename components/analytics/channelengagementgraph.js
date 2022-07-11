@@ -8,50 +8,50 @@ import { setCommunicationChannel } from "../../redux/analytics/analyticsslice";
 import { selectUser } from "../../redux/authentication/authslice";
 
 const engagementdata = [];
+data = [];
+//const GetChannelengagementData = async () => {
+//Getting the user so that we can get token and schema
+//   const user = useSelector(selectUser);
+//   const schema = user.user.schema;
+//   const token = user.user.token;
 
-const GetChannelengagementData = async () => {
-  //Getting the user so that we can get token and schema
-  const user = useSelector(selectUser);
-  const schema = user.user.schema;
-  const token = user.user.token;
+//   const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
+//   const authAxios = axios.create({
+//     baseURL: `https://${schema}proximaawsserver.xyz:8000/api/`,
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
 
-  const authAxios = axios.create({
-    baseURL: `http://${schema}proximaawsserver.xyz:8000/api/`,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+//   const { data } = authAxios
+//     .get(`communicationchannel`)
+//     .then((response) => {
+//       console.log(response.data);
+//       dispatch(
+//         setCommunicationChannel({
+//           communicationchannel: response.data,
+//         })
+//       );
+//       engagementdata.append(response.data);
+//     })
+//     .catch(function (error) {
+//       if (error.response) {
+//         // Request made and server responded
+//         //dispatch(setAppointmentInfo(null));
 
-  const { data } = authAxios
-    .get(`communicationchannel`)
-    .then((response) => {
-      console.log(response.data);
-      dispatch(
-        setCommunicationChannel({
-          communicationchannel: response.data,
-        })
-      );
-      engagementdata.append(response.data);
-    })
-    .catch(function (error) {
-      if (error.response) {
-        // Request made and server responded
-        //dispatch(setAppointmentInfo(null));
-
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.log(error.request);
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.log(error.message);
-      }
-    });
-};
+//         console.log(error.response.data);
+//         console.log(error.response.status);
+//         console.log(error.response.headers);
+//       } else if (error.request) {
+//         // The request was made but no response was received
+//         console.log(error.request);
+//       } else {
+//         // Something happened in setting up the request that triggered an Error
+//         console.log(error.message);
+//       }
+//     });
+// };
 
 const data = {
   labels: ["WhatsApp", "Instagram", "Twitter", "Website", "Text"],

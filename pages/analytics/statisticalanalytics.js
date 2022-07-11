@@ -7,11 +7,11 @@ import { selectUser } from "../../redux/authentication/authslice";
 function Statisticalanalytics() {
   const router = useRouter();
 
-  const user = useSelector(selectUser);
-  const token = user.user.token;
+  // const user = useSelector(selectUser);
+  // const token = user.user.token;
 
-  if (typeof window !== "undefined" && user == null)
-    router.push("/authentication/signin");
+  // if (typeof window !== "undefined" && user == null)
+  //   router.push("/authentication/signin");
 
   return (
     <div>

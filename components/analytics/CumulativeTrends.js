@@ -8,122 +8,122 @@ import axios from "axios";
 import { selectUser } from "../../redux/authentication/authslice";
 
 function CumulativeTrends() {
-  const user = useSelector(selectUser);
-  const schema = user.user.schema;
-  const token = user.user.token;
+  //const user = useSelector(selectUser);
+  //const schema = user.user.schema;
+  //const token = user.user.token;
 
-  const [countallchats, setcountallchats] = useState([]);
-  const [countescalatedissues, setcountescalatedissues] = useState([]);
-  const [averageinteractiontime, setaverageinteractiontime] = useState([]);
-  const authAxios = axios.create({
-    baseURL: `http://${schema}proximaawsserver.xyz:8000/api/`,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  // const [countallchats, setcountallchats] = useState([]);
+  // const [countescalatedissues, setcountescalatedissues] = useState([]);
+  // const [averageinteractiontime, setaverageinteractiontime] = useState([]);
+  // const authAxios = axios.create({
+  //   baseURL: `https://${schema}proximaawsserver.xyz:8000/api/`,
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // });
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const getEscalatedissues = async () => {
-    //const dispatch = useDispatch();
+  // const getEscalatedissues = async () => {
+  //   //const dispatch = useDispatch();
 
-    const { data } = authAxios
-      .get(`countescalatedissues `)
-      .then((response) => {
-        console.log(response.data);
-        //dispatch(
-        //  setCommunicationChannel({
-        //    communicationchannel: response.data,
-        // })
-        //);
-        setcountescalatedissues(response.data);
-      })
-      .catch(function (error) {
-        if (error.response) {
-          // Request made and server responded
-          //dispatch(setAppointmentInfo(null));
+  //   const { data } = authAxios
+  //     .get(`countescalatedissues `)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       //dispatch(
+  //       //  setCommunicationChannel({
+  //       //    communicationchannel: response.data,
+  //       // })
+  //       //);
+  //       setcountescalatedissues(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       if (error.response) {
+  //         // Request made and server responded
+  //         //dispatch(setAppointmentInfo(null));
 
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log(error.message);
-        }
-      });
-  };
-  const getAverageinteractionTime = async () => {
-    //const dispatch = useDispatch();
+  //         console.log(error.response.data);
+  //         console.log(error.response.status);
+  //         console.log(error.response.headers);
+  //       } else if (error.request) {
+  //         // The request was made but no response was received
+  //         console.log(error.request);
+  //       } else {
+  //         // Something happened in setting up the request that triggered an Error
+  //         console.log(error.message);
+  //       }
+  //     });
+  // };
+  // const getAverageinteractionTime = async () => {
+  //   //const dispatch = useDispatch();
 
-    const { data } = axios
-      .get(`http://${schema}127.0.0.1:8000/api/averageinteractiontime `)
-      .then((response) => {
-        console.log(response.data);
-        //dispatch(
-        //  setCommunicationChannel({
-        //    communicationchannel: response.data,
-        // })
-        //);
-        setaverageinteractiontime(response.data);
-      })
-      .catch(function (error) {
-        if (error.response) {
-          // Request made and server responded
-          //dispatch(setAppointmentInfo(null));
+  //   const { data } = axios
+  //     .get(`http://${schema}127.0.0.1:8000/api/averageinteractiontime `)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       //dispatch(
+  //       //  setCommunicationChannel({
+  //       //    communicationchannel: response.data,
+  //       // })
+  //       //);
+  //       setaverageinteractiontime(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       if (error.response) {
+  //         // Request made and server responded
+  //         //dispatch(setAppointmentInfo(null));
 
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log(error.message);
-        }
-      });
-  };
+  //         console.log(error.response.data);
+  //         console.log(error.response.status);
+  //         console.log(error.response.headers);
+  //       } else if (error.request) {
+  //         // The request was made but no response was received
+  //         console.log(error.request);
+  //       } else {
+  //         // Something happened in setting up the request that triggered an Error
+  //         console.log(error.message);
+  //       }
+  //     });
+  // };
 
-  const countAllChats = async () => {
-    //const dispatch = useDispatch();
+  // const countAllChats = async () => {
+  //   //const dispatch = useDispatch();
 
-    const { data } = axios
-      .get(`http://${schema}127.0.0.1:8000/api/countallchats `)
-      .then((response) => {
-        console.log(response.data);
-        //dispatch(
-        //  setCommunicationChannel({
-        //    communicationchannel: response.data,
-        // })
-        //);
-        setcountallchats(response.data);
-      })
-      .catch(function (error) {
-        if (error.response) {
-          // Request made and server responded
-          //dispatch(setAppointmentInfo(null));
+  //   const { data } = axios
+  //     .get(`http://${schema}127.0.0.1:8000/api/countallchats `)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       //dispatch(
+  //       //  setCommunicationChannel({
+  //       //    communicationchannel: response.data,
+  //       // })
+  //       //);
+  //       setcountallchats(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       if (error.response) {
+  //         // Request made and server responded
+  //         //dispatch(setAppointmentInfo(null));
 
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log(error.message);
-        }
-      });
-  };
+  //         console.log(error.response.data);
+  //         console.log(error.response.status);
+  //         console.log(error.response.headers);
+  //       } else if (error.request) {
+  //         // The request was made but no response was received
+  //         console.log(error.request);
+  //       } else {
+  //         // Something happened in setting up the request that triggered an Error
+  //         console.log(error.message);
+  //       }
+  //     });
+  // };
 
-  useEffect(() => {
-    getAverageinteractionTime();
-    getEscalatedissues();
-    countAllChats();
-  }, []);
+  // useEffect(() => {
+  //   getAverageinteractionTime();
+  //   getEscalatedissues();
+  //   countAllChats();
+  // }, []);
 
   return (
     <div className="flex flex-col p-1">

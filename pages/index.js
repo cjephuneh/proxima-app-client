@@ -13,17 +13,18 @@ import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const router = useRouter();
-  try {
-    const user = useSelector(selectUser);
-    const token = user.user.token;
-    console.log(user.user);
-  } catch (err) {
-    const user = null;
-    router.push("/authentication/signin");
-  }
+  // try {
+  //   //const user = useSelector(selectUser);
+  //   //const token = user.user.token;
+  //   //console.log(user.user);
+  //   const user = true;
+  // } catch (err) {
+  //   const user = null;
+  //   router.push("/authentication/signin");
+  // }
 
-  if (typeof window !== "undefined" && user == null)
-    router.push("/authentication/signin");
+  //if (typeof window !== "undefined" && user == null)
+  //  router.push("/authentication/signin");
   return (
     <div className="">
       <Head>

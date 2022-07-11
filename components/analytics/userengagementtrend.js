@@ -7,47 +7,47 @@ import { selectEngagementFreqency } from "../../redux/analytics/analyticsslice";
 
 const monthlydata = [];
 
-const GetEngagementFrequency = async () => {
-  const user = useSelector(selectUser);
-  const schema = user.user.schema;
-  const token = user.user.token;
-  //The userengagemenmt trend data
-  //const engagementfreqency = useSelector(selectEngagementFreqency)
-  const authAxios = axios.create({
-    baseURL: `http://${schema}proximaawsserver.xyz:8000/api/`,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+//const GetEngagementFrequency = async () => {
+//   const user = useSelector(selectUser);
+//   const schema = user.user.schema;
+//   const token = user.user.token;
+//   //The userengagemenmt trend data
+//   //const engagementfreqency = useSelector(selectEngagementFreqency)
+//   const authAxios = axios.create({
+//     baseURL: `https://${schema}proximaawsserver.xyz:8000/api/`,
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
 
-  const { data } = authAxios
-    .get(`engagementfrequency`)
-    .then((response) => {
-      console.log(response.data);
-      //dispatch(
-      //setEngagementFreqency({
-      //     engagementfreqency: response.data,
-      //  })
-      // );
-      monthlydata.append(response.data);
-    })
-    .catch(function (error) {
-      if (error.response) {
-        // Request made and server responded
-        //dispatch(setAppointmentInfo(null));
+//   const { data } = authAxios
+//     .get(`engagementfrequency`)
+//     .then((response) => {
+//       console.log(response.data);
+//       //dispatch(
+//       //setEngagementFreqency({
+//       //     engagementfreqency: response.data,
+//       //  })
+//       // );
+//       monthlydata.append(response.data);
+//     })
+//     .catch(function (error) {
+//       if (error.response) {
+//         // Request made and server responded
+//         //dispatch(setAppointmentInfo(null));
 
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.log(error.request);
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.log(error.message);
-      }
-    });
-};
+//         console.log(error.response.data);
+//         console.log(error.response.status);
+//         console.log(error.response.headers);
+//       } else if (error.request) {
+//         // The request was made but no response was received
+//         console.log(error.request);
+//       } else {
+//         // Something happened in setting up the request that triggered an Error
+//         console.log(error.message);
+//       }
+//     });
+// };
 
 import { Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
