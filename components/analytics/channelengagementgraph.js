@@ -8,7 +8,7 @@ import { setCommunicationChannel } from "../../redux/analytics/analyticsslice";
 import { selectUser } from "../../redux/authentication/authslice";
 
 const engagementdata = [];
-data = [];
+//data = [];
 //const GetChannelengagementData = async () => {
 //Getting the user so that we can get token and schema
 //   const user = useSelector(selectUser);
