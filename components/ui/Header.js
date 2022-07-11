@@ -60,6 +60,24 @@ function Navbar() {
           <LoginIcon className=" md:inline-flex h-8 bg-blue-900 rounded-full text-white  p-2 cursor-pointer md: mx-1 hover:shadow-xl" />
         </a>
       </Link>
+      <Link href="/">
+        <a className="">
+          <HomeIcon className="md:inline-flex h-8 bg-blue-900 rounded-full text-white  p-2 cursor-pointer md: mx-2 hover:shadow-md" />
+        </a>
+      </Link>
+      <Link href="/analytics/chatbasedanalytics">
+        <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded-md text-black  items-center justify-center hover:bg-blue-900 hover:text-white hover:shadow-md transition-color duration-200">
+          Chat Analytics
+        </a>
+      </Link>
+
+      <a
+        href="#!"
+        onClick={(user = false)}
+        className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded-full text-black  items-center justify-center hover:bg-blue-900 hover:text-white hover:shadow-md"
+      >
+        <LogoutIcon className="hidden md:inline-flex h-8 bg-blue-900 rounded-full text-white  p-2 cursor-pointer md: mx-2 hover:shadow-xl" />
+      </a>
     </>
   );
 
