@@ -5,26 +5,26 @@ import axios from "axios";
 import { selectUser } from "../../redux/authentication/authslice";
 
 function Hourlystatus() {
-  const user = useSelector(selectUser);
-  const schema = user.user.schema;
-  const token = user.user.token;
+  // const user = useSelector(selectUser);
+  // const schema = user.user.schema;
+  // const token = user.user.token;
 
-  const [hourlyengagement, sethourlyengagement] = useState([]);
-  const [hourlychats, sethourlychats] = useState([]);
-  const [hourlycountescalatedissues, sethourlycountescalatedissues] = useState(
-    []
-  );
-  const [hourlyqueriesreceived, sethourlyqueriesreceived] = useState([]);
-  const [hourlyclientsatisfaction, sethourlyclientsatisfaction] = useState([]);
-  const [hourlyaverageresponsetime, sethourlyaverageresponsetime] = useState(
-    []
-  );
-  const authAxios = axios.create({
-    baseURL: `https://${schema}proximaawsserver.xyz:8000/api/`,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  // const [hourlyengagement, sethourlyengagement] = useState([]);
+  // const [hourlychats, sethourlychats] = useState([]);
+  // const [hourlycountescalatedissues, sethourlycountescalatedissues] = useState(
+  //   []
+  // );
+  // const [hourlyqueriesreceived, sethourlyqueriesreceived] = useState([]);
+  // const [hourlyclientsatisfaction, sethourlyclientsatisfaction] = useState([]);
+  // const [hourlyaverageresponsetime, sethourlyaverageresponsetime] = useState(
+  //   []
+  // );
+  // const authAxios = axios.create({
+  //   baseURL: `https://${schema}proximaawsserver.xyz:8000/api/`,
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // });
 
   const dispatch = useDispatch();
 
