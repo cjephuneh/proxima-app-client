@@ -10,120 +10,120 @@ import {
 import { selectUser } from "../../redux/authentication/authslice";
 
 function ChatList() {
-  // const user = useSelector(selectUser);
-  // const schema = user.user.schema;
-  // const token = user.user.token;
+  const user = useSelector(selectUser);
+  const schema = user.user.schema;
+  const token = user.user.token;
 
-  // const [chatbotchat, setchatbotchat] = useState([]);
-  // const [chatslotintents, setchatslotintents] = useState([]);
-  // const [listchatslotintents, setlistchatslotintents] = useState([]);
+  const [chatbotchat, setchatbotchat] = useState([]);
+  const [chatslotintents, setchatslotintents] = useState([]);
+  const [listchatslotintents, setlistchatslotintents] = useState([]);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const authAxios = axios.create({
-  //   baseURL: `https://${schema}proximaawsserver.xyz:8000/api/`,
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // });
+  const authAxios = axios.create({
+    baseURL: `https://${schema}proximaawsserver.xyz:8000/api/`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-  // const getChatbotChat = async () => {
-  //   const { data } = authAxios
-  //     .get(`retrievechatbotchats/${id}/`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       dispatch(
-  //         setChatbotChat({
-  //           chatbotchat: response.data,
-  //         })
-  //       );
-  //       setchatbotchat(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       if (error.response) {
-  //         // Request made and server responded
-  //         //dispatch(setAppointmentInfo(null));
+  const getChatbotChat = async () => {
+    const { data } = authAxios
+      .get(`retrievechatbotchats/${id}/`)
+      .then((response) => {
+        console.log(response.data);
+        dispatch(
+          setChatbotChat({
+            chatbotchat: response.data,
+          })
+        );
+        setchatbotchat(response.data);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          // Request made and server responded
+          //dispatch(setAppointmentInfo(null));
 
-  //         console.log(error.response.data);
-  //         console.log(error.response.status);
-  //         console.log(error.response.headers);
-  //       } else if (error.request) {
-  //         // The request was made but no response was received
-  //         console.log(error.request);
-  //       } else {
-  //         // Something happened in setting up the request that triggered an Error
-  //         console.log(error.message);
-  //       }
-  //     });
-  // };
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log(error.message);
+        }
+      });
+  };
 
-  // const getChatSlotIntentFilling = async () => {
-  //   const { data1 } = axios
-  //     .get(
-  //       `http://${schema}127.0.0.1:8000/api/retrieveupdateslotintents/${id}/`
-  //     )
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       dispatch(
-  //         setChatSlotIntent({
-  //           chatslotintent: response.data,
-  //         })
-  //       );
-  //       setchatslotintents(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       if (error.response) {
-  //         // Request made and server responded
-  //         //dispatch(setAppointmentInfo(null));
+  const getChatSlotIntentFilling = async () => {
+    const { data1 } = axios
+      .get(
+        `http://${schema}127.0.0.1:8000/api/retrieveupdateslotintents/${id}/`
+      )
+      .then((response) => {
+        console.log(response.data);
+        dispatch(
+          setChatSlotIntent({
+            chatslotintent: response.data,
+          })
+        );
+        setchatslotintents(response.data);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          // Request made and server responded
+          //dispatch(setAppointmentInfo(null));
 
-  //         console.log(error.response.data);
-  //         console.log(error.response.status);
-  //         console.log(error.response.headers);
-  //       } else if (error.request) {
-  //         // The request was made but no response was received
-  //         console.log(error.request);
-  //       } else {
-  //         // Something happened in setting up the request that triggered an Error
-  //         console.log(error.message);
-  //       }
-  //     });
-  // };
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log(error.message);
+        }
+      });
+  };
 
-  // const getChatbotChatList = async () => {
-  //   const { data } = axios
-  //     .get(`http://${schema}127.0.0.1:8000/api/listchats/`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       dispatch(
-  //         setChatbotChatlist({
-  //           chatbotchatlist: response.data,
-  //         })
-  //       );
-  //       setlistchatslotintents(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       if (error.response) {
-  //         // Request made and server responded
-  //         //dispatch(setAppointmentInfo(null));
+  const getChatbotChatList = async () => {
+    const { data } = axios
+      .get(`http://${schema}127.0.0.1:8000/api/listchats/`)
+      .then((response) => {
+        console.log(response.data);
+        dispatch(
+          setChatbotChatlist({
+            chatbotchatlist: response.data,
+          })
+        );
+        setlistchatslotintents(response.data);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          // Request made and server responded
+          //dispatch(setAppointmentInfo(null));
 
-  //         console.log(error.response.data);
-  //         console.log(error.response.status);
-  //         console.log(error.response.headers);
-  //       } else if (error.request) {
-  //         // The request was made but no response was received
-  //         console.log(error.request);
-  //       } else {
-  //         // Something happened in setting up the request that triggered an Error
-  //         console.log(error.message);
-  //       }
-  //     });
-  // };
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log(error.message);
+        }
+      });
+  };
 
-  // useEffect(() => {
-  //   //getChatbotChat();
-  //   //getChatSlotIntentFilling;
-  //   //getChatbotChatList;
-  // }, []);
+  useEffect(() => {
+    //getChatbotChat();
+    //getChatSlotIntentFilling;
+    //getChatbotChatList;
+  }, []);
   return (
     <>
       <div className="flex flex-row justify-center space-x-96">
