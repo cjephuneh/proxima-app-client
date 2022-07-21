@@ -34,7 +34,7 @@ const Login = (props) => {
 
     await axios({
       method: "post",
-      url: "https://proximaawsserver.xyz:8000/api/usersauth/userlogin/",
+      url: "https://proximaawsserver.xyz/api/usersauth/userlogin/",
       data: formField,
     })
       .then((response) => {

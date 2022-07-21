@@ -16,7 +16,7 @@ function CumulativeTrends() {
   const [countescalatedissues, setcountescalatedissues] = useState([]);
   const [averageinteractiontime, setaverageinteractiontime] = useState([]);
   const authAxios = axios.create({
-    baseURL: `https://${schema}proximaawsserver.xyz:8000/api/`,
+    baseURL: `https://${schema}proximaawsserver.xyz/api/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -59,7 +59,7 @@ function CumulativeTrends() {
     //const dispatch = useDispatch();
 
     const { data } = axios
-      .get(`http://${schema}127.0.0.1:8000/api/averageinteractiontime `)
+      .get(`averageinteractiontime `)
       .then((response) => {
         console.log(response.data);
         //dispatch(
@@ -91,7 +91,7 @@ function CumulativeTrends() {
     //const dispatch = useDispatch();
 
     const { data } = axios
-      .get(`http://${schema}127.0.0.1:8000/api/countallchats `)
+      .get(`countallchats `)
       .then((response) => {
         console.log(response.data);
         dispatch(

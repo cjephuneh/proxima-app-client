@@ -20,7 +20,7 @@ function Hourlystatus() {
     []
   );
   const authAxios = axios.create({
-    baseURL: `https://${schema}proximaawsserver.xyz:8000/api/`,
+    baseURL: `https://${schema}proximaawsserver.xyz/api/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -155,7 +155,7 @@ function Hourlystatus() {
     //const dispatch = useDispatch();
 
     const { data } = authAxios
-      .get(`/hourlyclientsatisfaction `)
+      .get(`hourlyclientsatisfaction `)
       .then((response) => {
         console.log(response.data);
         //dispatch(

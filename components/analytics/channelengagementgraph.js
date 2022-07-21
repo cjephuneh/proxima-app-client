@@ -17,7 +17,7 @@ const GetChannelengagementData = async () => {
   const dispatch = useDispatch();
 
   const authAxios = axios.create({
-    baseURL: `https://${schema}proximaawsserver.xyz:8000/api/`,
+    baseURL: `https://${schema}proximaawsserver.xyz/api/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -57,7 +57,7 @@ const data = {
   datasets: [
     {
       label: "Channels Engagement Pattern",
-      data: [12, 19, 3, 5, 2],
+      //data: [12, 19, 3, 5, 2],
       data: engagementdata,
       backgroundColor: [
         "rgba(255, 99, 132, 0.2)",

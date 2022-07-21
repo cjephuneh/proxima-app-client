@@ -21,7 +21,7 @@ function ChatList() {
   const dispatch = useDispatch();
 
   const authAxios = axios.create({
-    baseURL: `https://${schema}proximaawsserver.xyz:8000/api/`,
+    baseURL: `https://${schema}proximaawsserver.xyz/api/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -59,9 +59,7 @@ function ChatList() {
 
   const getChatSlotIntentFilling = async () => {
     const { data1 } = axios
-      .get(
-        `http://${schema}127.0.0.1:8000/api/retrieveupdateslotintents/${id}/`
-      )
+      .get(`retrieveupdateslotintents/${id}/`)
       .then((response) => {
         console.log(response.data);
         dispatch(
@@ -91,7 +89,7 @@ function ChatList() {
 
   const getChatbotChatList = async () => {
     const { data } = axios
-      .get(`http://${schema}127.0.0.1:8000/api/listchats/`)
+      .get(`listchats/`)
       .then((response) => {
         console.log(response.data);
         dispatch(
