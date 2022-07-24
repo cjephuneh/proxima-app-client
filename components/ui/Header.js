@@ -78,7 +78,7 @@ function Navbar() {
         className="relative flex items-center  cursor-pointer my-auto"
       >
         <h1 className="sm:text-centre sm:text-lg md:text-xl font-tesla">
-          KOSSE
+          PROXIMA
         </h1>
       </div>
 
@@ -95,7 +95,7 @@ function Navbar() {
               <PhoneIcon className="h-7 cursor-pointer  hover:scale-110 transform transition duration-300 ease-out" />
             </div>
             <h1 className="p-3 text-blue-500 hover:text-blue-900">
-              (+254) 793681840
+              (+254) 790001947
             </h1>
           </div>{" "}
           <div className="flex">
@@ -103,7 +103,7 @@ function Navbar() {
               <MailIcon className="h-7 cursor-pointer hover:scale-110 transform transition duration-300 ease-out" />
             </div>
             <h1 className="p-3 text-blue-500 hover:text-blue-900">
-              kosseai.inc@gmail.com
+              proximaagents@gmail.com
             </h1>
           </div>
         </div>
