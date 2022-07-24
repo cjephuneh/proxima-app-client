@@ -14,7 +14,7 @@ const GetEngagementFrequency = async () => {
   //The userengagemenmt trend data
   //const engagementfreqency = useSelector(selectEngagementFreqency)
   const authAxios = axios.create({
-    baseURL: `https://${schema}proximaawsserver.xyz/api/`,
+    baseURL: `https://${schema}proximaserver.eastus.cloudapp.azure.com/api/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },

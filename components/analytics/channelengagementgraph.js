@@ -17,7 +17,7 @@ const GetChannelengagementData = async () => {
   const dispatch = useDispatch();
 
   const authAxios = axios.create({
-    baseURL: `https://${schema}proximaawsserver.xyz/api/`,
+    baseURL: `https://${schema}proximaserver.eastus.cloudapp.azure.com/api/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
