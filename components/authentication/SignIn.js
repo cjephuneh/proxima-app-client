@@ -102,9 +102,9 @@ const Login = (props) => {
             wrapper="b"
             //loop={Infinity}
             steps={[
-              "State of The Art Customer Engagement...",
+              "Customer Satisfaction | Experience | Engagement...",
               1000,
-              "KOSSE AI",
+              "PROXIMA",
               1000,
             ]}
           />
