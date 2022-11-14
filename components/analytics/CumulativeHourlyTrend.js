@@ -3,15 +3,13 @@ import { Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/authentication/authslice";
 import axios from "axios";
-import { selectFrequency, setFrequency } from '../../redux/analytics/analyticsslice';
+import { selectCumulativeHourlyChats, selectFrequency, setCumulativeHourlyChats, setFrequency } from '../../redux/analytics/analyticsslice';
 
-function Userengagementtrend() {
+function CumulativeHourlyTrend() {
 
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
-  const frequency = useSelector(selectFrequency)
-  console.log(frequency.frequency)
 
   const token = user.user.token;
   const schema = user.user.tenant_domain_schema
@@ -23,17 +21,18 @@ function Userengagementtrend() {
     },
   });
 
-const engagementdatafreq = []
+  const cumulativehourlychats = useSelector(selectCumulativeHourlyChats)
+  console.log(cumulativehourlychats.cumulativehourlychats)
 
-const GetEngagementFrequency = async () => {
+const GetCumulativeHourlyChats = async () => {
 
   const { data } = authAxios
-    .get(`engagementfrequency?schema=atiamcollege`)
+    .get(`cumulativehourlychats?schema=atiamcollege`)
     .then((response) => {
       // console.log(response.data);
       dispatch(
-        setFrequency({
-          frequency: response.data,
+        setCumulativeHourlyChats({
+          cumulativehourlychats: response.data,
       })
       );
     })
@@ -56,27 +55,36 @@ const GetEngagementFrequency = async () => {
 };
 
 
-// 
-
-
   const data = {
     labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "september",
-      "October",
-      "November",
-      "December",
+      "00.00",
+      "01.00",
+      "02.00",
+      "03.00",
+      "04.00",
+      "05.00",
+      "06.00",
+      "07.00",
+      "08.00",
+      "09.00",
+      "10.00",
+      "11.00",
+      "13.00",
+      "14.00",
+      "15.00",
+      "16.00",
+      "17.00",
+      "18.00",
+      "19.00",
+      "20.00",
+      "21.00",
+      "22.00",
+      "23.00",
+      "00.00",
     ],
     datasets: [
       {
-        label: "User Queries",
+        label: "Total interactions",
         fill: false,
         lineTension: 0.1,
         backgroundColor: "rgba(75,192,192,0.4)",
@@ -102,15 +110,16 @@ const GetEngagementFrequency = async () => {
 
 
   useEffect(() => {
-    GetEngagementFrequency();
+
+    GetCumulativeHourlyChats();
   }, []);
 
   return (
     <div>
-    <h2 className="text-blue-900 text-2xl text-center">Engagement Frequency</h2>
+    <h2 className="text-blue-900 text-2xl text-center">Hourly Interaction</h2>
     <Line data={data} width={300} height={100} />
   </div>  )
 }
 
 
-export default Userengagementtrend;
+export default CumulativeHourlyTrend;

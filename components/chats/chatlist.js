@@ -21,7 +21,7 @@ function ChatList() {
   const dispatch = useDispatch();
 
   const authAxios = axios.create({
-    baseURL: `https://${schema}proximaserver.eastus.cloudapp.azure.com/api/`,
+    baseURL: `https://${schema}proximadminserver.buzz/api/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },

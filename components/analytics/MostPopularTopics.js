@@ -4,10 +4,10 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Bar } from "react-chartjs-2";
-import { selectCommunicationChannel, setCommunicationChannel } from "../../redux/analytics/analyticsslice";
+import { setMostPopularTopics, selectMostPopularTopics } from "../../redux/analytics/analyticsslice";
 import { selectUser } from "../../redux/authentication/authslice";
 
-function channelengagementgraph() {
+function MostPopularTopics() {
 
 
   const user = useSelector(selectUser);
@@ -22,20 +22,18 @@ function channelengagementgraph() {
 });
   const dispatch = useDispatch();
 
+  const mostpopulartopics = useSelector(selectMostPopularTopics)
+  console.log(mostpopulartopics.mostpopulartopics)
 
-  const engagementdata = [];
-  const communicationchannel = useSelector(selectCommunicationChannel)
-  console.log(communicationchannel.communicationchannel)
-
-  const GetCommunicationChannels = async () => {
+  const GetMostPopularTopics = async () => {
 
     const { data } = authAxios
-      .get(`communicationchannels?schema=atiamcollege`)
+      .get(`mostpopulartopics?schema=atiamcollege`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(
-          setCommunicationChannel({
-            communicationchannel: response.data,
+          setMostPopularTopics({
+            mostpopulartopics: response.data,
         })
         );
       })
@@ -84,13 +82,13 @@ function channelengagementgraph() {
   };
 
   useEffect(() => {
-    GetCommunicationChannels();
+    GetMostPopularTopics();
   }, []);
 
   return (
     <div className="pt-4 h-[400px] w-[1000px] p-4">
       <h2 className="text-3xl text-center m-2 text-blue-900">
-        Communication Channels Trend
+      Conversation Points
       </h2>
       <Bar
         data={data}
@@ -105,4 +103,4 @@ function channelengagementgraph() {
 }
 
 
-export default channelengagementgraph;
+export default MostPopularTopics;

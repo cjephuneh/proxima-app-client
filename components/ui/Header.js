@@ -40,7 +40,7 @@ function Navbar() {
       </Link>
       <Link href="/analytics/chatbasedanalytics">
         <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded-md text-black  items-center justify-center hover:bg-blue-900 hover:text-white hover:shadow-md transition-color duration-200">
-          Chat Analytics
+          Predictive Analytics
         </a>
       </Link>
 
@@ -49,7 +49,7 @@ function Navbar() {
         onClick={(user = false)}
         className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded-full text-black  items-center justify-center hover:bg-blue-900 hover:text-white hover:shadow-md"
       >
-        <LogoutIcon className="hidden md:inline-flex h-8 bg-blue-900 rounded-full text-white  p-2 cursor-pointer md: mx-2 hover:shadow-xl" />
+        Sign Out 
       </a>
     </>
   );
@@ -84,7 +84,7 @@ function Navbar() {
 
       <div className="items-center space-x-4 justify-center text-gray-500 cursor-pointer my-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start lg:h-auto">
-          {user ? authLinks : guestLinks}
+          {user != null ? authLinks : guestLinks}
         </div>
       </div>
 

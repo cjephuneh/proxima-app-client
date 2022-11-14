@@ -4,8 +4,10 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Channelengagementgraph from "../components/analytics/channelengagementgraph";
+import CumulativeHourlyTrend from "../components/analytics/CumulativeHourlyTrend";
 import CumulativeTrends from "../components/analytics/CumulativeTrends";
 import Hourlystatus from "../components/analytics/hourlystatus";
+import MostPopularTopics from "../components/analytics/MostPopularTopics";
 import Userengagementtrend from "../components/analytics/userengagementtrend";
 import Navbar from "../components/ui/Header";
 import { selectUser } from "../redux/authentication/authslice";
@@ -48,8 +50,13 @@ export default function Home() {
                 <Userengagementtrend />
                 <Channelengagementgraph />
               </div>
+
             </div>
           </div>
+        </div>
+        <div className="p-4 pt-6 px-12">
+            <CumulativeHourlyTrend />
+            <MostPopularTopics />
         </div>
       </div>
     </div>

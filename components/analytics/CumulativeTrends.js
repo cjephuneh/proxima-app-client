@@ -6,21 +6,34 @@ import coverpage from "../../images/darkbrainlogo.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { selectUser } from "../../redux/authentication/authslice";
+import { selectCountAllChats, SelectCountEscalatedissues, setCountAllChats, SetCountEscalatedissues } from "../../redux/analytics/analyticsslice";
 
 function CumulativeTrends() {
   const user = useSelector(selectUser);
-  const schema = user.user.schema;
+  // console.log("##########")
+  // console.log(user.user.tenant_domain_schema);
+  // console.log("##########")
+  // const schema = 'atiamcollege'
   const token = user.user.token;
+  const schema = user.user.tenant_domain_schema
+  // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ…jQwfQ.XH1J7LdsZciGyrXj8qlL4hpBknaCPBmJvRvJunz-cOM'
 
-  const [countallchats, setcountallchats] = useState([]);
   const [countescalatedissues, setcountescalatedissues] = useState([]);
   const [averageinteractiontime, setaverageinteractiontime] = useState([]);
+  // Pull the data from the respective slices
+  const totalescalatedissues = useSelector(SelectCountEscalatedissues)
+  const totalchatcount = useSelector(selectCountAllChats)
+  // console.log(totalescalatedissues)
+  // console.log(totalchatcount)
+
   const authAxios = axios.create({
-    baseURL: `https://${schema}proximaserver.eastus.cloudapp.azure.com/api/`,
+    baseURL: `https://${schema}.proximadminserver.buzz/api/`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+
+
 
   const dispatch = useDispatch();
 
@@ -28,15 +41,14 @@ function CumulativeTrends() {
     //const dispatch = useDispatch();
 
     const { data } = authAxios
-      .get(`countescalatedissues `)
+      .get(`countescalatedissues?schema=atiamcollege`)
       .then((response) => {
-        console.log(response.data);
-        //dispatch(
-        //  setCommunicationChannel({
-        //    communicationchannel: response.data,
-        // })
-        //);
-        setcountescalatedissues(response.data);
+        // console.log(response.data);
+        dispatch(
+          SetCountEscalatedissues({
+            totalescalatedissues: response.data,
+        })
+        );
       })
       .catch(function (error) {
         if (error.response) {
@@ -55,56 +67,56 @@ function CumulativeTrends() {
         }
       });
   };
-  const getAverageinteractionTime = async () => {
-    //const dispatch = useDispatch();
+  // const getAverageinteractionTime = async () => {
+  //   //const dispatch = useDispatch();
 
-    const { data } = axios
-      .get(`averageinteractiontime `)
-      .then((response) => {
-        console.log(response.data);
-        //dispatch(
-        //  setCommunicationChannel({
-        //    communicationchannel: response.data,
-        // })
-        //);
-        setaverageinteractiontime(response.data);
-      })
-      .catch(function (error) {
-        if (error.response) {
-          // Request made and server responded
-          //dispatch(setAppointmentInfo(null));
+  //   const { data } = authAxios
+  //     .get(`averageinteractiontime?schema=atiamcollege`)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       //dispatch(
+  //       //  setCommunicationChannel({
+  //       //    communicationchannel: response.data,
+  //       // })
+  //       //);
+  //       setaverageinteractiontime(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       if (error.response) {
+  //         // Request made and server responded
+  //         //dispatch(setAppointmentInfo(null));
 
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log(error.message);
-        }
-      });
-  };
+  //         console.log(error.response.data);
+  //         console.log(error.response.status);
+  //         console.log(error.response.headers);
+  //       } else if (error.request) {
+  //         // The request was made but no response was received
+  //         console.log(error.request);
+  //       } else {
+  //         // Something happened in setting up the request that triggered an Error
+  //         console.log(error.message);
+  //       }
+  //     });
+  // };
 
   const countAllChats = async () => {
     //const dispatch = useDispatch();
 
-    const { data } = axios
-      .get(`countallchats `)
+    
+    const { data } = authAxios
+      .get(`countallchats?schema=atiamcollege`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(
-          setCommunicationChannel({
-            communicationchannel: response.data,
+          setCountAllChats({
+            totalchatcount: response.data,
           })
         );
-        setcountallchats(response.data);
       })
       .catch(function (error) {
         if (error.response) {
           // Request made and server responded
-          dispatch(setAppointmentInfo(null));
+          // dispatch(setAppointmentInfo(null));
 
           console.log(error.response.data);
           console.log(error.response.status);
@@ -120,7 +132,7 @@ function CumulativeTrends() {
   };
 
   useEffect(() => {
-    getAverageinteractionTime();
+    // getAverageinteractionTime();
     getEscalatedissues();
     countAllChats();
   }, []);
@@ -137,13 +149,13 @@ function CumulativeTrends() {
       </div>
       <div className="flex-col pt-2 bg-gray-100  text-center">
         <h1 className="text-4xl text-black m-2">
-          {countallchats?.total_interactions}
+          {totalchatcount?.totalchatcount}
         </h1>
         <p className="text-3xl text-blue-900 m-2">Total Interactions</p>
       </div>
       <div className="flex-col pt-2  text-center">
         <h1 className="text-4xl text-black text-center m-2">
-          {countescalatedissues?.total_issue_escalated}
+          {totalescalatedissues?.totalescalatedissues}
         </h1>
         <p className="text-3xl text-blue-900 m-2">Total Issues escalated</p>
       </div>

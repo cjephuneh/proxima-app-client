@@ -34,12 +34,12 @@ const Login = (props) => {
 
     await axios({
       method: "post",
-      url: "https://proximaserver.eastus.cloudapp.azure.com/api/usersauth/userlogin/",
+      url: "https://atiamcollege.proximadminserver.buzz/api/users/login",
       data: formField,
     })
       .then((response) => {
         //console.log(response.data.token);
-        if (response.data.token) {
+        if (response.data) {
           dispatch(
             setLogin_Sucess({
               user: response.data,
@@ -48,7 +48,6 @@ const Login = (props) => {
           router.push("/");
           console.log(response.data);
 
-          dispatch(setLoginFail(null));
         }
 
         return response.data;
