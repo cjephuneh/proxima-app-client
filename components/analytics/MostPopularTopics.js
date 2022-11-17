@@ -28,7 +28,7 @@ function MostPopularTopics() {
   const GetMostPopularTopics = async () => {
 
     const { data } = authAxios
-      .get(`mostpopulartopics?schema=atiamcollege`)
+      .get(`mostpopulartopics?schema=${schema}`)
       .then((response) => {
         // console.log(response.data);
         dispatch(

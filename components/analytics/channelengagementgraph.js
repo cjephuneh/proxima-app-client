@@ -30,7 +30,7 @@ function channelengagementgraph() {
   const GetCommunicationChannels = async () => {
 
     const { data } = authAxios
-      .get(`communicationchannels?schema=atiamcollege`)
+      .get(`communicationchannels?schema=${schema}`)
       .then((response) => {
         console.log(response.data);
         dispatch(

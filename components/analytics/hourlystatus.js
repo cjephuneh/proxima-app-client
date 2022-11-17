@@ -27,7 +27,7 @@ function Hourlystatus() {
 
   const getHourlyChats = async () => {
     const { data } = authAxios
-      .get(`hourlychats?schema=atiamcollege`)
+      .get(`hourlychats?schema=${schema}`)
       .then((response) => {
         // console.log(response.data);
         dispatch(
@@ -57,7 +57,7 @@ function Hourlystatus() {
   const getHourlyEscalatedIssues = async () => {
 
     const { data } = authAxios
-      .get(`hourlycountescalatedissues?schema=atiamcollege`)
+      .get(`hourlycountescalatedissues?schema=${schema}`)
       .then((response) => {
         // console.log(response.data, "###########");
         // console.log(response.data);
@@ -88,7 +88,7 @@ function Hourlystatus() {
     //const dispatch = useDispatch();
 
     const { data } = authAxios
-      .get(`hourlyqueriesreceived?schema=atiamcollege`)
+      .get(`hourlyqueriesreceived?schema=${schema}`)
       .then((response) => {
         // console.log(response.data);
         dispatch(

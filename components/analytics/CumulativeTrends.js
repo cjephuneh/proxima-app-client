@@ -41,7 +41,7 @@ function CumulativeTrends() {
     //const dispatch = useDispatch();
 
     const { data } = authAxios
-      .get(`countescalatedissues?schema=atiamcollege`)
+      .get(`countescalatedissues?schema=${schema}`)
       .then((response) => {
         // console.log(response.data);
         dispatch(
@@ -104,7 +104,7 @@ function CumulativeTrends() {
 
     
     const { data } = authAxios
-      .get(`countallchats?schema=atiamcollege`)
+      .get(`countallchats?schema=${schema}`)
       .then((response) => {
         // console.log(response.data);
         dispatch(

@@ -27,7 +27,7 @@ function CumulativeHourlyTrend() {
 const GetCumulativeHourlyChats = async () => {
 
   const { data } = authAxios
-    .get(`cumulativehourlychats?schema=atiamcollege`)
+    .get(`cumulativehourlychats?schema=${schema}`)
     .then((response) => {
       // console.log(response.data);
       dispatch(

@@ -28,7 +28,7 @@ const engagementdatafreq = []
 const GetEngagementFrequency = async () => {
 
   const { data } = authAxios
-    .get(`engagementfrequency?schema=atiamcollege`)
+    .get(`engagementfrequency?schema=${schema}`)
     .then((response) => {
       // console.log(response.data);
       dispatch(
