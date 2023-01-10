@@ -38,16 +38,35 @@ function Navbar() {
           <HomeIcon className="md:inline-flex h-8 bg-blue-900 rounded-full text-white  p-2 cursor-pointer md: mx-2 hover:shadow-md" />
         </a>
       </Link>
-      <Link href="/analytics/chatbasedanalytics">
+      <Link href="/analytics/chatbasedsearch">
         <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded-md text-black  items-center justify-center hover:bg-blue-900 hover:text-white hover:shadow-md transition-color duration-200">
-          Predictive Analytics
+          Search 
         </a>
       </Link>
-
+      <Link href="/analytics/descriptiveanalytics">
+        <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded-md text-black  items-center justify-center hover:bg-blue-900 hover:text-white hover:shadow-md transition-color duration-200">
+          Descriptive 
+        </a>
+      </Link>
+      <Link href="/analytics/predictiveanalytics">
+        <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded-md text-black  items-center justify-center hover:bg-blue-900 hover:text-white hover:shadow-md transition-color duration-200">
+          Predictive 
+        </a>
+      </Link>
+      <Link href="/summarization/summarization">
+        <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded-md text-black  items-center justify-center hover:bg-blue-900 hover:text-white hover:shadow-md transition-color duration-200">
+          Summarization 
+        </a>
+      </Link>
+      <Link href="/customerfeedback/customerfeedback">
+        <a className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded-md text-black  items-center justify-center hover:bg-blue-900 hover:text-white hover:shadow-md transition-color duration-200">
+          Feedback 
+        </a>
+      </Link>
       <a
         href="#!"
         onClick={(user = false)}
-        className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded-full text-black  items-center justify-center hover:bg-blue-900 hover:text-white hover:shadow-md"
+        className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded-md text-black  items-center justify-center hover:scale-105 hover:shadow-md"
       >
         Sign Out 
       </a>
@@ -73,14 +92,14 @@ function Navbar() {
 
   return (
     <header className="flex flex-col md:w-full xl:flex xl:flex-row sticky xl:w-3/4 top-5 z-50 space-x-20  justify-start  p-5 md:px-10 md:mx-auto rounded-md shadow-lg border-1 border-blue:100 bg-gray-100">
-      <div
+      {/* <div
         //onClick={() => router.push("/")}
         className="relative flex items-center  cursor-pointer my-auto"
       >
         <h1 className="sm:text-centre sm:text-lg md:text-xl font-tesla">
           PROXIMA
         </h1>
-      </div>
+      </div> */}
 
       <div className="items-center space-x-4 justify-center text-gray-500 cursor-pointer my-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start lg:h-auto">

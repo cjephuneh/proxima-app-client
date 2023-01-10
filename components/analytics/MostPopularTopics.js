@@ -86,7 +86,7 @@ function MostPopularTopics() {
   }, []);
 
   return (
-    <div className="pt-4 h-[400px] w-[1000px] p-4">
+    <div className="pt-4 h-[400px] w-[1000px] p-4 ">
       <h2 className="text-3xl text-center m-2 text-blue-900">
       Conversation Points
       </h2>

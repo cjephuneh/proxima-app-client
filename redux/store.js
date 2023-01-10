@@ -14,11 +14,18 @@ import storage from "redux-persist/lib/storage";
 
 import AuthReducer from "../redux/authentication/authslice";
 import AnalyticsReducer from "../redux/analytics/analyticsslice";
+import PredictiveAnalyticsReducer from "../redux/predictiveanalytics/predictiveanalyticsslice";
+import SummarizationReducer from "../redux/summarization/summarizationslice";
+import SearchReducer from "../redux/search/searchslice";
 
 //Combining the reducers
 const rootReducer = combineReducers({
   auth: AuthReducer,
   analytics: AnalyticsReducer,
+  predictiveanalytics: PredictiveAnalyticsReducer,
+  summarization: SummarizationReducer,
+  searchengine: SearchReducer
+ 
 });
 // persist config obj
 // blacklist a store attribute using it's reducer name. Blacklisted attributes will not persist. (I did not find a way to blacklist specific values)

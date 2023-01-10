@@ -138,15 +138,18 @@ function CumulativeTrends() {
   }, []);
 
   return (
-    <div className="flex flex-col p-1">
-      <div className="sm:object-cover object-center relative h-[200px] w-[300px] sm:h-[300px] sm:w-[400px]  object-cover lg:h-[400px] lg:w-[500px] xl:h-[500px] ">
+    <div className="flex flex-col p-1 border border-black py-2 rounded-sm shadow-md">
+      {/* <div className="sm:object-cover object-center relative h-[200px] w-[300px] sm:h-[300px] sm:w-[400px]  object-cover lg:h-[400px] lg:w-[500px] xl:h-[500px] ">
         <Image
           src={coverpage}
           layout="fill"
           objectFit="cover"
           className="rounded-md shadow-lg"
         />
-      </div>
+      </div> */}
+      <h1 className="text-center text-3xl text-blue-900 m-2">
+        Cumulative Data
+      </h1>
       <div className="flex-col pt-2 bg-gray-100  text-center">
         <h1 className="text-4xl text-black m-2">
           {totalchatcount?.totalchatcount}

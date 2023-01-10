@@ -8,6 +8,8 @@ import {
   setChatSlotIntent,
 } from "../../redux/analytics/analyticsslice";
 import { selectUser } from "../../redux/authentication/authslice";
+import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/solid";
+import ChatbotCard from "../Summarization/ChatbotCard";
 
 function ChatList() {
   const user = useSelector(selectUser);
@@ -122,61 +124,57 @@ function ChatList() {
     //getChatSlotIntentFilling;
     //getChatbotChatList;
   }, []);
-  return (
-    <>
-      <div className="flex flex-row justify-center space-x-96">
-        <h1 className="text-blue-900 text-2xl text-center">CHATS</h1>
-        <h1 className="text-blue-900 text-2xl text-center">
-          Slots and Intents
-        </h1>
-      </div>
-      <div className="flex flex-row justify-between space-x-2">
-        {listchatslotintents?.map(
-          ({
-            id,
-            client,
-            chat_means,
-            user_query,
-            chatbot_response,
-            paraphrased_response,
-            escalated,
-            created_at,
-          }) => (
-            <div className="flex flex-row justify-center space-x-24 bg-gray-100 p-1">
-              <h1>{client}</h1>
-              <p>Time: {created_at}</p>
-            </div>
-          )
-        )}
 
-        {chatbotchat?.map(
-          ({
-            id,
-            client,
-            chat_means,
-            user_query,
-            chatbot_response,
-            paraphrased_response,
-            escalated,
-          }) => (
-            <div className="bg-gray-100 p-1  rounded-md w-[1000px] border-2">
-              <p className="">{user_query}</p>
-              <p className="">{chatbot_response}</p>
-              <div className="flex flex-row justify-between">
-                <p>{chat_means}</p>
-                <p>{escalated}</p>
-              </div>
-            </div>
-          )
-        )}
-        {chatslotintents?.map(({ id, client, slots, intents }) => (
-          <div className="bg-gray-100 p-1 rounded-md w-[500px] border-2">
-            <p className="p-1">{slots}: </p>
-            <p className="p-1">{intents}: </p>
-          </div>
-        ))}
-      </div>
-    </>
+  <>
+    <div className='flex flex-row shadow-md p-2 bg-gray-50 border-b border-gray-400 hover:scale-102 transform transition duration-300 ease-out h-[70px]'>
+    <ArrowDownIcon className="md:inline-flex h-8 bg-white rounded-full text-black hover:scale-110 transform transition duration-300 ease-out p-2 cursor-pointer md: mx-2 hover:shadow-md" />
+    <button
+      className="py-2  bg-gray-100 rounded-md p-2  w-[100px] h-[30px]  focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+      >
+      0793681840
+    </button>
+            <button
+      className="py-2  bg-gray-100 rounded-md p-2  w-[100px] h-[30px]  focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+    >
+      Sales
+    </button>
+    <div className="">
+        <div className="p-2 bg-gray-200 rounded-md shadow-md text-sm">
+        <p>01/12/2022</p>
+        </div>
+        {/*  */}            
+    </div>
+    
+    </div>
+  </>
+  return (
+    <div className='flex flex-row shadow-md p-2 bg-gray-50 h-[300px]'>
+        <div>
+        <div className='flex flex-row space-x-3'>
+        <button
+          className="py-2  bg-gray-100 rounded-md p-2  w-[100px] h-[30px]  focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+          >
+          0793681840
+        </button>
+                <button
+          className="py-2  bg-gray-100 rounded-md p-2  w-[100px] h-[30px]  focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+        >
+          Sales
+        </button>
+        <div className="">
+        <div className="p-1 bg-gray-200 rounded-md shadow-md text-sm">
+        <p>01/12/2022</p>
+        </div>
+        {/*  */}            
+        </div>
+        </div>
+        <div>
+        <ChatbotCard />
+        </div>
+
+</div>
+    </div>
+   
   );
 }
 

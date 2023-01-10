@@ -5,7 +5,7 @@ import axios from "axios";
 import { selectUser } from "../../redux/authentication/authslice";
 import { SelectHourlychats, SelectHourlyCountEscalatedIssues, SelectHourlyQueriesReceived, SetHourlychats, SetHourlyCountEscalatedIssues, SetHourlyQueriesReceived } from "../../redux/analytics/analyticsslice";
 
-function Hourlystatus() {
+function Newstatus() {
   const user = useSelector(selectUser);
   const token = user.user.token;
   const schema = user.user.tenant_domain_schema
@@ -182,4 +182,4 @@ function Hourlystatus() {
   );
 }
 
-export default Hourlystatus;
+export default Newstatus;
