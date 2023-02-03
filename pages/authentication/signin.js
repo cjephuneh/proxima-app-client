@@ -7,9 +7,9 @@ function Signin() {
   return (
     <div className="bg-gray-50">
       <main>
-        <div className="mx-auto pt-8 max-w-7xl">
+        {/* <div className="mx-auto pt-8 max-w-7xl">
           <Navbar />
-        </div>
+        </div> */}
         <section className="m-24">
           <Login />
         </section>
