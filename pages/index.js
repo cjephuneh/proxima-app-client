@@ -1,11 +1,13 @@
+'use client'
+
 import Head from 'next/head'
-import {  useDispatch, useSelector } from 'react-redux'
-import { sayHelloProxima, sayHelloWorld, reset } from '@/redux/slice/testSlice'
+import {  useSelector } from 'react-redux'
+
+import Login from './auth/Login'
 
 export default function Home() {
-    const greet = useSelector((state) => state.test.value)
+    const user = useSelector((state) => state.auth.user)
 
-    const dispatch = useDispatch()
   return (
       <>
         <Head>
@@ -14,16 +16,20 @@ export default function Home() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div className="flex flex-col h-screen w-screen items-center justify-center overflow-hidden">
-          
-          <h1 className='text-4xl text-blue-500'>{greet}</h1>
+        
+        {
+          user ?
 
-          <div className='space-x-4 mt-4'>
-            <button onClick={() => dispatch(sayHelloProxima('Proxima'))} className='bg-green-400 px-4 py-1 rounded'>proxima</button>
-            <button onClick={() => dispatch(sayHelloWorld('World'))} className='bg-green-400 px-4 py-1 rounded'>world</button>
-            <button onClick={() => dispatch(reset())} className='bg-green-400 px-4 py-1 rounded'>reset</button>
-          </div>
-        </div>
+          <div className="flex flex-col h-screen w-screen items-center justify-center overflow-hidden">
+          
+          {
+            user && <h1>Hi {user.name}</h1>
+          }
+
+        </div>  :
+
+        <Login />
+        }
 
         
       </>
