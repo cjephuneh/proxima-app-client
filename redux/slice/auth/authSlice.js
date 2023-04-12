@@ -3,10 +3,75 @@ import authService from './authService'
 
 const initialState = {
   user: null,
-  isError: false,
-  isSuccess: false,
-  isLoading: false,
-  isMessage: ''
+  admin: null,
+  anonymoususer: null,
+  client: null,
+  employee: null,
+  changepassword: null,
+  forgotpassword: null,
+  activate_user: null,
+  resendactivationlink: null,
+  reset_password: null,
+
+    // user
+    isUserError: false,
+    isUserSuccess: false,
+    isUserLoading: false,
+    isUserMessage: '',
+
+    // admin
+    isAdminError: false,
+    isAdminSuccess: false,
+    isAdminLoading: false,
+    isAdminMessage: '',
+
+    // anonymous user
+    isAnonymousUserError: false,
+    isAnonymousUserSuccess: false,
+    isAnonymousUserLoading: false,
+    isAnonymousUserMessage: '',
+
+    // client
+    isClientError: false,
+    isClientSuccess: false,
+    isClientLoading: false,
+    isClientMessage: '',
+
+    // employee
+    isEmployeeError: false,
+    isEmployeeSuccess: false,
+    isEmployeeLoading: false,
+    isEmployeeMessage: '',
+
+    // change password
+    isChangePasswordError: false,
+    isChangePasswordSuccess: false,
+    isChangePasswordLoading: false,
+    isChangePasswordMessage: '',
+
+    // forgot password
+    isForgotPasswordError: false,
+    isForgotPasswordSuccess: false,
+    isForgotPasswordLoading: false,
+    isForgotPasswordMessage: '',
+
+    // activate user
+    isActivateUserError: false,
+    isActivateUserSuccess: false,
+    isActivateUserLoading: false,
+    isActivateUserMessage: '',
+
+    // resend activation link
+    isResendActivationLinkError: false,
+    isResendActivationLinkSuccess: false,
+    isResendActivationLinkLoading: false,
+    isResendActivationLinkMessage: '',
+
+    // reset password
+    isResetPasswordError: false,
+    isResetPasswordSuccess: false,
+    isResetPasswordLoading: false,
+    isResetPasswordMessage: '',
 }
 
 // allow all users to sign in
@@ -135,153 +200,153 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(signin.pending, (state) => {
-                state.isLoading = true
+                state.isUserLoading = true
             })
             .addCase(signin.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
+                state.isUserLoading = false
+                state.isUserSuccess = true
                 state.user = action.payload
             })
             .addCase(signin.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.isMessage = action.payload
+                state.isUserLoading = false
+                state.isUserError = true
+                state.isUserMessage = action.payload
                 state.user = null 
             })
 
             .addCase(admin.pending, (state) => {
-                state.isLoading = true
+                state.isAdminLoading = true
             })
             .addCase(admin.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.user = action.payload
+                state.isAdminLoading = false
+                state.isAdminSuccess = true
+                state.admin = action.payload
             })
             .addCase(admin.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.isMessage = action.payload
-                state.user = null 
+                state.isAdminLoading = false
+                state.isAdminError = true
+                state.isAdminMessage = action.payload
+                state.admin = null 
             })
 
             .addCase(anonymoususer.pending, (state) => {
-                state.isLoading = true
+                state.isAnonymousUserLoading = true
             })
             .addCase(anonymoususer.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.user = action.payload
+                state.isAnonymousUserLoading = false
+                state.isAnonymousUserSuccess = true
+                state.anonymoususer = action.payload
             })
             .addCase(anonymoususer.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.isMessage = action.payload
-                state.user = null 
+                state.isAnonymousUserLoading = false
+                state.isAnonymousUserError = true
+                state.isAnonymousUserMessage = action.payload
+                state.anonymoususer = null 
             })
 
             .addCase(client.pending, (state) => {
-                state.isLoading = true
+                state.isClientLoading = true
             })
             .addCase(client.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.user = action.payload
+                state.isClientLoading = false
+                state.isClientSuccess = true
+                state.client = action.payload
             })
             .addCase(client.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.isMessage = action.payload
-                state.user = null 
+                state.isClientLoading = false
+                state.isClientError = true
+                state.isClientMessage = action.payload
+                state.client = null 
             })
 
             .addCase(employee.pending, (state) => {
-                state.isLoading = true
+                state.isEmployeeLoading = true
             })
             .addCase(employee.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.user = action.payload
+                state.isEmployeeLoading = false
+                state.isEmployeeSuccess = true
+                state.employee = action.payload
             })
             .addCase(employee.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.isMessage = action.payload
-                state.user = null 
+                state.isEmployeeLoading = false
+                state.isEmployeeError = true
+                state.isEmployeeMessage = action.payload
+                state.employee = null 
             })
 
             .addCase(changepassword.pending, (state) => {
-                state.isLoading = true
+                state.isChangePasswordLoading = true
             })
             .addCase(changepassword.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.user = action.payload
+                state.isChangePasswordLoading = false
+                state.isChangePasswordSuccess = true
+                state.changepassword = action.payload
             })
             .addCase(changepassword.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.isMessage = action.payload
-                state.user = null 
+                state.isChangePasswordLoading = false
+                state.isChangePasswordError = true
+                state.isChangePasswordMessage = action.payload
+                state.changepassword = null 
             })
 
             .addCase(forgotpassword.pending, (state) => {
-                state.isLoading = true
+                state.isForgotPasswordLoading = true
             })
             .addCase(forgotpassword.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.user = action.payload
+                state.isForgotPasswordLoading = false
+                state.isForgotPasswordSuccess = true
+                state.forgotpassword = action.payload
             })
             .addCase(forgotpassword.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.isMessage = action.payload
-                state.user = null 
+                state.isForgotPasswordLoading = false
+                state.isForgotPasswordError = true
+                state.isForgotPasswordMessage = action.payload
+                state.forgotpassword = null 
             })
 
             .addCase(activate_user.pending, (state) => {
-                state.isLoading = true
+                state.isActivateUserLoading = true
             })
             .addCase(activate_user.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.user = action.payload
+                state.isActivateUserLoading = false
+                state.isActivateUserSuccess = true
+                state.activate_user = action.payload
             })
             .addCase(activate_user.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.isMessage = action.payload
-                state.user = null 
+                state.isActivateUserLoading = false
+                state.isActivateUserError = true
+                state.isActivateUserMessage = action.payload
+                state.activate_user = null 
             })
 
             .addCase(resendactivationlink.pending, (state) => {
-                state.isLoading = true
+                state.isResendActivationLinkLoading = true
             })
             .addCase(resendactivationlink.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.user = action.payload
+                state.isResendActivationLinkLoading = false
+                state.isResendActivationLinkSuccess = true
+                state.resendactivationlink = action.payload
             })
             .addCase(resendactivationlink.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.isMessage = action.payload
-                state.user = null 
+                state.isResendActivationLinkLoading = false
+                state.isResendActivationLinkError = true
+                state.isResendActivationLinkMessage = action.payload
+                state.resendactivationlink = null 
             })
 
             .addCase(reset_password.pending, (state) => {
-                state.isLoading = true
+                state.isResendActivationLinkLoading = true
             })
             .addCase(reset_password.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.user = action.payload
+                state.isResendActivationLinkLoading = false
+                state.isResendActivationLinkSuccess = true
+                state.resendactivationlink = action.payload
             })
             .addCase(reset_password.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.isMessage = action.payload
-                state.user = null 
+                state.isResendActivationLinkLoading = false
+                state.isResendActivationLinkError = true
+                state.isResendActivationLinkMessage = action.payload
+                state.resendactivationlink = null 
             })
     }
 })
