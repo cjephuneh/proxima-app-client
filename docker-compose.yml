@@ -1,0 +1,22 @@
+version: '3.6'
+
+networks:
+  traefik_proxy:
+    external: true
+
+services:
+  chatgpt:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - 'OPENAI_API_KEY='
+    labels:  # new
+      - "traefik.enable=true"
+      - "traefik.http.routers.appclient.rule=Host(`app.proximaai.co`)"
+      - "traefik.http.routers.appclient.tls=true"
+      - "traefik.http.routers.appclient.tls.certresolver=letsencrypt"
+    networks:
+      - traefik_proxy
+
+
