@@ -1,21 +1,34 @@
 // Enable all users to signin
 
-export default function handler(req, res) {
-    const user = {
-        name: 'kim'
-    }
-    if(req.method === 'POST'){
-        /* 
-            sign in logic
-        */
+/**
+ * 
+route: /api/auth/signin
 
-        // send the API response
-        if(req.body.name === user.name){
-            res.status(200).json(req.body)
-        } else {
-            res.status(400).json({
-                message: 'user does not exist'
-            })
-        }
+res: 
+{
+    "email": "employee@mail.com",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZXhwIjoxNjg1ODcyMjU2fQ.aEZSq4gq5_eV2uDFwpEBvm1562aaeMUAFPqOuNw-qfY",
+    "user_type": "employee"
+}
+ */
+
+import axios from "axios"
+
+export default function handler(req, res) {
+    const { email, password } = req.body
+
+    if(req.method === 'POST'){
+        axios.post(`${BASE_URL}/api/auth/signin`, {
+            email,
+            password
+        }).then(({ data }) => {
+            if(data.token){
+                res.status(200).json(data)
+            } else{
+                res.status(400).json({
+                    message: 'User does not exist'
+                })
+            }
+        })
     }
-  }
+}

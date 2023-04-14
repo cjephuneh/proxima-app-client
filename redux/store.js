@@ -6,6 +6,9 @@ import communityReducer from './slice/community/communitySlice'
 import analyticsReducer from './slice/analytics/analyticsSlice'
 import surveyReducer from './slice/survey/surveySlice'
 import tenantManagementReducer from './slice/tenantmanagement/tenantmanagementSlice'
+import summarizeReducer from './slice/summarize/summarizeSlice'
+import paraphraseReducer from './slice/paraphrase/paraphraseSlice'
+import generationReducer from './slice/generation/generationSlice'
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +17,9 @@ export const store = configureStore({
     community: communityReducer,
     analytics: analyticsReducer,
     survey: surveyReducer,
-    tenant: tenantManagementReducer
+    tenant: tenantManagementReducer,
+    summarize: summarizeReducer,
+    paraphrase: paraphraseReducer,
+    generation: generationReducer
   },
 })
