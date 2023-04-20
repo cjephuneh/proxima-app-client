@@ -9,6 +9,7 @@ import tenantManagementReducer from './slice/tenantmanagement/tenantmanagementSl
 import summarizeReducer from './slice/summarize/summarizeSlice'
 import paraphraseReducer from './slice/paraphrase/paraphraseSlice'
 import generationReducer from './slice/generation/generationSlice'
+import predictiveReducer from './slice/predictive/predictiveSlice'
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     tenant: tenantManagementReducer,
     summarize: summarizeReducer,
     paraphrase: paraphraseReducer,
-    generation: generationReducer
+    generation: generationReducer,
+    predictive: predictiveReducer
   },
 })
