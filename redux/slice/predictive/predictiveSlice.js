@@ -234,7 +234,7 @@ const predictiveSlice = createSlice({
             .addCase(communityGrowthRate.pending, (state) => {
                 state.isCommunityGrowthRateLoading = true
             })
-            .addCase(clientUniqueClients.fulfilled, (state, action) => {
+            .addCase(communityGrowthRate.fulfilled, (state, action) => {
                 state.isCommunityGrowthRateLoading = false
                 state.isCommunityGrowthRateSuccess = true
                 state.communityGrowthRate = action.payload

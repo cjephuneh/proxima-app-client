@@ -1,15 +1,25 @@
-'use client'
-
+import Download from '@/components/homepage/Download'
+import Facts from '@/components/homepage/Facts'
+import Hero from '@/components/homepage/Hero'
+import Navbar from '@/components/homepage/Navbar'
+import Pricing from '@/components/homepage/Pricing'
 import Head from 'next/head'
-import {  useSelector } from 'react-redux'
-
-import Login from './auth/Login'
+import { useRouter } from 'next/router'
+import { useTheme } from 'next-themes'
+import { useEffect } from 'react'
+import Layout from '@/components/Layout'
 
 export default function Home() {
-    const user = useSelector((state) => state.auth.user)
+    // const { pathname } = useRouter()
+    // console.log(pathname)
 
+    const { systemTheme, theme, setTheme } = useTheme();
+
+    useEffect(() => {
+        setTheme('dark')
+    }, [])
   return (
-      <>
+      <div className=''>
         <Head>
           <title>Proxima AI</title>
           <meta name="description" content="The proxima client app" />
@@ -17,21 +27,16 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         
-        {
-          user ?
-
-          <div className="flex flex-col h-screen w-screen items-center justify-center overflow-hidden">
-          
-          {
-            user && <h1>Hi {user.name}</h1>
-          }
-
-        </div>  :
-
-        <Login />
-        }
+        <main>
+            <Layout>
+              <Hero />
+              <Facts />
+              <Pricing />
+              <Download />
+            </Layout>
+        </main>
 
         
-      </>
+      </div>
   )
 }
