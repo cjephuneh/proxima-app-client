@@ -2,6 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import searchService from "./searchService";
 
 const initialState = {
+    searchWord: '',
+    isSearchWindowVisible: false,
+
     searchResults: null,
     isSearchError: false,
     isSearchSuccess: false,
@@ -23,7 +26,15 @@ const searchSlice = createSlice({
     name: 'search',
     initialState,
     reducers: {
-
+        setSearchValue: (state, action) => {
+            state.searchWord = action.payload
+        },
+        setIsSearchWindowVisible: (state) => {
+            state.isSearchWindowVisible = true
+        }, 
+        closeSearchWindow: (state) => {
+            state.isSearchWindowVisible = false
+        }
     }, 
     extraReducers: (builder) => {
         builder
@@ -43,5 +54,7 @@ const searchSlice = createSlice({
             })
     }
 })
+
+export const { setSearchValue, setIsSearchWindowVisible, closeSearchWindow } = searchSlice.actions
 
 export default searchSlice.reducer

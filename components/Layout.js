@@ -6,7 +6,7 @@ export default function Layout({children}){
     return (
         <div className={pathname === '/' ? "mx-auto max-w-screen-xl pt-6 text-white" : "mx-auto max-w-screen-xl pt-6 text-black"}>
             <Navbar />
-            <div className={pathname !== '/' && 'bg-gray-50'}>
+            <div className={'overflow-y-scroll'}>
                 {children}
             </div>
         </div>

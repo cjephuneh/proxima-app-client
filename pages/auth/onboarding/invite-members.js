@@ -28,7 +28,7 @@ export default function InviteMembers(){
                     </div>
 
                     <div className="flex items-center justify-center">
-                        <button type='submit' className="mt-16 px-44 bg-[#2DABB1] text-white py-2 rounded">Done</button>
+                        <button data-testid='done-btn' type='submit' className="mt-16 px-44 bg-[#2DABB1] text-white py-2 rounded">Done</button>
                     </div>
                 </form>
 

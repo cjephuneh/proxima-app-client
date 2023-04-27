@@ -1,273 +1,111 @@
 import images from "@/assets/images";
 import DashLayout from "@/components/dashboard/DashLayout";
-import { GrFormNext } from "react-icons/gr";
-import { SlGraph } from "react-icons/sl";
-import { TbActivityHeartbeat } from "react-icons/tb";
+import LatestIssues from "@/components/dashboard/home/LatestIssues";
+import RecentInteractions from "@/components/dashboard/home/RecentInteractions";
+import { closeSearchWindow } from "@/redux/slice/search/searchSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Dashboard(){
+    // recent interactions
+    const tags = ['Drugs', 'Health', 'Complaint']
+    const title = 'Moon fever when using Astecca'
+    const description = 'I’ve been getting mild fever symptoms whenever am using any of your drugs. Could it be that am having an allergic reaction to the silicon casings?'
+    const customers = [images.user, images.user, images.user]
+
+    // latest issues
+    const customerImg = images.user
+    const customerName = 'John Doe Mike'
+    const issueTitle = 'Moon fever when using Astecca'
+    const issueBrief = 'Some brief cut in half description'
+    const customerContributions = 189
+
+    // search
+    const searchValue = useSelector((state) => state.search.searchWord)
+    const searchWindowVisible = useSelector((state) => state.search.isSearchWindowVisible)
+
+    //
+    const dispatch = useDispatch()
     return(
         <DashLayout>
-            <h2 className="text-3xl">Recently interacted</h2>
+            {
+                searchWindowVisible === false ?
 
-            <div className="mt-6 flex gap-8">
-                <div className="bg-white p-4 rounded w-96">
-                    <div className="flex gap-3">
-                        <p className="bg-purple-300 w-fit px-2 py-1 rounded text-sm">Drugs</p>
-                        <p className="bg-purple-300 w-fit px-2 py-1 rounded text-sm">Health</p>
-                        <p className="bg-purple-300 w-fit px-2 py-1 rounded text-sm">Complaint</p>
+                <div>
+                    <h2 className="text-3xl">Recently interacted</h2>
+
+                    <div className="mt-6 flex gap-8">
+                        <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                        <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                        <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
                     </div>
 
-                    <h3 className="text-2xl mt-4">Moon fever when using Astecca</h3>
+                    <h2 className="text-3xl mt-6">Latest Issues</h2>
 
-                    <p className="mt-4 text-sm text-gray-500">
-                    I’ve been getting mild fever symptoms whenever am using any of your drugs. Could it be that am having an allergic reaction to the silicon casings?
-                    </p>
+                    <div className='mt-6 space-y-4'>
+                        <LatestIssues customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
+                        <LatestIssues customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
+                        <LatestIssues customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
+                        <LatestIssues customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
+                        <LatestIssues customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
+                        <LatestIssues customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
+                        <LatestIssues customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
+                        <LatestIssues customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
+                    </div>
+                </div> :
 
-                    <div className="mt-4 flex items-center justify-between">
-                        <div className="flex gap-1">
-                            <img src={images.user} alt='user' className="w-7 h-7 object-contain" />
-                            <img src={images.user} alt='user' className="w-7 h-7 object-contain" />
-                            <img src={images.user} alt='user' className="w-7 h-7 object-contain" />
+                <div className="h-full overflow-hidden relative">
+                    
+                    <div className="z-10">
+                        <h2 className="text-3xl">Recently interacted</h2>
+
+                        <div className="mt-6 flex gap-8">
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
                         </div>
 
-                        <div className="bg-red-200 w-8 h-8 rounded-full flex items-center justify-center">
-                            <TbActivityHeartbeat className='w-7 h-7' color='red' />
+                        <h2 className="text-3xl mt-6">Latest Issues</h2>
+
+                        <div className='mt-6 space-y-4'>
+                            <LatestIssues customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
+                            <LatestIssues />
+                            <LatestIssues />
+                            <LatestIssues />
+                            <LatestIssues />
+                            <LatestIssues />
+                            <LatestIssues />
+                            <LatestIssues />
                         </div>
                     </div>
-                </div>
 
-                <div className="bg-white p-4 rounded w-96">
-                    <div className="flex gap-3">
-                        <p className="bg-purple-300 w-fit px-2 py-1 rounded text-sm">Drugs</p>
-                        <p className="bg-purple-300 w-fit px-2 py-1 rounded text-sm">Health</p>
-                        <p className="bg-purple-300 w-fit px-2 py-1 rounded text-sm">Complaint</p>
-                    </div>
-
-                    <h3 className="text-2xl mt-4">Moon fever when using Astecca</h3>
-
-                    <p className="mt-4 text-sm text-gray-500">
-                    I’ve been getting mild fever symptoms whenever am using any of your drugs. Could it be that am having an allergic reaction to the silicon casings?
-                    </p>
-
-                    <div className="mt-4 flex items-center justify-between">
-                        <div className="flex gap-1">
-                            <img src={images.user} alt='user' className="w-7 h-7 object-contain" />
-                            <img src={images.user} alt='user' className="w-7 h-7 object-contain" />
-                            <img src={images.user} alt='user' className="w-7 h-7 object-contain" />
+                    <div className='bg-gray-200 z-20 h-full w-full absolute top-0 left-0 opacity-[.98] overflow-y-scroll overflow-x-hidden'>
+                        <div className="flex justify-end sticky top-0">
+                            <button data-testid='close-btn' onClick={() => dispatch(closeSearchWindow())} className="bg-red-500 opacity-100 px-4 py-1 mr-4 rounded text-white font-semibold">Close</button>
                         </div>
-
-                        <div className="bg-red-200 w-8 h-8 rounded-full flex items-center justify-center">
-                            <TbActivityHeartbeat className='w-7 h-7' color='red' />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="bg-white p-4 rounded w-96">
-                    <div className="flex gap-3">
-                        <p className="bg-purple-300 w-fit px-2 py-1 rounded text-sm">Drugs</p>
-                        <p className="bg-purple-300 w-fit px-2 py-1 rounded text-sm">Health</p>
-                        <p className="bg-purple-300 w-fit px-2 py-1 rounded text-sm">Complaint</p>
-                    </div>
-
-                    <h3 className="text-2xl mt-4">Moon fever when using Astecca</h3>
-
-                    <p className="mt-4 text-sm text-gray-500">
-                    I’ve been getting mild fever symptoms whenever am using any of your drugs. Could it be that am having an allergic reaction to the silicon casings?
-                    </p>
-
-                    <div className="mt-4 flex items-center justify-between">
-                        <div className="flex gap-1">
-                            <img src={images.user} alt='user' className="w-7 h-7 object-contain" />
-                            <img src={images.user} alt='user' className="w-7 h-7 object-contain" />
-                            <img src={images.user} alt='user' className="w-7 h-7 object-contain" />
-                        </div>
-
-                        <div className="bg-red-200 w-8 h-8 rounded-full flex items-center justify-center">
-                            <TbActivityHeartbeat className='w-7 h-7' color='red' />
+                        
+                        <div data-testid='issues-window' className="flex flex-wrap gap-4 mt-4">
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
+                            <RecentInteractions tags={tags} title={title} description={description} customers={customers} />
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <h2 className="text-3xl mt-6">Latest Issues</h2>
-
-            <div className='mt-6 space-y-4'>
-                <div className="mx-4 px-6 py-3 bg-white flex justify-between items-center">
-                    <div className="flex gap-3 items-center">
-                        <img src={images.user} alt='user' className="w-12 h-12 object-contain" />
-                        <div>
-                            <p className="font-semibold">John Doe</p>
-                            <p className="text-sm text-gray-500">Mike</p>
-                        </div>
-                    </div>
-
-                    <div className=''>
-                        <p>Moon fever when using Astecca</p>
-                        <p className="text-sm text-gray-500">Some brief cut in half description</p>
-                    </div>
-
-                    <div className=''>
-                        <p>189</p>
-                        <p className="text-sm text-gray-500">User contributions</p>
-                    </div>
-
-                    <GrFormNext className="w-7 h-7" />
-                </div>
-
-                <div className="mx-4 px-6 py-3 bg-white flex justify-between items-center">
-                    <div className="flex gap-3 items-center">
-                        <img src={images.user} alt='user' className="w-12 h-12 object-contain" />
-                        <div>
-                            <p className="font-semibold">John Doe</p>
-                            <p className="text-sm text-gray-500">Mike</p>
-                        </div>
-                    </div>
-
-                    <div className=''>
-                        <p>Moon fever when using Astecca</p>
-                        <p className="text-sm text-gray-500">Some brief cut in half description</p>
-                    </div>
-
-                    <div className=''>
-                        <p>189</p>
-                        <p className="text-sm text-gray-500">User contributions</p>
-                    </div>
-
-                    <GrFormNext className="w-7 h-7" />
-                </div>
-
-                <div className="mx-4 px-6 py-3 bg-white flex justify-between items-center">
-                    <div className="flex gap-3 items-center">
-                        <img src={images.user} alt='user' className="w-12 h-12 object-contain" />
-                        <div>
-                            <p className="font-semibold">John Doe</p>
-                            <p className="text-sm text-gray-500">Mike</p>
-                        </div>
-                    </div>
-
-                    <div className=''>
-                        <p>Moon fever when using Astecca</p>
-                        <p className="text-sm text-gray-500">Some brief cut in half description</p>
-                    </div>
-
-                    <div className=''>
-                        <p>189</p>
-                        <p className="text-sm text-gray-500">User contributions</p>
-                    </div>
-
-                    <GrFormNext className="w-7 h-7" />
-                </div>
-
-                <div className="mx-4 px-6 py-3 bg-white flex justify-between items-center">
-                    <div className="flex gap-3 items-center">
-                        <img src={images.user} alt='user' className="w-12 h-12 object-contain" />
-                        <div>
-                            <p className="font-semibold">John Doe</p>
-                            <p className="text-sm text-gray-500">Mike</p>
-                        </div>
-                    </div>
-
-                    <div className=''>
-                        <p>Moon fever when using Astecca</p>
-                        <p className="text-sm text-gray-500">Some brief cut in half description</p>
-                    </div>
-
-                    <div className=''>
-                        <p>189</p>
-                        <p className="text-sm text-gray-500">User contributions</p>
-                    </div>
-
-                    <GrFormNext className="w-7 h-7" />
-                </div>
-
-                <div className="mx-4 px-6 py-3 bg-white flex justify-between items-center">
-                    <div className="flex gap-3 items-center">
-                        <img src={images.user} alt='user' className="w-12 h-12 object-contain" />
-                        <div>
-                            <p className="font-semibold">John Doe</p>
-                            <p className="text-sm text-gray-500">Mike</p>
-                        </div>
-                    </div>
-
-                    <div className=''>
-                        <p>Moon fever when using Astecca</p>
-                        <p className="text-sm text-gray-500">Some brief cut in half description</p>
-                    </div>
-
-                    <div className=''>
-                        <p>189</p>
-                        <p className="text-sm text-gray-500">User contributions</p>
-                    </div>
-
-                    <GrFormNext className="w-7 h-7" />
-                </div>
-
-                <div className="mx-4 px-6 py-3 bg-white flex justify-between items-center">
-                    <div className="flex gap-3 items-center">
-                        <img src={images.user} alt='user' className="w-12 h-12 object-contain" />
-                        <div>
-                            <p className="font-semibold">John Doe</p>
-                            <p className="text-sm text-gray-500">Mike</p>
-                        </div>
-                    </div>
-
-                    <div className=''>
-                        <p>Moon fever when using Astecca</p>
-                        <p className="text-sm text-gray-500">Some brief cut in half description</p>
-                    </div>
-
-                    <div className=''>
-                        <p>189</p>
-                        <p className="text-sm text-gray-500">User contributions</p>
-                    </div>
-
-                    <GrFormNext className="w-7 h-7" />
-                </div>
-
-                <div className="mx-4 px-6 py-3 bg-white flex justify-between items-center">
-                    <div className="flex gap-3 items-center">
-                        <img src={images.user} alt='user' className="w-12 h-12 object-contain" />
-                        <div>
-                            <p className="font-semibold">John Doe</p>
-                            <p className="text-sm text-gray-500">Mike</p>
-                        </div>
-                    </div>
-
-                    <div className=''>
-                        <p>Moon fever when using Astecca</p>
-                        <p className="text-sm text-gray-500">Some brief cut in half description</p>
-                    </div>
-
-                    <div className=''>
-                        <p>189</p>
-                        <p className="text-sm text-gray-500">User contributions</p>
-                    </div>
-
-                    <GrFormNext className="w-7 h-7" />
-                </div>
-
-                <div className="mx-4 px-6 py-3 bg-white flex justify-between items-center">
-                    <div className="flex gap-3 items-center">
-                        <img src={images.user} alt='user' className="w-12 h-12 object-contain" />
-                        <div>
-                            <p className="font-semibold">John Doe</p>
-                            <p className="text-sm text-gray-500">Mike</p>
-                        </div>
-                    </div>
-
-                    <div className=''>
-                        <p>Moon fever when using Astecca</p>
-                        <p className="text-sm text-gray-500">Some brief cut in half description</p>
-                    </div>
-
-                    <div className=''>
-                        <p>189</p>
-                        <p className="text-sm text-gray-500">User contributions</p>
-                    </div>
-
-                    <GrFormNext className="w-7 h-7" />
-                </div>
-            </div>
+            }
         </DashLayout>
     )
 }

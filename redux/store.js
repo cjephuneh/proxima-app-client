@@ -10,10 +10,12 @@ import summarizeReducer from './slice/summarize/summarizeSlice'
 import paraphraseReducer from './slice/paraphrase/paraphraseSlice'
 import generationReducer from './slice/generation/generationSlice'
 import predictiveReducer from './slice/predictive/predictiveSlice'
+import searchReducer from './slice/search/searchSlice'
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    search: searchReducer,
     chat: chatReducer,
     community: communityReducer,
     analytics: analyticsReducer,

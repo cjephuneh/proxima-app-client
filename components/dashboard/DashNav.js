@@ -9,7 +9,7 @@ import { IoAnalyticsSharp } from "react-icons/io5";
 
 export default function DashNav(){
     return (
-        <aside className="p-4 h-screen overflow-y-hidden flex flex-col items-center justify-between shadow">
+        <aside data-testid='side-nav' className="p-4 h-screen overflow-y-hidden flex flex-col items-center justify-between shadow">
             <div>
                 <img src={images.logoLight} className="h-12 w-12 object-contain mb-4" />
 

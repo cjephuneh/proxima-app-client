@@ -1,16 +1,41 @@
 import images from "@/assets/images";
+import { setSearchValue, setIsSearchWindowVisible } from "@/redux/slice/search/searchSlice";
 import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineBell, AiOutlineMail } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 
 export default function UserInteractions(){
     const { pathname } = useRouter()
+
+    const dispatch = useDispatch()
+
+    const [searchWord, setSearchWord] = useState('')
+
+    const updateSearchWordToStore = (value) => {
+        dispatch(setSearchValue(value))
+
+        setSearchWord(value)
+    }
+
+    const activateSearchWindow = () => {
+        dispatch(setIsSearchWindowVisible())
+    }
+
+    // const searchRef = useRef(null)
+
+    // useEffect(() => {
+    //     if(document.activeElement === searchRef){
+    //         console.log('active')
+    //     }
+    // }, [searchRef])
     
     return (
         <div className={pathname === '/dashboard' ? "flex items-center gap-3 pt-6 pb-6 h-20 w-full shadow justify-between px-12": "flex items-center gap-3 pt-6 pb-6 h-20 w-full shadow justify-end px-12"}>
             <div className={pathname === '/dashboard' ? 'flex items-center gap-1' : 'hidden'}>
                 <BsSearch />
-                <input type='text' placeholder="Search" className="focus:outline-none px-4 py-2" />
+                <input type='text' placeholder="Search" value={searchWord} onFocus={() => activateSearchWindow()} onChange={e => updateSearchWordToStore(e.target.value)} className="focus:outline-none px-4 py-2" />
             </div>
             
             <div className="flex gap-5 items-center">
