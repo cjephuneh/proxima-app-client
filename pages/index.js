@@ -1,42 +1,20 @@
-import Download from '@/components/homepage/Download'
-import Facts from '@/components/homepage/Facts'
-import Hero from '@/components/homepage/Hero'
-import Navbar from '@/components/homepage/Navbar'
-import Pricing from '@/components/homepage/Pricing'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useTheme } from 'next-themes'
-import { useEffect } from 'react'
-import Layout from '@/components/Layout'
+import Layout from "@/components/auth/Layout";
+import Link from "next/link";
 
-export default function Home() {
-    // const { pathname } = useRouter()
-    // console.log(pathname)
+export default function Index(){
 
-    const { systemTheme, theme, setTheme } = useTheme();
+    return (
+        <Layout>
+            <div className="flex flex-col items-center mt-32">
+                <h2 data-testid='first-visit' className="font-semibold text-3xl">Is this your first visit?</h2>
+                <p className="mt-3 text-gray-500 text-center">Have you ever registered on the platform before (either as a client or <br /> organization)?</p>
 
-    useEffect(() => {
-        setTheme('dark')
-    }, [])
-  return (
-      <div className=''>
-        <Head>
-          <title>Proxima AI</title>
-          <meta name="description" content="The proxima client app" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        
-        <main>
-            <Layout>
-              <Hero />
-              <Facts />
-              <Pricing />
-              <Download />
-            </Layout>
-        </main>
+                <div className="mt-16 flex flex-col space-y-3">
+                    <Link href={'/auth/login'} data-testid='yes-btn' className="border px-12 py-3 rounded bg-[#2DABB1] text-white">Yes, I have been here before</Link>
 
-        
-      </div>
-  )
+                    <Link href={'/auth/onboarding/orgname'} className="px-12 py-3 rounded bg-gray-200">No, this is my first time</Link>
+                </div>
+            </div>
+        </Layout>
+    )
 }

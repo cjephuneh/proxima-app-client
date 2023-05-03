@@ -1,33 +1,53 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/auth/Layout";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useFormik } from 'formik'
+import * as yup from 'yup'
 
 export default function Username(){
     const router = useRouter()
 
-    const [username, setUsername] = useState('')
+    // handle submit
+    const submitUsername = (values, actions) => {
+        console.log(values)
 
-    const [showValidationMessage, setShowValidationMessage] = useState(false)
-
-    const submitUsername = () => {
-        if(username === ''){
-            setShowValidationMessage(true)
-            return
-        }
         router.push('admin-details')
     }
+
+    // validation schema
+    const loginSchema = yup.object().shape({
+        username: yup.string().required('Required')
+    })
+
+    // formik form validation
+    const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
+        initialValues: {
+            username: '',
+        },
+        validationSchema: loginSchema,
+        onSubmit: submitUsername
+    })
+
     return(
         <Layout>
-            <div className="flex flex-col items-center mt-16">
+            <form onSubmit={handleSubmit} className="flex flex-col items-center mt-16">
                 <h2 className="font-semibold text-3xl">How should we call you?</h2>
                 <p className="mt-3 text-gray-500 text-center">Choose a Username that we can easily identify you with</p>
 
-                <input type="text" aria-label="username-input" value={username} onChange={e => setUsername(e.target.value)} placeholder="e.g. johnDoe, john_doe, " className="mt-8 focus:outline-none bg-white border p-2 rounded" />
+                <input 
+                    type="text" 
+                    id='username'
+                    aria-label="username-input" 
+                    value={values.username} 
+                    onChange={handleChange}
+                    onBlur={handleBlur} 
+                    placeholder="e.g. johnDoe, john_doe, " 
+                    className={errors.username && touched.username ? 'w-80 mt-4 focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'w-80 mt-4 focus:outline-none border rounded px-4 py-2 bg-white'}
+                />
 
-                <p className={showValidationMessage ? "text-sm text-red-500" : 'hidden'}>Username is required</p>
+                {touched.username && errors?.username && (<p className='w-80 text-red-500 text-sm'>{errors.username}</p>)}
 
-                <button data-testid='next-btn' onClick={() => submitUsername()} className="mt-16 px-12 bg-[#2DABB1] text-white py-2">Next</button>
-            </div>
+                <button data-testid='next-btn' type="submit" className="mt-16 px-12 bg-[#2DABB1] text-white py-2">Next</button>
+            </form>
         </Layout>
     )
 }

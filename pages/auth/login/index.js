@@ -1,43 +1,72 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/auth/Layout";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useFormik } from 'formik'
+import * as yup from 'yup'
 
 export default function Login(){
     const router  = useRouter()
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
-    const [showValidationMessage, setShowValidationMessage] = useState(false)
-
-    const submitLoginDetails = (e) => {
-        e.preventDefault()
-
-        if(email === '' || password === ''){
-            setShowValidationMessage(true)
-            return;
-        } else{
-            router.replace('/dashboard')
-        }  
+    // handle submit
+    const submitLoginDetails = (values, actions) => {
+        console.log(values)
+   
+        router.replace('/dashboard')
     }
+
+    // validation schema
+    const loginSchema = yup.object().shape({
+        email: yup.string().email('Invalid email address').required('Email is required'),
+        password: yup.string().required('Password is required')
+    })
+
+    // formik form validation
+    const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
+        initialValues: {
+            email: '',
+            password: ''
+        },
+        validationSchema: loginSchema,
+        onSubmit: submitLoginDetails
+    })
+
     return(
         <Layout>
             <div className="flex flex-col items-center mt-16">
                 <h2 className="font-semibold text-3xl">Welcome back</h2>
                 <p className="mt-3 text-gray-500 text-center">Login to proceed</p>
 
-                <form onSubmit={submitLoginDetails} className="mt-12 space-y-4">
+                <form onSubmit={handleSubmit} className="mt-12 space-y-4">
                     <div className="flex flex-col">
                         <label>Email Address</label>
-                        <input type="text" data-testid='email-input' aria-label="email-input" value={email} onChange={e => setEmail(e.target.value)} placeholder="example@domain.com" className='border px-4 py-1 rounded bg-white focus:outline-none' />
-                        <p className={showValidationMessage ? "text-sm text-red-500" : 'hidden'}>Email is required</p>
+                        <input 
+                            type="text" 
+                            id="email"
+                            data-testid='email-input' 
+                            aria-label="email-input" 
+                            value={values.email} 
+                            onChange={handleChange} 
+                            onBlur={handleBlur}
+                            placeholder="example@domain.com" 
+                            className={errors.email && touched.email ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
+                        />
+                        {touched.email && errors?.email && (<p className='text-red-500 text-sm'>{errors.email}</p>)}
                     </div>
 
                     <div className="flex flex-col">
                         <label>Password</label>
-                        <input type="password" data-testid='password-input' aria-label="password-input" value={password} onChange={e => setPassword(e.target.value)} placeholder="password" className='border px-4 py-1 rounded bg-white focus:outline-none' />
-                        <p className={showValidationMessage ? "text-sm text-red-500" : 'hidden'}>Password is required</p>
+                        <input 
+                            type="password" 
+                            id='password'
+                            data-testid='password-input' 
+                            aria-label="password-input" 
+                            value={values.password} 
+                            onChange={handleChange} 
+                            onBlur={handleBlur}
+                            placeholder="password" 
+                            className={errors.password && touched.password ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
+                        />
+                        {touched.password && errors?.password && (<p className='text-red-500 text-sm'>{errors.password}</p>)}
                     </div>
 
                     <div className="flex items-center justify-center">
