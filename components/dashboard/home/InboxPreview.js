@@ -35,7 +35,7 @@ export default function InboxPreview({showInboxPreview}){
             }
 
             <div className='mt-3 flex items-center justify-center'>
-                <Link href={'dashboard/inbox'} className='text-[#4798F6] underline'>View more...</Link>
+                <Link href={'/dashboard/inbox'} className='text-[#4798F6] underline'>View more...</Link>
             </div>
         </div>
     )

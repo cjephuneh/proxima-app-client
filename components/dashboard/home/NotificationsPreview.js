@@ -15,7 +15,7 @@ export default function NotificationsPreview({showNotificationsPreview}){
             </div>
 
             <div className='mt-3 flex items-center justify-center'>
-                <Link href={'dashboard/notifications'} className='text-[#4798F6] underline'>Show all...</Link>
+                <Link href={'/dashboard/notifications'} className='text-[#4798F6] underline'>Show all...</Link>
             </div>
         </div>
     )
