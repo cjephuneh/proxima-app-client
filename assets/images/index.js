@@ -5,6 +5,7 @@ const images = {
     app: require('./appshot.png').default?.src,
     user: require('./user.png').default?.src,
     issuePic: require('./issuepic.png').default?.src,
+    celebrate: require('./celebrate.png').default?.src,
 }
 
 export default images

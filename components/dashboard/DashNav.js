@@ -18,7 +18,7 @@ export default function DashNav(){
     return (
         <aside data-testid='side-nav' className="p-4 h-screen flex flex-col  justify-between shadow">
             <div className="relative">
-                <div className="mb-4 flex items-center gap-2">
+                <div className="mb-6 flex items-center gap-2">
                     <img src={images.logoLight} className="h-10 w-10 object-contain" />
                     { showDetails && <p className="font-semibold text-2xl text-[#2DABB1]">Proxima AI</p>}
                 </div>
@@ -41,9 +41,9 @@ export default function DashNav(){
 
                 <p className="text-gray-500 text-sm tracking-wider mb-4">ANALYTICS</p>
 
-                <Link href={'/dashboard/analytics'} className="flex mb-8  items-center gap-2">
-                    <TbBrandGoogleAnalytics className={showDetails ? "h-5 w-5" : "h-8 w-8"} color="gray" />
-                    <p className={showDetails ? "text-gray-500" : "hidden"}>Descriptive</p>
+                <Link href={'/dashboard/analytics/descriptive'} className="flex mb-8  items-center gap-2">
+                    <TbBrandGoogleAnalytics className={showDetails ? (pathname.includes('descriptive') ? "h-5 w-5 text-[#2DABB1]" : "h-5 w-5 text-gray-500") : (pathname.includes('descriptive') ? "h-8 w-8 text-[#2DABB1]" : "h-8 w-8 text-gray-500")} />
+                    <p className={showDetails ? (pathname.includes('descriptive') ? "text-[#2DABB1]" : "text-gray-500") : "hidden"}>Descriptive</p>
                 </Link>
 
                 <Link href={'/dashboard'} className="flex mb-8 items-center gap-2">
@@ -65,13 +65,13 @@ export default function DashNav(){
 
                 <Link href={'/dashboard/surveys'} className="flex mb-8 items-center gap-2">
                     <RiSurveyLine className={showDetails ? (pathname.includes('surveys') ? "h-5 w-5 text-[#2DABB1]" : "h-5 w-5 text-gray-500") : (pathname.includes('surveys') ? "h-8 w-8 text-[#2DABB1]" : "h-8 w-8 text-gray-500")} />
-                    <p className={showDetails ? (pathname.includes('surveys') ? "text-[#2DABB1]" : "text-gray-500") : "hidden"}>surveys</p>
+                    <p className={showDetails ? (pathname.includes('surveys') ? "text-[#2DABB1]" : "text-gray-500") : "hidden"}>Surveys</p>
                 </Link>
             </div>
             <div>
-                <Link href={'/dashboard'} className="flex mb-6 items-center gap-2">
-                    <SlSettings className={showDetails ? "h-5 w-5" : "h-8 w-8"} color="gray" />
-                    <p className={showDetails ? "text-gray-500" : "hidden"}>Settings</p>
+                <Link href={'/dashboard/settings'} className="flex mb-6 items-center gap-2">
+                    <SlSettings className={showDetails ? (pathname.includes('settings') ? "h-5 w-5 text-[#2DABB1]" : "h-5 w-5 text-gray-500") : (pathname.includes('settings') ? "h-8 w-8 text-[#2DABB1]" : "h-8 w-8 text-gray-500")} />
+                    <p className={showDetails ? (pathname.includes('settings') ? "text-[#2DABB1]" : "text-gray-500") : "hidden"}>Settings</p>
                 </Link>
 
                 <button className="flex mb-6 items-center gap-2">
