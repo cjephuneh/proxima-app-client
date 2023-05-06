@@ -46,9 +46,9 @@ export default function DashNav(){
                     <p className={showDetails ? (pathname.includes('descriptive') ? "text-[#2DABB1]" : "text-gray-500") : "hidden"}>Descriptive</p>
                 </Link>
 
-                <Link href={'/dashboard'} className="flex mb-8 items-center gap-2">
-                    <MdOutlineBatchPrediction className={showDetails ? "h-5 w-5" : "h-8 w-8"} color="gray" />
-                    <p className={showDetails ? "text-gray-500" : "hidden"}>Predictive</p>
+                <Link href={'/dashboard/analytics/predictive'} className="flex mb-8 items-center gap-2">
+                    <MdOutlineBatchPrediction className={showDetails ? (pathname.includes('predictive') ? "h-5 w-5 text-[#2DABB1]" : "h-5 w-5 text-gray-500") : (pathname.includes('predictive') ? "h-8 w-8 text-[#2DABB1]" : "h-8 w-8 text-gray-500")} />
+                    <p className={showDetails ? (pathname.includes('predictive') ? "text-[#2DABB1]" : "text-gray-500") : "hidden"}>Predictive</p>
                 </Link>
 
                 <p className="text-gray-500 text-sm tracking-wider mb-4">SUPPORT</p>

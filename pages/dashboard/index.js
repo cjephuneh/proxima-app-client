@@ -1,13 +1,7 @@
 import images from "@/assets/images";
 import DashLayout from "@/components/dashboard/DashLayout";
-import IssueCard from "@/components/dashboard/home/IssueCard";
 import LatestSurveys from "@/components/dashboard/home/LatestSurveys";
 import RecentInteractions from "@/components/dashboard/home/RecentInteractions";
-import { closeSearchWindow } from "@/redux/slice/search/searchSlice";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setSearchValue } from "@/redux/slice/search/searchSlice";
-
 
 export default function Dashboard(){
     const recentlyInteracted = [
@@ -118,168 +112,41 @@ export default function Dashboard(){
             customerContributions: 14
         }
     ]; 
-    
-    const issuesList = [
-        {
-          tags: ["Quality", "Shipping", "Customer Service"],
-          image: "https://example.com/images/issue1.jpg",
-          title: "Product arrived damaged",
-          description: "I received the product, but it was damaged during shipping. I tried contacting customer service, but have not received a response yet.",
-          upvotes: 10
-        },
-        {
-          tags: ["Technical", "Pricing", "Customer Service"],
-          image: "https://example.com/images/issue2.jpg",
-          title: "Unable to complete purchase",
-          description: "I tried to purchase the product, but the website kept giving me error messages. I checked my payment information and it was correct. I contacted customer service, but have not received a response yet.",
-          upvotes: 34
-        },
-        {
-          tags: ["Quality", "Design", "Pricing"],
-          image: "https://example.com/images/issue3.jpg",
-          title: "Product does not match description",
-          description: "I purchased the product based on the description, but when it arrived it did not match the description. Additionally, the quality of the product is lower than expected for the price.",
-          upvotes: 23,
-        },
-        {
-          tags: ["Technical", "Shipping", "Customer Service"],
-          image: "https://example.com/images/issue4.jpg",
-          title: "Wrong product received",
-          description: "I received a product that I did not order. I tried contacting customer service, but have not received a response yet. Additionally, the product was shipped to the wrong address.",
-          upvotes: 43
-        },
-        {
-          tags: ["Quality", "Design", "Pricing"],
-          image: "https://example.com/images/issue5.jpg",
-          title: "Product fell apart",
-          description: "The product fell apart after only a few uses. The design seems to be flawed and the quality is poor for the price.",
-          upvotes: 12
-        }
-      ];
 
-    const dispatch = useDispatch()
-
-    const [sortedIssues, setSortedIssues] = useState(issuesList)
-    const [selectedSortRule, setSelectedSortRule] = useState('none')
-    const [searchIssuesResult, setSearchIssuesResult] = useState(sortedIssues)
-
-    const sortIssuesByUpvote = (sortRule) => {
-        setSelectedSortRule(sortRule)
-
-        if(sortRule === 'most_upvotes'){
-            setSortedIssues(issuesList.sort((a, b) => b.upvotes - a.upvotes))
-        } 
-        else if(sortRule === 'least_upvotes'){
-            setSortedIssues(issuesList.sort((a, b) => a.upvotes - b.upvotes))
-        }
-        else{
-            setSortedIssues(issuesList)
-        }
-        
-    }
-
-    // search
-    const searchValue = useSelector((state) => state.search.searchWord)
-    
-    const searchIssues = () => {
-        const searchResults = sortedIssues.filter(issue => issue.title.toLowerCase().includes(searchValue.toLowerCase()));
-        setSearchIssuesResult(searchResults)
-    }
-
-    useEffect(() => {
-        searchIssues()
-    }, [searchValue, selectedSortRule])
-    
-    // recent interactions
-    const tags = ['Drugs', 'Health', 'Complaint']
-    const title = 'Moon fever when using Astecca'
-    const description = 'I’ve been getting mild fever symptoms whenever am using any of your drugs. Could it be that am having an allergic reaction to the silicon casings?'
     const customers = [images.user, images.user, images.user]
 
-    // latest issues
     const customerImg = images.user
 
-    const searchWindowVisible = useSelector((state) => state.search.isSearchWindowVisible)
-
-    //
     return(
         <DashLayout>
-            {
-                searchWindowVisible === false ?
+            <div>
+                <h2 className="text-2xl">Recently interacted</h2>
 
-                <div>
-                    <h2 className="text-2xl">Recently interacted</h2>
-
-                    <div className="mt-6 flex gap-8">
-                        {
-                            recentlyInteracted.map(({tags, title, description}, i) => (
-                                <RecentInteractions key={i} tags={tags} title={title} description={description} customers={customers} />
-                            ))
-                        }
-                    </div>
-
-                    <div className="mt-6 flex items-center gap-12">
-                        <h2 className="text-2xl">Surveys</h2>
-                        <select className="text-sm font-semibold bg-transparent">
-                            <option value="One Week Ago">One Week Ago</option>
-                            <option value="Two Weeks Ago">Two Weeks Ago</option>
-                            <option value="One Month Ago">One Month Ago</option>
-                        </select>
-                    </div>
-
-                    <div className='mt-6 space-y-4'>
-                        {
-                            issues.map(({customerName, issueTitle, issueBrief, customerContributions},i) => (
-                                <LatestSurveys key={i} customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
-                            ))
-                        }
-                    </div>
-                </div> :
-
-                <div className="h-full overflow-hidden relative">
-                    <div className='bg-gray-100 p-4 z-20 h-full w-full absolute top-0 left-0 opacity-[.98] overflow-y-scroll overflow-x-hidden'>
-                        <div className="flex justify-end sticky top-0">
-                            <button data-testid='close-btn' onClick={() => {
-                                    dispatch(setSearchValue(''))
-                                    dispatch(closeSearchWindow())
-                                }}
-                                className="bg-red-500 opacity-100 px-4 py-1 mr-4 rounded text-white font-semibold"
-                            >Close</button>
-                        </div>
-
-                        {/* filters */}
-                        <div className="mt-6 flex justify between">
-                            <h5 className="font-semibold text-lg w-1/3">Filters</h5>
-
-                            <div className="w-1/3 flex flex-col">
-                                <label className="text-lg font-semibold">Sort by:</label>
-                                <select className="w-fit px-4 py-2 rounded" value={selectedSortRule} onChange={(e) => sortIssuesByUpvote(e.target.value)}>
-                                    <option value="none">None</option>
-                                    <option value="most_upvotes">Most upvotes</option>
-                                    <option value="least_upvotes">Least upvotes</option>
-                                </select>
-                            </div>
-
-                            <div className="w-1/3 flex flex-col">
-                                <label className="text-lg font-semibold">Filter by:</label>
-                                <select className="w-fit px-4 py-2 rounded">
-                                    <option value="none">None</option>
-                                    <option value="one week ago">One week ago</option>
-                                    <option value="two week ago">Two weeks ago</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div data-testid='issues-window' className="flex flex-wrap gap-4 mt-12">
-                            {
-                                searchIssuesResult.map((issue, id) => (
-                                    <IssueCard key={id} issue={issue} />
-                                ))
-                            }
-                        </div>
-                    </div>
+                <div className="mt-6 flex gap-8">
+                    {
+                        recentlyInteracted.map(({tags, title, description}, i) => (
+                            <RecentInteractions key={i} tags={tags} title={title} description={description} customers={customers} />
+                        ))
+                    }
                 </div>
-            }
+
+                <div className="mt-6 flex items-center gap-12">
+                    <h2 className="text-2xl">Surveys</h2>
+                    <select className="text-sm font-semibold bg-transparent">
+                        <option value="One Week Ago">One Week Ago</option>
+                        <option value="Two Weeks Ago">Two Weeks Ago</option>
+                        <option value="One Month Ago">One Month Ago</option>
+                    </select>
+                </div>
+
+                <div className='mt-6 space-y-4'>
+                    {
+                        issues.map(({customerName, issueTitle, issueBrief, customerContributions},i) => (
+                            <LatestSurveys key={i} customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
+                        ))
+                    }
+                </div>
+            </div>
         </DashLayout>
     )
 }

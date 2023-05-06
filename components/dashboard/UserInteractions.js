@@ -1,7 +1,7 @@
 import images from "@/assets/images";
 import { setSearchValue, setIsSearchWindowVisible } from "@/redux/slice/search/searchSlice";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineBell, AiOutlineMail } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,9 @@ export default function UserInteractions(){
     const { pathname } = useRouter()
 
     const dispatch = useDispatch()
+
+    const inboxIconRef = useRef(null)
+    const notificationsIconRef = useRef(null)
 
     // search
     const [searchWord, setSearchWord] = useState('')
@@ -31,27 +34,51 @@ export default function UserInteractions(){
     const activateSearchWindow = () => {
         dispatch(setIsSearchWindowVisible())
     }
+
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (inboxIconRef.current && !inboxIconRef.current.contains(event.target)) {
+                setShowInboxPreview(false);
+            }
+
+            if (notificationsIconRef.current && !notificationsIconRef.current.contains(event.target)) {
+                setShowNotificationsPreview(false);
+            }
+        };
+
+        document.body.addEventListener('click', handleOutsideClick);
+
+        return () => {
+            document.body.removeEventListener('click', handleOutsideClick);
+        };
+    }, []);
     
     return (
-        <div className={pathname === '/dashboard' ? "relative bg-gray-100 flex items-center gap-3 pt-6 pb-6 h-20 w-full shadow justify-between px-12": "relative bg-gray-100 flex items-center gap-3 pt-6 pb-6 h-20 w-full shadow justify-end px-12"}>
-            <div className={pathname === '/dashboard' ? 'flex items-center gap-1' : 'hidden'}>
+        // <div className={pathname === '/dashboard' ? "relative bg-gray-100 flex items-center gap-3 pt-6 pb-6 h-20 w-full shadow justify-between px-12": "relative bg-gray-100 flex items-center gap-3 pt-6 pb-6 h-20 w-full shadow justify-end px-12"}>
+        <div className="relative bg-gray-100 flex items-center gap-3 pt-6 pb-6 h-20 w-full shadow justify-between px-12">
+            {/* <div className={pathname === '/dashboard' ? 'flex items-center gap-1' : 'hidden'}> */}
+            <div className='flex items-center gap-1'>
                 <BsSearch />
                 <input type='text' placeholder="Search" value={searchWord} onFocus={() => activateSearchWindow()} onChange={e => updateSearchWordToStore(e.target.value)} className="focus:outline-none px-4 py-2 bg-transparent" />
             </div>
             
             <div className="flex gap-5 items-center">
-                <button onClick={() => {
+                <button 
+                    onClick={() => {
                         setShowNotificationsPreview(!showNotificationsPreview)
                         setShowInboxPreview(false)
                     }}
+                    ref={notificationsIconRef}
                 >
                     <AiOutlineBell className="w-8 h-8" />
                 </button>
 
-                <button onClick={() => {
+                <button 
+                    onClick={() => {
                         setShowInboxPreview(!showInboxPreview)
                         setShowNotificationsPreview(false)
                     }} 
+                    ref={inboxIconRef}
                     className='relative'
                 >
                     <div className="absolute text-sm p-1 text-white w-6 h-6 bg-[#FF5C5C] rounded-full -right-2 -top-2 flex items-center justify-center">2</div>
