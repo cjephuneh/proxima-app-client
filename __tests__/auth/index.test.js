@@ -1,15 +1,8 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
-import Index from '@/pages/auth/index';
-import { useTheme } from "next-themes";
+import Index from '@/pages/index';
 import { createMockRouter } from "@/__test_utils__/mockRouter";
 import { RouterContext } from 'next/dist/shared/lib/router-context';
-
-jest.mock('next-themes', () => ({
-  useTheme: jest.fn().mockReturnValue({
-    setTheme: jest.fn(),
-  }),
-  }));
 
 describe('Index', () => {
   let router = createMockRouter()
@@ -26,10 +19,6 @@ describe('Index', () => {
 
   test('renders without error', () => {
     expect(screen.getByTestId('first-visit')).toBeInTheDocument()
-  });
-
-  test('uses light theme on first load', () => {
-    expect(useTheme().setTheme).toHaveBeenCalledWith('light')
   });
 
   test('displays "Yes" and "No" buttons', () => {

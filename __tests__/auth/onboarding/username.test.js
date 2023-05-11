@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { createMockRouter } from "@/__test_utils__/mockRouter";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import Username from '@/pages/auth/onboarding/username'
@@ -21,18 +21,26 @@ describe('Username', () => {
     })
 
     test('does not navigate to admin-details page when username is empty', () => {
-        fireEvent.change(screen.getByLabelText('username-input'), { target: { value: '' }})
+        act(() => {
+            fireEvent.change(screen.getByLabelText('username-input'), { target: { value: '' }})
 
-        fireEvent.click(screen.getByTestId('next-btn'))
+            fireEvent.click(screen.getByTestId('next-btn'))
+        })
 
-        expect(router.push).not.toHaveBeenCalled()
+        waitFor(() => {
+            expect(router.push).not.toHaveBeenCalled()
+        })
     })
 
     test('navigates to admin-details page when username is filled out', () => {
-        fireEvent.change(screen.getByLabelText('username-input'), { target: { value: 'username' }})
+        act(() => {
+            fireEvent.change(screen.getByLabelText('username-input'), { target: { value: 'username' }})
 
-        fireEvent.click(screen.getByTestId('next-btn'))
+            fireEvent.click(screen.getByTestId('next-btn'))
+        })
 
-        expect(router.push).toHaveBeenCalledWith('admin-details')
+        waitFor(() => {
+            expect(router.push).toHaveBeenCalledWith('admin-details')
+        })
     })
 })

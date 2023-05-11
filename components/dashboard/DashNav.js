@@ -5,16 +5,18 @@ import { TbBrandGoogleAnalytics, TbLogout } from 'react-icons/tb'
 import { SlSettings } from 'react-icons/sl'
 import { RiSurveyLine } from 'react-icons/ri'
 import { BsPerson, BsTicketPerforated } from "react-icons/bs";
-import { useState } from "react";
 import { MdOutlineBatchPrediction } from "react-icons/md";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { setShowDetails } from "@/redux/slice/dashutils/indexSlice";
 
 export default function DashNav(){
-        const [showDetails, setShowDetails] = useState(false)
+        const dispatch = useDispatch()
+
+        const showDetails = useSelector((state) => state.dashUtils.showDetails)
 
         const { pathname } = useRouter()
 
-        // notes => on details show -> icons h-8 w-8 ; else h-5 w-5
     return (
         <aside data-testid='side-nav' className="p-4 h-screen flex flex-col  justify-between shadow">
             <div className="relative">
@@ -23,7 +25,7 @@ export default function DashNav(){
                     { showDetails && <p className="font-semibold text-2xl text-[#2DABB1]">Proxima AI</p>}
                 </div>
                 
-                <button onClick={() => setShowDetails(!showDetails)} className="absolute -right-8 top-20 border p-1 rounded-full cursor-pointer">
+                <button onClick={() => dispatch(setShowDetails())} className="absolute -right-8 top-20 border p-1 rounded-full cursor-pointer">
                     {
                         showDetails ?
                         <AiOutlineDoubleLeft size={18} /> :

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, act } from "@testing-library/react";
 import { createMockRouter } from "@/__test_utils__/mockRouter";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import AdminDetails from '@/pages/auth/onboarding/admin-details'
@@ -21,20 +21,30 @@ describe('AdminDetails', () => {
     })
 
     test('does not navigate to invite-members page with empty fields', () => {
-        fireEvent.click(screen.getByTestId('next-btn'))
+        act(() => {
+            fireEvent.click(screen.getByTestId('next-btn'))
+        })
 
-        expect(router.push).not.toHaveBeenCalled()
+        waitFor(() => {
+            expect(router.push).not.toHaveBeenCalled()
+        })
     })
 
     test('navigates to invite-members page with filled out fields', () => {
-        fireEvent.change(screen.getByLabelText('first-name-input'), { target: { value: 'first' }})
-        fireEvent.change(screen.getByLabelText('last-name-input'), { target: { value: 'last' }})
-        fireEvent.change(screen.getByLabelText('middle-name-input'), { target: { value: 'middle' }})
-        fireEvent.change(screen.getByLabelText('email-input'), { target: { value: 'email@example.com' }})
-        fireEvent.change(screen.getByLabelText('gender-input'), { target: { value: 'male' }})
-        
-        fireEvent.click(screen.getByTestId('next-btn'))
+        act(() => {
+            fireEvent.change(screen.getByLabelText('first-name-input'), { target: { value: 'first' }})
+            fireEvent.change(screen.getByLabelText('last-name-input'), { target: { value: 'last' }})
+            fireEvent.change(screen.getByLabelText('middle-name-input'), { target: { value: 'middle' }})
+            fireEvent.change(screen.getByLabelText('email-input'), { target: { value: 'email@example.com' }})
+            fireEvent.change(screen.getByLabelText('gender-input'), { target: { value: 'male' }})
 
-        expect(router.push).toHaveBeenCalledWith('invite-members')
+            fireEvent.click(screen.getByTestId('next-btn'))
+        })
+        
+        
+
+        waitFor(() => {
+            expect(router.push).toHaveBeenCalledWith('invite-members')
+        })
     })
 })

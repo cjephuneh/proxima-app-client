@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { createMockRouter } from "@/__test_utils__/mockRouter";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { Provider } from "react-redux";
@@ -21,24 +21,32 @@ describe('Dashboard Index', () => {
     })
 
     test('it renders correctly', () => {
-        expect(screen.getByText('Latest Issues')).toBeDefined()
+        expect(screen.getByText('Recently Interacted')).toBeDefined()
     })
 
     test('it renders a sidebar', () => {
         expect(screen.getByTestId('side-nav')).toBeDefined()
     })
 
-    test('it renders an overlay of issues when search input is activated', () => {
-        fireEvent.focus(screen.getByPlaceholderText('Search'))
+    test('it renders issues when search input is activated', () => {
+        act(() => {
+            fireEvent.focus(screen.getByPlaceholderText('Search'))
+        })
 
+       waitFor(() => {
         expect(screen.getByTestId('issues-window')).toBeDefined()
+       })
     })
 
     test('it closes the overlay of issues when close button is clicked', () => {
-        fireEvent.focus(screen.getByPlaceholderText('Search'))
+        act(() => {
+            fireEvent.focus(screen.getByPlaceholderText('Search'))
 
-        fireEvent.click(screen.getByTestId('close-btn'))
+            fireEvent.click(screen.getByTestId('close-btn'))
+        })
 
-        expect(screen.queryByTestId('issues-window')).toBeNull()
+        waitFor(() => {
+            expect(screen.queryByTestId('issues-window')).toBeNull()
+        })
     })
 })

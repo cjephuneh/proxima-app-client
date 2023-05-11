@@ -11,6 +11,7 @@ import paraphraseReducer from './slice/paraphrase/paraphraseSlice'
 import generationReducer from './slice/generation/generationSlice'
 import predictiveReducer from './slice/predictive/predictiveSlice'
 import searchReducer from './slice/search/searchSlice'
+import dashUtilsReducer from './slice/dashutils/indexSlice'
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
     summarize: summarizeReducer,
     paraphrase: paraphraseReducer,
     generation: generationReducer,
-    predictive: predictiveReducer
+    predictive: predictiveReducer,
+    dashUtils: dashUtilsReducer
   },
 })

@@ -120,7 +120,7 @@ export default function Dashboard(){
     return(
         <DashLayout>
             <div>
-                <h2 className="text-2xl">Recently interacted</h2>
+                <h2 className="text-2xl">Recently Interacted</h2>
 
                 <div className="mt-6 flex gap-8">
                     {

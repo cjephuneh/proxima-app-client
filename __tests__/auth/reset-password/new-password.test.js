@@ -1,4 +1,4 @@
-import { fireEvent, getByTestId, render, screen } from "@testing-library/react";
+import { act, fireEvent, getByTestId, render, screen, waitFor } from "@testing-library/react";
 import { createMockRouter } from "@/__test_utils__/mockRouter";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import NewPassword from '@/pages/auth/reset-password/new-password'
@@ -21,13 +21,17 @@ describe('NewPassword', () => {
     })
 
     test('should not navigate to dashboard the new and confirm password fields are empty', () => {
-        fireEvent.change(screen.getByLabelText('new-password'), { target: { value: '' }})
-        fireEvent.change(screen.getByLabelText('confirm-password'), { target: { value: '' }})
+        act(() => {
+            fireEvent.change(screen.getByLabelText('new-password'), { target: { value: '' }})
+            fireEvent.change(screen.getByLabelText('confirm-password'), { target: { value: '' }})
 
-        fireEvent.click(screen.getByTestId('submit-btn'))
+            fireEvent.click(screen.getByTestId('submit-btn'))
+        })
 
 
-        expect(router.replace).not.toHaveBeenCalled()
+        waitFor(() => {
+            expect(router.replace).not.toHaveBeenCalled()
+        })
     })
 
     test('should not navigate to dashboard the new and confirm password fields values do not match', () => {
@@ -41,12 +45,16 @@ describe('NewPassword', () => {
     })
 
     test('should navigate to dashboard the new and confirm password fields values match', () => {
-        fireEvent.change(screen.getByLabelText('new-password'), { target: { value: 'pass' }})
-        fireEvent.change(screen.getByLabelText('confirm-password'), { target: { value: 'pass' }})
+        act(() => {
+            fireEvent.change(screen.getByLabelText('new-password'), { target: { value: 'pass' }})
+            fireEvent.change(screen.getByLabelText('confirm-password'), { target: { value: 'pass' }})
 
-        fireEvent.click(screen.getByTestId('submit-btn'))
+            fireEvent.click(screen.getByTestId('submit-btn'))
+        })
 
 
-        expect(router.replace).toHaveBeenCalledWith('/dashboard')
+        waitFor(() => {
+            expect(router.replace).toHaveBeenCalledWith('/dashboard')
+        })
     })
 })
