@@ -12,22 +12,21 @@ res:
 }
  */
 
+import { ApiUrls } from "@/utils/ApiUrls"
 import axios from "axios"
 
 export default function handler(req, res) {
     const { email, password } = req.body
 
     if(req.method === 'POST'){
-        axios.post(`${BASE_URL}/api/auth/signin`, {
+        axios.post(ApiUrls.signin, {
             email,
             password
         }).then(({ data }) => {
             if(data.token){
                 res.status(200).json(data)
             } else{
-                res.status(400).json({
-                    message: 'User does not exist'
-                })
+                res.status(400).json(data.error)
             }
         })
     }

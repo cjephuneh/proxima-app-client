@@ -1,39 +1,22 @@
 // Register users who will seek assistance from organizations
 
-/*
-Request
-
-/api/auth/client
-
-Response
-
-{
-    "username": "testclient2",
-    "email": "testclient2@mail.com",
-    "first_name": "testclient",
-    "last_name": "test",
-    "phonenumber": "07936818408",
-    "gender": "Male",
-    "DOB": "1999-09-01",
-    "user_type": "client"
-}
-
-*/
+import { ApiUrls } from "@/utils/ApiUrls"
+import axios from "axios"
 
 export default function handler(req, res) {
-  const { username, first_name, last_name, phonenumber, gender, DOB, user_type, email, password } = req.body
+  const { username, email, first_name, last_name, phonenumber, gender, DOB, user_type, password, confirm_password } = req.body
 
   if(req.method === 'POST'){
-      axios.post(`${BASE_URL}/api/auth/client`, {
-        username, first_name, last_name, phonenumber, gender, DOB, user_type, email, password
+      axios.post(ApiUrls.register_client, {
+        username, email, first_name, last_name, phonenumber, gender, DOB, user_type,  password, confirm_password
       }).then(({ data }) => {
-          if(data.user_type){
+          if(data.user_type && data.token){
               res.status(200).json(data)
           } else{
-              res.status(400).json({
-                  message: 'Registering the user failed'
-              })
+              res.status(data.status).json(
+                  data.errors
+              )
           }
       })
   }
-  }
+}

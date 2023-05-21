@@ -1,5 +1,8 @@
 //  Register organization admin user
 
+import { ApiUrls } from "@/utils/ApiUrls"
+import axios from "axios"
+
 /* Route
 
 /api/auth/admin
@@ -22,19 +25,19 @@ Response
 
 
 export default function handler(req, res) {
-  const { username, first_name, last_name, phonenumber, gender, DOB, user_type, email, password } = req.body
-
-  if(req.method === 'POST'){
-      axios.post(`${BASE_URL}/api/auth/admin`, {
-        username, first_name, last_name, phonenumber, gender, DOB, user_type, email, password
-      }).then(({ data }) => {
-          if(data.tenant_id){
-              res.status(200).json(data)
-          } else{
-              res.status(400).json({
-                  message: 'Registering the admin failed'
-              })
-          }
-      })
-  }
-  }
+    const { username, email, first_name, last_name, phonenumber, gender, DOB, user_type, password, confirm_password } = req.body
+  
+    if(req.method === 'POST'){
+        axios.post(ApiUrls.register_client, {
+          username, email, first_name, last_name, phonenumber, gender, DOB, user_type,  password, confirm_password
+        }).then(({ data }) => {
+            if(data.user_type && data.token){
+                res.status(200).json(data)
+            } else{
+                res.status(data.status).json(
+                    data.errors
+                )
+            }
+        })
+    }
+}
