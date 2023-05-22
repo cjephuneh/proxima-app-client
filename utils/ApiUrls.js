@@ -3,6 +3,7 @@ const AUTH_ENDPOINT = BASE_URI + '/auth'
 const TENANT_ENDPOINT = BASE_URI + '/tenantmanagement'
 const CHAT_ENDPOINT = BASE_URI + '/chat'
 const DESCRIPTIVE_ENDPOINT = BASE_URI + '/analytics'
+const REPORTS_ENDPOINT = BASE_URI + '/reports'
 
 export const ApiUrls = {
     // auth
@@ -54,4 +55,18 @@ export const ApiUrls = {
     surveyresponserate: DESCRIPTIVE_ENDPOINT + '/surveyresponserate/',
     averagesurveyrunperiod: DESCRIPTIVE_ENDPOINT + '/averagesurveyrunperiod/',
     totalsurveys: DESCRIPTIVE_ENDPOINT + '/totalsurveys/',
+
+    // reports
+    chatspdf: REPORTS_ENDPOINT + '/chatspdf/',
+    chatscsv: REPORTS_ENDPOINT + '/chatscsv/',
+    messagespdf: REPORTS_ENDPOINT + '/messagespdf/',
+    messagescsv: REPORTS_ENDPOINT + '/messagescsv/',
+    surveycsv: REPORTS_ENDPOINT + '/surveycsv/',
+    surveypdf: REPORTS_ENDPOINT + '/surveypdf/',
+    issuescsv: REPORTS_ENDPOINT + '/issuescsv/',
+    issuespdf: REPORTS_ENDPOINT + '/issuespdf/',
+    threadpdf: REPORTS_ENDPOINT + '/threadpdf/',
+    threadscsv: REPORTS_ENDPOINT + '/threadscsv/',
+    surveyresponsespdf: REPORTS_ENDPOINT + '/surveyresponsespdf/',
+    surveyresponsescsv: REPORTS_ENDPOINT + '/surveyresponsescsv/',
 }
