@@ -4,6 +4,7 @@ const TENANT_ENDPOINT = BASE_URI + '/tenantmanagement'
 const CHAT_ENDPOINT = BASE_URI + '/chat'
 const DESCRIPTIVE_ENDPOINT = BASE_URI + '/analytics'
 const REPORTS_ENDPOINT = BASE_URI + '/reports'
+const SURVEY_ENDPOINT = BASE_URI + '/survey'
 
 export const ApiUrls = {
     // auth
@@ -69,4 +70,20 @@ export const ApiUrls = {
     threadscsv: REPORTS_ENDPOINT + '/threadscsv/',
     surveyresponsespdf: REPORTS_ENDPOINT + '/surveyresponsespdf/',
     surveyresponsescsv: REPORTS_ENDPOINT + '/surveyresponsescsv/',
+
+    // community
+    community: COMMUNITY_ENDPOINT + '/community/',
+    joincommunity: COMMUNITY_ENDPOINT + '/joincommunity/',
+    leavecommunity: COMMUNITY_ENDPOINT + '/leavecommunity/',
+    thread: COMMUNITY_ENDPOINT + '/thread/',
+    issue: COMMUNITY_ENDPOINT + '/issue/',
+    comment: COMMUNITY_ENDPOINT + '/comment/',
+    likecomment: COMMUNITY_ENDPOINT + '/likecomment/',
+    dislikecomment: COMMUNITY_ENDPOINT + '/dislikecomment/',
+
+    // survey
+    survey: SURVEY_ENDPOINT + '/survey/',
+    survey_response: SURVEY_ENDPOINT + '/response/',
+    surveyreportview: SURVEY_ENDPOINT + '/surveyreportview/',
+    surveysubgroup: SURVEY_ENDPOINT + '/surveysubgroup/',
 }
