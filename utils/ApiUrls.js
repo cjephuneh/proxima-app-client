@@ -6,6 +6,7 @@ const DESCRIPTIVE_ENDPOINT = BASE_URI + '/analytics'
 const REPORTS_ENDPOINT = BASE_URI + '/reports'
 const SURVEY_ENDPOINT = BASE_URI + '/survey'
 const PREDICTIVE_ENDPOINT = BASE_URI + '/predictive'
+const SEARCH_ENDPOINT = BASE_URI + '/search'
 
 export const ApiUrls = {
     // auth
@@ -96,4 +97,7 @@ export const ApiUrls = {
     predicted_uniqueclients: PREDICTIVE_ENDPOINT + '/client/uniqueclients/',
     predicted_growthrate: PREDICTIVE_ENDPOINT + '/community/growthrate/',
     predicted_involvements: PREDICTIVE_ENDPOINT + '/community/involvements',
+
+    // search
+    search: SEARCH_ENDPOINT + '/'
 }
