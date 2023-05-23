@@ -2,6 +2,8 @@ import axios from "axios";
 import { ApiUrls } from "@/utils/ApiUrls";
 
 // CALEB: use ApiUrls.search as the search endpoint/url/API route
+// make sure it is a post request and the required params are passed in the body
+// then make a get request to the api endpoint with the required params
 
 export default function handler(req, res) {
     
