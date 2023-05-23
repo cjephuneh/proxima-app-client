@@ -5,6 +5,7 @@ const CHAT_ENDPOINT = BASE_URI + '/chat'
 const DESCRIPTIVE_ENDPOINT = BASE_URI + '/analytics'
 const REPORTS_ENDPOINT = BASE_URI + '/reports'
 const SURVEY_ENDPOINT = BASE_URI + '/survey'
+const PREDICTIVE_ENDPOINT = BASE_URI + '/predictive'
 
 export const ApiUrls = {
     // auth
@@ -86,4 +87,13 @@ export const ApiUrls = {
     survey_response: SURVEY_ENDPOINT + '/response/',
     surveyreportview: SURVEY_ENDPOINT + '/surveyreportview/',
     surveysubgroup: SURVEY_ENDPOINT + '/surveysubgroup/',
+
+    // predictive
+    predicted_interactions: PREDICTIVE_ENDPOINT + '/chat/interactions/',
+    predicted_topics: PREDICTIVE_ENDPOINT + '/chat/topics',
+    predicted_escalatedchats: PREDICTIVE_ENDPOINT + '/chat/escalatedchats/',
+    predicted_genderdistribution: PREDICTIVE_ENDPOINT + '/client/genderdistribution/',
+    predicted_uniqueclients: PREDICTIVE_ENDPOINT + '/client/uniqueclients/',
+    predicted_growthrate: PREDICTIVE_ENDPOINT + '/community/growthrate/',
+    predicted_involvements: PREDICTIVE_ENDPOINT + '/community/involvements',
 }
