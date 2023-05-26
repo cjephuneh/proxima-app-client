@@ -34,84 +34,62 @@ export default function Dashboard(){
 
     const issues = [
         {
-            customerName: 'Mary Anne Smith',
-            issueTitle: 'Device overheating',
-            issueBrief: 'My device gets very hot after using it for just a few minutes, and then it shuts down. I am concerned that this might be a safety hazard.',
-            customerContributions: 27
+          // customerName: 'Mary Anne Smith',
+          date: '12-06-2023',
+          surveyName: 'Product Usage Survey',
+          surveyDescription: 'We would like to gather information about how customers use our product. Your insights will help us improve its functionality and user experience.',
+          customerContributions: 27
         },
         {
-            customerName: 'David Lee Wang',
-            issueTitle: 'Battery drain too fast',
-            issueBrief: 'The battery on my device seems to drain much faster than it should. Even when I am not using it, the battery percentage goes down quickly.',
-            customerContributions: 54
+          // customerName: 'David Lee Wang',
+          date: '12-12-2022',
+          surveyName: 'Battery Performance Survey',
+          surveyDescription: 'We are conducting a survey to understand the battery performance of our product. Your feedback will assist us in enhancing its battery life and efficiency.',
+          customerContributions: 54
         },
         {
-            customerName: 'Nancy Wu Kim',
-            issueTitle: 'Product not working as advertised',
-            issueBrief: 'I purchased your product based on the features advertised on your website, but many of these features do not seem to work or do not work as expected.',
-            customerContributions: 12
+          // customerName: 'Nancy Wu Kim',
+          date: '17-01-2023',
+          surveyName: 'Feature Satisfaction Survey',
+          surveyDescription: 'Please take a moment to provide feedback on the features of our product. Your responses will aid us in further refining and optimizing these features.',
+          customerContributions: 12
         },
         {
-            customerName: 'Alex Brown Taylor',
-            issueTitle: 'Unresponsive touch screen',
-            issueBrief: 'The touch screen on my device does not respond to my touch in certain areas, or it responds incorrectly. This makes it difficult to use some features of the device.',
-            customerContributions: 39
+          // customerName: 'Alex Brown Taylor',
+          date: '08-07-2023',
+          surveyName: 'Touch Screen Experience Survey',
+          surveyDescription: 'We are interested in gathering feedback about your experience with the touch screen on our product. Your input will help us enhance its responsiveness and accuracy.',
+          customerContributions: 39
         },
         {
-            customerName: 'Karen Johnson Williams',
-            issueTitle: 'Poor sound quality',
-            issueBrief: 'The sound quality on my device is very poor, even when I use headphones. It is difficult to hear music or other audio clearly.',
-            customerContributions: 81
+          // customerName: 'Karen Johnson Williams',
+          date: '19-03-2023',
+          surveyName: 'Audio Quality Survey',
+          surveyDescription: 'We value your opinion on the audio quality of our product. Your feedback will guide us in improving the sound performance for a better audio experience.',
+          customerContributions: 81
         },
         {
-            customerName: 'William Chen Davis',
-            issueTitle: 'Connectivity issues with Wi-Fi',
-            issueBrief: 'My device has trouble connecting to Wi-Fi networks, or it disconnects frequently. This makes it difficult to use certain features of the device that require internet access.',
-            customerContributions: 65
+          // customerName: 'William Chen Davis',
+          date: '29-09-2023',
+          surveyName: 'Wi-Fi Connectivity Survey',
+          surveyDescription: 'We are conducting a survey to gather information about the Wi-Fi connectivity experience with our product. Your responses will help us address any connectivity issues and provide a seamless online experience.',
+          customerContributions: 65
         },
         {
-            customerName: 'Emily Kim Jones',
-            issueTitle: 'Screen freezes or crashes',
-            issueBrief: 'The screen on my device sometimes freezes or becomes unresponsive, and sometimes the device crashes and needs to be restarted. This makes it difficult to use the device reliably.',
-            customerContributions: 23
+          // customerName: 'Emily Kim Jones',
+          date: '02-05-2023',
+          surveyName: 'User Interface Feedback Survey',
+          surveyDescription: 'Your feedback on the user interface of our product is valuable to us. Please take a moment to provide insights that will aid us in enhancing the overall user experience.',
+          customerContributions: 23
         },
         {
-            customerName: 'Michael Lee Park',
-            issueTitle: 'Compatibility issues with other devices',
-            issueBrief: 'My device has trouble connecting to other devices, or it cannot communicate with them correctly. This makes it difficult to use the device with other devices I own.',
-            customerContributions: 46
+          // customerName: 'Michael Lee Park',
+          date: '15-02-2023',
+          surveyName: 'Device Compatibility Survey',
+          surveyDescription: 'We would like to know about your experience with device compatibility. Your feedback will assist us in ensuring seamless compatibility with a wide range of devices.',
+          customerContributions: 46
         },
-        {
-            customerName: 'Sarah Davis Brown',
-            issueTitle: 'Difficulty using software features',
-            issueBrief: 'I am having trouble using some of the software features on my device, such as configuring settings or accessing certain menus. The user manual is not helpful in explaining these features.',
-            customerContributions: 19
-        },
-        {
-            customerName: 'Robert Wilson Kim',
-            issueTitle: 'Device is slow or unresponsive',
-            issueBrief: 'My device runs very slowly or becomes unresponsive when I try to use certain features or apps. This makes it frustrating to use the device.',
-            customerContributions: 33
-        },
-        {
-            customerName: 'Lisa Brown Wang',
-            issueTitle: 'Product durability issues',
-            issueBrief: 'After just a few months of use, my device is showing signs of wear and tear, such as scratches or cracks. I am concerned that the device will not last as long as I expected it to.',
-            customerContributions: 7
-        },
-        {
-            customerName: 'Kevin Davis Lee',
-            issueTitle: 'Security concerns',
-            issueBrief: 'I am concerned about the security of my device and the information stored on it. I have heard about data breaches and other security issues with similar devices, and I want to make sure that my device is secure.',
-            customerContributions: 92
-        },
-        {
-            customerName: 'Jenny Kim Wilson',
-            issueTitle: 'Product defects',
-            issueBrief: 'My device has a defect that prevents it from working correctly, even after trying to troubleshoot the issue. I would like to exchange the device for a new one or receive a refund.',
-            customerContributions: 14
-        }
-    ]; 
+    ]
 
     const customers = [images.user, images.user, images.user]
 
@@ -141,8 +119,8 @@ export default function Dashboard(){
 
                 <div className='mt-6 space-y-4'>
                     {
-                        issues.map(({customerName, issueTitle, issueBrief, customerContributions},i) => (
-                            <LatestSurveys key={i} customerImg={customerImg} customerName={customerName} issueTitle={issueTitle} issueBrief={issueBrief} customerContributions={customerContributions} />
+                        issues.map(({date, surveyName, surveyDescription, customerContributions},i) => (
+                            <LatestSurveys key={i} customerImg={customerImg} date={date} surveyName={surveyName} surveyDescription={surveyDescription} customerContributions={customerContributions} />
                         ))
                     }
                 </div>

@@ -15,19 +15,24 @@ res:
 import { ApiUrls } from "@/utils/ApiUrls"
 import axios from "axios"
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     const { email, password } = req.body
 
+    console.log(req.body)
+
     if(req.method === 'POST'){
-        axios.post(ApiUrls.signin, {
+        const { data } = await axios.post(ApiUrls.signin, {
             email,
             password
-        }).then(({ data }) => {
-            if(data.token){
-                res.status(200).json(data)
-            } else{
-                res.status(400).json(data.error)
-            }
         })
+        res.status(200).json(data)
+        
+        // .then(({ data }) => {
+        //     if(data.token){
+        //         res.status(200).json(data)
+        //     } else{
+        //         res.status(400).json(data.error)
+        //     }
+        // })
     }
 }
