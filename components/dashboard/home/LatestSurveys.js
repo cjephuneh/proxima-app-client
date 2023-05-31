@@ -5,8 +5,8 @@ import { RiSurveyLine } from "react-icons/ri";
 
 export default function LatestSurveys({ customerImg, date, surveyName, surveyDescription, customerContributions}){
     return (
-        <div className="mx-4 px-6 py-3 bg-white flex justify-between items-center">
-            <div className="flex gap-3 items-center w-52">
+        <div className="mx-4 px-6 py-3 gap-4 bg-white flex justify-between items-center">
+            <div className="flex gap-2 items-center">
                 {/* <img src={customerImg} alt='user' className="w-12 h-12 object-contain" /> */}
                 <RiSurveyLine className="w-6 h-6" />
                 <div>
@@ -16,12 +16,12 @@ export default function LatestSurveys({ customerImg, date, surveyName, surveyDes
                 </div>
             </div>
 
-            <div className='flex-1 ml-40'>
+            <div className='flex-1'>
                 <p>{surveyName}</p>
                 <p className="text-sm text-gray-500">{surveyDescription.length > 60 ? `${surveyDescription.slice(0,60)}...` : surveyDescription}</p>
             </div>
 
-            <div className='w-96'>
+            <div className=''>
                 <p>{customerContributions}</p>
                 <p className="text-sm text-gray-500">User contributions</p>
             </div>

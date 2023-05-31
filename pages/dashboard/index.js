@@ -100,7 +100,7 @@ export default function Dashboard(){
             <div>
                 <h2 className="text-2xl">Recently Interacted</h2>
 
-                <div className="mt-6 flex gap-8">
+                <div className="mt-6 flex gap-8 overflow-x-scroll">
                     {
                         recentlyInteracted.map(({tags, title, description}, i) => (
                             <RecentInteractions key={i} tags={tags} title={title} description={description} customers={customers} />

@@ -1,7 +1,24 @@
 import Layout from "@/components/auth/Layout";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Index(){
+    useEffect(() => {
+        const checkScreenWidth = () => {
+            if (window.innerWidth) {
+                alert(window.innerWidth);
+            }
+        };
+
+        // Call the function initially
+        checkScreenWidth();
+
+        // Add an event listener to check the screen width on window resize
+        window.addEventListener("resize", checkScreenWidth);
+
+        // Clean up the event listener on component unmount
+        return () => window.removeEventListener("resize", checkScreenWidth);
+    }, []);
 
     return (
         <Layout>
