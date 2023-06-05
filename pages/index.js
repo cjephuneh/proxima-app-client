@@ -1,87 +1,37 @@
-/* eslint-disable react/jsx-no-undef */
-import Head from "next/head";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-import ContextHeader from "../components/Home/ContextHeader";
-import GainsTemplate from "../components/Home/GainsTemplate";
-import GenerateReports from "../components/Home/GenerateReports";
-import HighlightsKeys from "../components/Home/HighlightsKeys";
-import Navbar from "../components/ui/Header";
-import { selectUser } from "../redux/authentication/authslice";
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/solid";
+import Layout from "@/components/auth/Layout";
+import Link from "next/link";
+import { useEffect } from "react";
 
-export default function Home() {
-  const router = useRouter();
-  try {
-    const user = useSelector(selectUser);
-    console.log(user);
-    const token = user.user.token;
-    console.log(user.user);
-  } catch (err) {
-    const user = null;
-    router.push("/authentication/signin");
-  }
+export default function Index(){
+    useEffect(() => {
+        const checkScreenWidth = () => {
+            if (window.innerWidth) {
+                alert(window.innerWidth);
+            }
+        };
 
-  // if (typeof window !== "undefined" && user == null)
-  //   router.push("/authentication/signin");
-  return (
-    <div className="mx-auto pt-8 max-w-7xl">
-    <Head>
-        <title>Proxima | Home</title>
-      </Head>
-        <Navbar />
-        <section className="p-2 pt-6">
-          <ContextHeader />
-        </section>
-        <section className="py-8 pt-1 ">
-      <div className='grid grid-cols-3 p-1 space-x-6 '>
-            <GenerateReports />
-            <GenerateReports />
-            <GenerateReports />
+        // Call the function initially
+        checkScreenWidth();
 
-          </div>
-      </section>
-      <section className="grid grid-cols-4 py-8 space-x-3">
-            <HighlightsKeys />
-            <HighlightsKeys />
-            <HighlightsKeys />
-            <HighlightsKeys />
+        // Add an event listener to check the screen width on window resize
+        window.addEventListener("resize", checkScreenWidth);
 
-      </section>
-      <section className="py-8 grid grid-cols-2 space-x-4">
-        <div>
-          <h1>
-            Top wins
-            <ArrowUpIcon className="md:inline-flex h-8 bg-white rounded-full text-green-400 border border-green-400  p-2 cursor-pointer md: mx-2 " />
+        // Clean up the event listener on component unmount
+        return () => window.removeEventListener("resize", checkScreenWidth);
+    }, []);
 
-          </h1>
-        <div className="pt-3 space-y-6">
-            <GainsTemplate />
-            <GainsTemplate />
+    return (
+        <Layout>
+            <div className="flex flex-col items-center mt-32">
+                <h2 data-testid='first-visit' className="font-semibold text-3xl">Is this your first visit?</h2>
+                <p className="mt-3 text-gray-500 text-center">Have you ever registered on the platform before (either as a client or <br /> organization)?</p>
 
-        </div>
-        </div>
+                <div className="mt-16 flex flex-col space-y-3">
+                    <Link href={'/auth/login'} data-testid='yes-btn' className="border px-12 py-3 rounded bg-[#2DABB1] text-white">Yes, I have been here before</Link>
 
-        <div>
-        <h1>
-            Top losses
-            <ArrowDownIcon className="md:inline-flex h-8 bg-white rounded-full text-red-400 border border-red-400  p-2 cursor-pointer md: mx-2 " />
-
-          </h1>
-        <div className="pt-3 space-y-6">
-            <GainsTemplate />
-            <GainsTemplate />
-
-        </div>
-        </div>
-      </section>
-
-    </div>
-  );
+                    <Link href={'/auth/onboarding/orgname'} className="px-12 py-3 rounded bg-gray-200">No, this is my first time</Link>
+                </div>
+            </div>
+        </Layout>
+    )
 }
-
-
-// git remote add origin https://github.com/Proximaagent/ProximaCoolKids.git
-// git branch -M main
-// git push -u origin main

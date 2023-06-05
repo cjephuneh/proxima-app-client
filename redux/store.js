@@ -1,54 +1,31 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { combineReducers } from "redux";
-import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  persistReducer,
-  persistStore,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { configureStore } from '@reduxjs/toolkit'
 
-import AuthReducer from "../redux/authentication/authslice";
-import AnalyticsReducer from "../redux/analytics/analyticsslice";
-import PredictiveAnalyticsReducer from "../redux/predictiveanalytics/predictiveanalyticsslice";
-import SummarizationReducer from "../redux/summarization/summarizationslice";
-import SearchReducer from "../redux/search/searchslice";
+import authReducer from './slice/auth/authSlice'
+import chatReducer from './slice/chat/chatSlice'
+import communityReducer from './slice/community/communitySlice'
+import analyticsReducer from './slice/analytics/analyticsSlice'
+import surveyReducer from './slice/survey/surveySlice'
+import tenantManagementReducer from './slice/tenantmanagement/tenantmanagementSlice'
+import summarizeReducer from './slice/summarize/summarizeSlice'
+import paraphraseReducer from './slice/paraphrase/paraphraseSlice'
+import generationReducer from './slice/generation/generationSlice'
+import predictiveReducer from './slice/predictive/predictiveSlice'
+import searchReducer from './slice/search/searchSlice'
+import dashUtilsReducer from './slice/dashutils/indexSlice'
 
-//Combining the reducers
-const rootReducer = combineReducers({
-  auth: AuthReducer,
-  analytics: AnalyticsReducer,
-  predictiveanalytics: PredictiveAnalyticsReducer,
-  summarization: SummarizationReducer,
-  searchengine: SearchReducer
- 
-});
-// persist config obj
-// blacklist a store attribute using it's reducer name. Blacklisted attributes will not persist. (I did not find a way to blacklist specific values)
-//Putting the storage
-
-const persistConfig = {
-  key: "root",
-  version: 1,
-  storage,
-  //blacklist: ['age'], //blacklisting a store attribute name, will not persist that store attribute.
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const store = configureStore({
-  reducer: persistedReducer,
-  // middleware option needs to be provided for avoiding the error. ref: https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist
-  middleware: getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-});
-
-export const persistor = persistStore(store);
-export default store;
+export const store = configureStore({
+  reducer: {
+    auth: authReducer,
+    search: searchReducer,
+    chat: chatReducer,
+    community: communityReducer,
+    analytics: analyticsReducer,
+    survey: surveyReducer,
+    tenant: tenantManagementReducer,
+    summarize: summarizeReducer,
+    paraphrase: paraphraseReducer,
+    generation: generationReducer,
+    predictive: predictiveReducer,
+    dashUtils: dashUtilsReducer
+  },
+})
