@@ -3,16 +3,41 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import { useDispatch, useSelector } from "react-redux";
+import { resetUserStateValues, signin } from "@/redux/slice/auth/authSlice";
+import { useEffect } from "react";
 
 export default function Login(){
     const router  = useRouter()
+    const dispatch = useDispatch()
 
     // handle submit
     const submitLoginDetails = (values, actions) => {
-        console.log(values)
+        dispatch(signin({
+            email: values.email,
+            password: values.password
+        }))
    
-        router.replace('/dashboard')
+        // router.replace('/dashboard')
     }
+
+    // retrieve data from store
+    const { user, isUserLoading, isUserError, isUserSuccess, isUserMessage } = useSelector((state) => state.auth)
+
+    // console.log(isUserMessage)
+
+    // handle user object changes
+    useEffect(() => {
+        if(isUserError){
+            console.log(isUserMessage)
+        }
+
+        if(isUserSuccess && user){
+            router.replace('/dashboard')
+        }
+
+        dispatch(resetUserStateValues())
+    }, [isUserError, isUserSuccess, user, dispatch, router])
 
     // validation schema
     const loginSchema = yup.object().shape({

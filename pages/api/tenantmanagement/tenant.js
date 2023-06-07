@@ -3,18 +3,25 @@
 import { ApiUrls } from "@/utils/ApiUrls"
 import axios from "axios"
 
-export default function handler(req, res) {
+// register tenant
+export default async function handler(req, res) {
   if(req.method === 'POST'){
-    const { tenant_name, industry } = req.body
+        try {
+            const { tenant_name, industry } = req.body
+            const { data } = await axios.post(ApiUrls.tenant, {
+                tenant_name,
+                industry
+            })
 
-    axios.post(ApiUrls.tenant, {
-        tenant_name, industry
-    }).then(({ data }) => {
-        if(!data.error){
-            res.status(200).json(data)
-        } else{
-            res.status(400).json(data)
+            res.json(data);
+        } catch (error) {
+            // Handle the error and send an appropriate response
+            // Next.js handles a 400 response as an error and catches it here
+            // Extract the error message from the response and return it here
+            // make sure not to specify any error codes
+            // if you have to, make sure it is a 200(2xx) code
+
+            res.json({ message: error.response.data });
         }
-    })
   }
-  }
+}

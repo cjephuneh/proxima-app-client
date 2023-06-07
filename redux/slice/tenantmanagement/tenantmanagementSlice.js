@@ -33,9 +33,16 @@ const initialState = {
 }
 
 // create a tenant
-export const tenant = createAsyncThunk('tenantmanagement/tenant', async (tenantData, thunkAPI) => {
+export const register_tenant = createAsyncThunk('tenantmanagement/tenant', async (tenantData, thunkAPI) => {
     try {
-        return await tenantManagementService.tenant(tenantData)
+        // return await tenantManagementService.tenant(tenantData)
+        const response = await tenantManagementService.tenant(tenantData)
+
+        if(response.error){
+            return thunkAPI.rejectWithValue(response.error)
+        }
+
+        return response
     } catch(error) {
         console.error(error)
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
@@ -85,15 +92,15 @@ const tenantManagementSlice = createSlice({
     extraReducers: (builder) => {
         builder
             // tenant
-            .addCase(tenant.pending, (state) => {
+            .addCase(register_tenant.pending, (state) => {
                 state.isTenantLoading = true
             })
-            .addCase(tenant.fulfilled, (state, action) => {
+            .addCase(register_tenant.fulfilled, (state, action) => {
                 state.isTenantLoading = false
                 state.isTenantSuccess = true
                 state.tenant = action.payload
             })
-            .addCase(tenant.rejected, (state, action) => {
+            .addCase(register_tenant.rejected, (state, action) => {
                 state.isTenantLoading = false
                 state.isTenantError = true
                 state.isTenantMessage = action.payload
