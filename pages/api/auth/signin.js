@@ -16,23 +16,23 @@ import { ApiUrls } from "@/utils/ApiUrls"
 import axios from "axios"
 
 export default async function handler(req, res) {
-    const { email, password } = req.body
-
-    console.log(req.body)
-
     if(req.method === 'POST'){
-        const { data } = await axios.post(ApiUrls.signin, {
-            email,
-            password
-        })
-        res.status(200).json(data)
-        
-        // .then(({ data }) => {
-        //     if(data.token){
-        //         res.status(200).json(data)
-        //     } else{
-        //         res.status(400).json(data.error)
-        //     }
-        // })
+        try {
+            const {email, password} = req.body
+            const { data } = await axios.post(ApiUrls.signin, {
+                email,
+                password
+            })
+
+            res.json(data);
+        } catch (error) {
+            // Handle the error and send an appropriate response
+            // Next.js handles a 400 response as an error and catches it here
+            // Extract the error message from the response and return it here
+            // make sure not to specify any error codes
+            // if you have to, make sure it is a 200(2xx) code
+
+            res.json({ message: error.response.data });
+        }
     }
 }

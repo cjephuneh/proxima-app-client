@@ -5,20 +5,29 @@
 import { ApiUrls } from "@/utils/ApiUrls"
 import axios from "axios"
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     // create survey
     if(req.method === 'POST'){
     const { tenant_id, survey_topic, survey_description, survey_context, survey_questions, target_audience, survey_type, start_day, end_day } = req.body
 
-    axios.post(ApiUrls.survey, {
-        tenant_id, survey_topic, survey_description, survey_context, survey_questions, target_audience, survey_type, start_day, end_day
-    }).then(({ data }) => {
-        if(data.survey_id){
-            res.status(200).json(data)
-        } else {
-            res.status(400).json(data)
+    // retrieve community surveys
+    if(tenant_id && !survey_topic && !survey_description && !survey_context && !survey_questions && !target_audience && !survey_type && !start_day && !end_day){
+        const { data } = await axios.get(`${ApiUrls.survey}?tenant_id=${tenant_id}`)
+        res.json(data)
+    }
+
+
+    if(tenant_id && survey_topic && survey_description && survey_context && survey_questions && target_audience && survey_type && start_day && end_day){
+        axios.post(ApiUrls.survey, {
+            tenant_id, survey_topic, survey_description, survey_context, survey_questions, target_audience, survey_type, start_day, end_day
+        }).then(({ data }) => {
+            if(data.survey_id){
+                res.status(200).json(data)
+            } else {
+                res.status(400).json(data)
+            }
+            })
         }
-        })
     }
 
     // get survey
@@ -29,6 +38,5 @@ export default function handler(req, res) {
             .then(({ data }) => {
                 res.send(data)
             })
-    }   
-    
+    }       
 }
