@@ -4,5 +4,11 @@ export const ClientApiUrls = {
 
     // auth
     admin: '/api/auth/admin',
-    signin: '/api/auth/signin'
+    signin: '/api/auth/signin',
+
+    // community
+    issue: '/api/community/issue',
+
+    // survey
+    survey: '/api/survey/survey'
 }

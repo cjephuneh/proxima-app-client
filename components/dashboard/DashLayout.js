@@ -37,9 +37,9 @@ export default function DashLayout({ children }) {
 
   useEffect(() => {
     const checkAuthentication = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate a delay of 5 seconds
+      // await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate a delay of 5 seconds
       
-      const isAuthenticated = !!localStorage.getItem("proxima_admin_detail"); // Check if a token exists in local storage
+      const isAuthenticated = !!localStorage.getItem("proxima_admin_details"); // Check if a token exists in local storage
 
       if (!isAuthenticated) {
         // Redirect to the login page if not authenticated

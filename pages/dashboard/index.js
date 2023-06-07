@@ -2,8 +2,23 @@ import images from "@/assets/images";
 import DashLayout from "@/components/dashboard/DashLayout";
 import LatestSurveys from "@/components/dashboard/home/LatestSurveys";
 import RecentInteractions from "@/components/dashboard/home/RecentInteractions";
+import { community_issues } from "@/redux/slice/community/communitySlice";
+import { tenant_survey } from "@/redux/slice/survey/surveySlice";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import FadeLoader from 'react-spinners/FadeLoader'
 
 export default function Dashboard(){
+    const dispatch = useDispatch()
+
+    // retrieve data from store
+    const { issue, isIssueError, isIssueSuccess, isIssueLoading, isIssueMessage } = useSelector((state) => state.community)
+
+    const { survey, isSurveyError, isSurveySuccess, isSurveyLoading, isSurveyMessage } = useSelector((state) => state.survey)
+
+    console.log(survey)
+
+
     const recentlyInteracted = [
         {
             tags: ['Drugs', 'Health', 'Complaint'],
@@ -95,34 +110,63 @@ export default function Dashboard(){
 
     const customerImg = images.user
 
+    // fetch recent issues
+    useEffect(() => {
+        dispatch(community_issues({
+            community_id: 1
+        }))
+    }, [dispatch])
+
+    // fetch latest surveys
+    useEffect(() => {
+        dispatch(tenant_survey({
+            tenant_id: 1
+        }))
+    }, [dispatch])
+
     return(
         <DashLayout>
             <div>
-                <h2 className="text-2xl">Recently Interacted</h2>
+                {/* <h2 className="text-2xl">Recently Interacted</h2> */}
+                <h2 className="text-2xl">Recently Issues</h2>
 
                 <div className="mt-6 flex gap-8 overflow-x-scroll">
                     {
-                        recentlyInteracted.map(({tags, title, description}, i) => (
-                            <RecentInteractions key={i} tags={tags} title={title} description={description} customers={customers} />
-                        ))
+                        isIssueLoading ? <FadeLoader color="#36d7b7" /> : (
+                            isIssueSuccess && issue && 
+
+                            issue.slice(0, 4).map(({issue_id, issue, description, client_id}) => (
+                                <RecentInteractions key={issue_id} issue={issue} description={description} client_id={client_id} />
+                            ))
+                        )
                     }
                 </div>
 
                 <div className="mt-6 flex items-center gap-12">
-                    <h2 className="text-2xl">Surveys</h2>
-                    <select className="text-sm font-semibold bg-transparent">
+                    <h2 className="text-2xl">Recent Surveys</h2>
+                    {/* <select className="text-sm font-semibold bg-transparent">
                         <option value="One Week Ago">One Week Ago</option>
                         <option value="Two Weeks Ago">Two Weeks Ago</option>
                         <option value="One Month Ago">One Month Ago</option>
-                    </select>
+                    </select> */}
                 </div>
 
                 <div className='mt-6 space-y-4'>
                     {
+                        isSurveyLoading ? <FadeLoader color="#36d7b7" /> : (
+                            isSurveySuccess && survey && 
+
+                            survey.map(({ survey_id, survey_topic, survey_description, survey_questions, start_day }) => (
+                                <LatestSurveys key={survey_id} survey_topic={survey_topic} survey_description={survey_description} survey_questions={survey_questions} start_day={start_day} />
+                            ))
+                        )
+                    }
+                    
+                    {/* {
                         issues.map(({date, surveyName, surveyDescription, customerContributions},i) => (
                             <LatestSurveys key={i} customerImg={customerImg} date={date} surveyName={surveyName} surveyDescription={surveyDescription} customerContributions={customerContributions} />
                         ))
-                    }
+                    } */}
                 </div>
             </div>
         </DashLayout>
