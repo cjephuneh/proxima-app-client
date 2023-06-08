@@ -2,7 +2,13 @@
 const nextConfig = {
   // reactStrictMode: true,
   // distDir: 'build',
-  output: 'standalone'
-}
+  output: 'standalone',
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.alias['@'] = path.resolve(__dirname);
+    }
+    return config;
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
