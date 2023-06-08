@@ -12,7 +12,7 @@ FROM dependencies AS build
 RUN npm install -g next
 
 COPY . .
-RUN next build
+#RUN next build
 
 # ---- Production ----
 FROM node:latest AS production
