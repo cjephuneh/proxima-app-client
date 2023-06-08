@@ -1,4 +1,4 @@
-import Navbar from "@/components/auth/Navbar";
+import Navbar from "../../components/auth/Navbar";
 
 export default function Layout({children}){
     return (
