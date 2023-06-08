@@ -1,4 +1,4 @@
-import images from "@/assets/images"
+import images from "../../assets/images"
 import Link from "next/link"
 
 export default function Navbar(){
