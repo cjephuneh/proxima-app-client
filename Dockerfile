@@ -48,9 +48,11 @@ COPY --from=build /app/test_middleware.js ./test_middleware.js
 # Install production dependencies
 RUN npm install --production
 
+# Install Tailwind CSS
+RUN npm install tailwindcss
+
 # Expose the port the app will run on
 EXPOSE 3000
 
 # Start the application
 CMD ["npm", "run", "dev"]
-
