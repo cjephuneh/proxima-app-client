@@ -1,4 +1,4 @@
-import Layout from "@/components/auth/Layout";
+import Layout from "../components/auth/Layout";
 import Link from "next/link";
 import { useEffect } from "react";
 
