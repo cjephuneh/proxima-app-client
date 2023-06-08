@@ -10,6 +10,7 @@ const initialState = {
     communicationchannels: null,
     engagementfrequency: null,
     hourlyaverageresponsetime: null,
+    averageresponsetime: null,
     hourlyclientsatisfaction: null,
     leasttopics: null,
     clientsatisfaction: null,
@@ -30,6 +31,35 @@ const initialState = {
     averagevoicemessageperchat: null,
     issueuserrelation: null,
     commentsuserrelation: null,
+    surveyratings: null,
+    surveyresponserate: null,
+    averagesurveyrunperiod: null,
+    totalsurveys: null,
+
+    // => added
+    // surveyratings,
+    isSurveyRatingsError: false,
+    isSurveyRatingsSuccess: false,
+    isSurveyRatingsLoading: false,
+    isSurveyRatingsMessage: '',
+
+    // surveyresponserate,
+    isSurveyResponseRateError: false, 
+    isSurveyResponseRateSuccess: false,
+    isSurveyResponseRateLoading: false,
+    isSurveyResponseRateMessage: '',   
+
+    // averagesurveyrunperiod,
+    isAverageSurveyRunPeriodError: false, 
+    isAverageSurveyRunPeriodSuccess: false,
+    isAverageSurveyRunPeriodLoading: false,
+    isAverageSurveyRunPeriodMessage: '',
+
+    // totalsurveys,
+    isTotalSurveysError: false,
+    isTotalSurveysSuccess: false,
+    isTotalSurveysLoading: false,
+    isTotalSurveysMessage: false,
 
     // average comments
     isAverageCommentsError: false,
@@ -150,6 +180,12 @@ const initialState = {
     isHourlyAverageResponseTimeSuccess: false,
     isHourlyAverageResponseTimeLoading: false,
     isHourlyAverageResponseTimeMessage: '',
+
+    // average response time
+    isAverageResponseTimeError: false,
+    isAverageResponseTimeSuccess: false,
+    isAverageResponseTimeLoading: false,
+    isAverageResponseTimeMessage: '',
 
     // hourly count escalated issues
     isHourlyCountEscalatedIssuesError: false,
@@ -436,6 +472,17 @@ export const hourlyaverageresponsetime = createAsyncThunk('analytics/hourlyavera
     }
 })
 
+// average response time during ineractions
+export const averageresponsetime = createAsyncThunk('analytics/hourlyaverageresponsetime', async (user, thunkAPI) => {
+    try {
+        return await analyticsService.hourlyaverageresponsetime(user)
+    } catch(error) {
+        console.error(error)
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 // Countr all escalated issues in the last one hour for a tenant
 export const hourlycountescalatedissues = createAsyncThunk('analytics/hourlycountescalatedissues', async (user, thunkAPI) => {
     try {
@@ -490,6 +537,53 @@ export const uniquecomments = createAsyncThunk('analytics/uniquecomments', async
         return thunkAPI.rejectWithValue(message)
     }
 })
+
+// => additions
+
+// survey ratings
+export const surveyratings = createAsyncThunk('analytics/surveyratings', async (analyticsData, thunkAPI) => {
+    try {
+        return await analyticsService.surveyratings(analyticsData)
+    } catch (error) {
+        console.error(error)
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+// survey response rate
+export const surveyresponserate = createAsyncThunk('analytics/surveyresponserate', async (analyticsData, thunkAPI) => {
+    try {
+        return await analyticsService.surveyresponserate(analyticsData)
+    } catch (error) {
+        console.error(error)
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+// survey run period
+export const averagesurveyrunperiod = createAsyncThunk('analytics/averagesurveyrunperiod', async (analyticsData, thunkAPI) => {
+    try {
+        return await analyticsService.averagesurveyrunperiod(analyticsData)
+    } catch (error) {
+        console.error(error)
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+// survey ratings
+export const totalsurveys = createAsyncThunk('analytics/totalsurveys', async (analyticsData, thunkAPI) => {
+    try {
+        return await analyticsService.totalsurveys(analyticsData)
+    } catch (error) {
+        console.error(error)
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 
 
 export const analyticsSlice = createSlice({
@@ -938,6 +1032,88 @@ export const analyticsSlice = createSlice({
                 state.isCommentsUserRelationError = true
                 state.isCommentsUserRelationMessage = action.payload
                 state.issueuserrelation = null 
+            })
+
+            // => additions
+
+            // survey ratings
+            .addCase(surveyratings.pending, (state) => {
+                state.isSurveyRatingsLoading = true
+            })
+            .addCase(surveyratings.fulfilled, (state, action) => {
+                state.isSurveyRatingsLoading = false
+                state.isSurveyRatingsSuccess = true
+                state.surveyratings = action.payload
+            })
+            .addCase(surveyratings.rejected, (state, action) => {
+                state.isSurveyRatingsLoading = false
+                state.isSurveyRatingsError = true
+                state.isSurveyRatingsMessage = action.payload
+                state.surveyratings = null 
+            })
+
+            // surveyresponserate
+            .addCase(surveyresponserate.pending, (state) => {
+                state.isSurveyResponseRateLoading = true
+            })
+            .addCase(surveyresponserate.fulfilled, (state, action) => {
+                state.isSurveyResponseRateLoading = false
+                state.isSurveyResponseRateSuccess = true
+                state.surveyresponserate = action.payload
+            })
+            .addCase(surveyresponserate.rejected, (state, action) => {
+                state.isSurveyResponseRateLoading = false
+                state.isSurveyResponseRateError = true
+                state.isSurveyResponseRateMessage = action.payload
+                state.surveyresponserate = null 
+            })
+
+            // averagesurveyrunperiod
+            .addCase(averagesurveyrunperiod.pending, (state) => {
+                state.isAverageSurveyRunPeriodLoading = true
+            })
+            .addCase(averagesurveyrunperiod.fulfilled, (state, action) => {
+                state.isAverageSurveyRunPeriodLoading = false
+                state.isAverageSurveyRunPeriodSuccess = true
+                state.averagesurveyrunperiod = action.payload
+            })
+            .addCase(averagesurveyrunperiod.rejected, (state, action) => {
+                state.isAverageSurveyRunPeriodLoading = false
+                state.isAverageSurveyRunPeriodError = true
+                state.isAverageSurveyRunPeriodMessage = action.payload
+                state.averagesurveyrunperiod = null 
+            })
+
+            // totalsurveys
+            .addCase(totalsurveys.pending, (state) => {
+                state.isTotalSurveysLoading = true
+            })
+            .addCase(totalsurveys.fulfilled, (state, action) => {
+                state.isTotalSurveysLoading = false
+                state.isTotalSurveysSuccess = true
+                state.totalsurveys = action.payload
+            })
+            .addCase(totalsurveys.rejected, (state, action) => {
+                state.isTotalSurveysLoading = false
+                state.isTotalSurveysError = true
+                state.isTotalSurveysMessage = action.payload
+                state.totalsurveys = null 
+            })
+
+            // averageresponsetime
+            .addCase(averageresponsetime.pending, (state) => {
+                state.isAverageResponseTimeLoading = true
+            })
+            .addCase(averageresponsetime.fulfilled, (state, action) => {
+                state.isAverageResponseTimeLoading = false
+                state.isAverageResponseTimeSuccess = true
+                state.averageresponsetime = action.payload
+            })
+            .addCase(averageresponsetime.rejected, (state, action) => {
+                state.isAverageResponseTimeLoading = false
+                state.isAverageResponseTimeError = true
+                state.isAverageResponseTimeMessage = action.payload
+                state.averageresponsetime = null 
             })
     }
 })

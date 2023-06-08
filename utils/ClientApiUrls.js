@@ -10,5 +10,5 @@ export const ClientApiUrls = {
     issue: '/api/community/issue',
 
     // survey
-    survey: '/api/survey/survey'
+    survey: '/api/survey/survey',
 }
