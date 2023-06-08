@@ -1,17 +1,46 @@
+import { ClientApiUrls } from '@/utils/ClientApiUrls'
 import axios from 'axios'
 
 // sign in a user
 const signin = async(userData) => {
-    const res = await axios.post('/api/auth/signin', userData)
+    // const res = await axios.post('/api/auth/signin', userData)
 
-    return res.data
+    // return res.data
+
+    try {
+        const { data } = await axios.post(ClientApiUrls.signin, userData)
+
+        if(data.token){
+            if(data.user_type === 'admin' || data.user_type === 'employee'){
+                localStorage.setItem('proxima_admin_details', JSON.stringify(data))
+
+                return data
+            } else {
+                return { error: 'This user does not belong to any organization' }
+            }
+        } else {
+            return { error: data }
+        }
+    } catch (error) {
+        throw error
+    }
 }
 
 // register organization admin user
-const admin = async(userData) => {
-    const res = await axios.post('/api/auth/admin', userData)
+const admin = async(adminData) => {
+    try {
+        const { data } = await axios.post(ClientApiUrls.admin, adminData)
 
-    return res.data
+        if(data.token){
+            localStorage.setItem('proxima_admin_details', JSON.stringify(data))
+
+            return data
+        } else {
+            return { error: data }
+        }
+    } catch (error) {
+        throw error
+    }
 }
 
 

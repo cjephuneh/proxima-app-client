@@ -22,7 +22,7 @@ const initialState = {
     Create a survey
     Retrieve a particular survey response
  */
-export const survey = createAsyncThunk('survey/survey', async (surveyData, thunkAPI) => {
+export const tenant_survey = createAsyncThunk('survey/survey', async (surveyData, thunkAPI) => {
     try {
         return await surveyService.survey(surveyData)
     } catch(error) {
@@ -52,15 +52,15 @@ const surveySlice = createSlice({
     extraReducers: (builder) => {
         builder
             // survey
-            .addCase(survey.pending, (state) => {
+            .addCase(tenant_survey.pending, (state) => {
                 state.isSurveyLoading = true
             })
-            .addCase(survey.fulfilled, (state, action) => {
+            .addCase(tenant_survey.fulfilled, (state, action) => {
                 state.isSurveyLoading = false
                 state.isSurveySuccess = true
                 state.survey = action.payload
             })
-            .addCase(survey.rejected, (state, action) => {
+            .addCase(tenant_survey.rejected, (state, action) => {
                 state.isSurveyLoading = false
                 state.isSurveyError = true
                 state.isSurveyMessage = action.payload

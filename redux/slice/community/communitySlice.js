@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import communityService from './communityService'
 
 const initialState = {
-  community: null,
-  joincommunity: null,
-  leavecommunity: null,
-  thread: null,
-  issue: null,
-  comment: null,
-  likecomment: null,
-  dislikecomment: null,
+    community: null,
+    joincommunity: null,
+    leavecommunity: null,
+    thread: null,
+    issue: null,
+    comment: null,
+    likecomment: null,
+    dislikecomment: null,
 
     // community
     isCommunityError: false,
@@ -105,9 +105,21 @@ export const thread = createAsyncThunk('community/thread', async (communityData,
 })
 
 // submit and retrieve issue
-export const issue = createAsyncThunk('community/issue', async (communityData, thunkAPI) => {
+export const community_issues = createAsyncThunk('community/issue', async (communityData, thunkAPI) => {
+    // try {
+    //     return await communityService.issue(communityData)
+    // } catch(error) {
+    //     console.error(error)
+    //     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+    //     return thunkAPI.rejectWithValue(message)
+    // }
     try {
-        return await communityService.issue(communityData)
+        const response = await communityService.issue(communityData)
+
+        if(response.error){
+            return thunkAPI.rejectWithValue(response.error)
+        }
+        return response
     } catch(error) {
         console.error(error)
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
@@ -230,15 +242,15 @@ export const communitySlice = createSlice({
             })
 
             // issue
-            .addCase(issue.pending, (state) => {
+            .addCase(community_issues.pending, (state) => {
                 state.isIssueLoading = true
             })
-            .addCase(issue.fulfilled, (state, action) => {
+            .addCase(community_issues.fulfilled, (state, action) => {
                 state.isIssueLoading = false
                 state.isIssueSuccess = true
                 state.issue = action.payload
             })
-            .addCase(issue.rejected, (state, action) => {
+            .addCase(community_issues.rejected, (state, action) => {
                 state.isIssueLoading = false
                 state.isIssueError = true
                 state.isIssueMessage = action.payload

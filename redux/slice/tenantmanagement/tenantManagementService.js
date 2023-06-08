@@ -1,10 +1,24 @@
+import { ClientApiUrls } from "@/utils/ClientApiUrls";
 import axios from "axios";
 
 // create a tenant
 const tenant = async (tenantData) => {
-    const res = await axios.post('/api/tenantmanagement/tenant', tenantData)
+    // const res = await axios.post('/api/tenantmanagement/tenant', tenantData)
 
-    return res.data
+    // return res.data
+    try {
+        const { data } = await axios.post(ClientApiUrls.tenant, tenantData)
+
+        if(data.tenant_id){
+            localStorage.setItem('proxima_tenant', JSON.stringify(data))
+
+            return data
+        } else {
+            return { error: data.error }
+        }
+    } catch (error) {
+        throw error
+    }
 }
 
 // create and retrieve tenant products

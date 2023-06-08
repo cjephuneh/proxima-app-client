@@ -1,169 +1,338 @@
 import axios from 'axios'
 
-// sign in a user
-const averagecomments = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/averagecomments', analyticsData)
+const averageresponsetime = async (analyticsData) => {
+    try {
+        const { data } = await axios.post('/api/analytics/averageresponsetime', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
+const averagecomments = async(analyticsData) => {
+    try {
+        const { data } = await axios.post('/api/analytics/averagecomments', analyticsData)
+
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const averagevoicemessageperchat  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/averagevoicemessageperchat', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/averagevoicemessageperchat', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const clientcitydistribution  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/clientcitydistribution', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/clientcitydistribution', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const clientsatisfaction  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/clientsatisfaction', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/clientsatisfaction', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const clientsaverageage  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/clientsaverageage', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/clientsaverageage', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const communicationchannels  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/communicationchannels', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/communicationchannels', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const communitygrowthrate  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/communitygrowthrate', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/communitygrowthrate', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const communitymembers  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/communitymembers', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/communitymembers', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const communityrating  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/communityrating', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/communityrating', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw data
+    }
 }
 
 const countchats  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/countchats', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/countchats', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const countescalatedissues  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/countescalatedissues', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/countescalatedissues', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const counthourlychats  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/counthourlychats', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/counthourlychats', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const countrydistribution  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/countrydistribution', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/countrydistribution', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const cumulativecomments  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/cumulativecomments', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/cumulativecomments', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const cumulativehourlychats  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/cumulativehourlychats', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/cumulativehourlychats', analyticsData)
 
-    return res.data
+        return data   
+    } catch (error) {
+        throw error
+    }
 }
 
 const cumulativeissues  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/cumulativeissues', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/cumulativeissues', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const cumulativevoicemessage  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/cumulativevoicemessage', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/cumulativevoicemessage', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const engagementfrequency  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/engagementfrequency', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/engagementfrequency', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const genderdistribution  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/genderdistribution', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/genderdistribution', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const hourlyaverageresponsetime  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/hourlyaverageresponsetime', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/hourlyaverageresponsetime', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const hourlycountescalatedissues  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/hourlycountescalatedissues', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/hourlycountescalatedissues', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
+const hourlyclientsatisfaction = async (analyticsData) => {
+    try {
+        const { data } = await axios.post('/api/analytics/hourlyclientsatisfaction', analyticsData)
+
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const leasttopics  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/leasttopics', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/leasttopics', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const populartopics  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/populartopics', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/populartopics', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const statedistribution  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/statedistribution', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/statedistribution', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const uniquecomments  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/statedistribution', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/statedistribution', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const issueuserrelation  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/statedistribution', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/statedistribution', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const commentsuserrelation  = async(analyticsData) => {
-    const res = await axios.post('/api/analytics/statedistribution', analyticsData)
+    try {
+        const { data } = await axios.post('/api/analytics/statedistribution', analyticsData)
 
-    return res.data
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
+// added 
+const surveyratings = async(analyticsData) => {
+    try {
+        const { data } = await axios.post('/api/analytics/surveyratings', analyticsData)
+
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
+const surveyresponserate = async(analyticsData) => {
+    try {
+        const { data } = await axios.post('/api/analytics/surveyresponserate', analyticsData)
+
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
+const averagesurveyrunperiod = async(analyticsData) => {
+    try {
+        const { data } = await axios.post('/api/analytics/averagesurveyrunperiod', analyticsData)
+
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
+const totalsurveys = async(analyticsData) => {
+    try {
+        const { data } = await axios.post('/api/analytics/totalsurveys', analyticsData)
+
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 const analyticsService = {
+    averageresponsetime,
     averagecomments,
     averagevoicemessageperchat,
     clientcitydistribution,
@@ -185,12 +354,19 @@ const analyticsService = {
     genderdistribution,
     hourlyaverageresponsetime,
     hourlycountescalatedissues,
+    hourlyclientsatisfaction,
     leasttopics,
     populartopics,
     statedistribution,
     uniquecomments,
     issueuserrelation,
-    commentsuserrelation
+    commentsuserrelation,
+
+    // additions
+    surveyratings,
+    surveyresponserate,
+    averagesurveyrunperiod,
+    totalsurveys,
 }
 
 export default analyticsService
