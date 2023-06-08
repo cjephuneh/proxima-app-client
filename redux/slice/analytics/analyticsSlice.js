@@ -473,7 +473,7 @@ export const hourlyaverageresponsetime = createAsyncThunk('analytics/hourlyavera
 })
 
 // average response time during ineractions
-export const averageresponsetime = createAsyncThunk('analytics/hourlyaverageresponsetime', async (user, thunkAPI) => {
+export const averageresponsetime = createAsyncThunk('analytics/averageresponsetime', async (user, thunkAPI) => {
     try {
         return await analyticsService.hourlyaverageresponsetime(user)
     } catch(error) {
