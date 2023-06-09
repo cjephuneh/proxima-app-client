@@ -5,6 +5,7 @@ import * as yup from 'yup'
 import { useDispatch, useSelector } from "react-redux";
 import { register_admin, resetAuthStateValues } from "@/redux/slice/auth/authSlice";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function AdminDetails(){
     const router = useRouter()
@@ -17,6 +18,7 @@ export default function AdminDetails(){
     const [tenantInfo, setTenantInfo] = useState(null)
 
     const getTenantInfo = () => localStorage.getItem('proxima_tenant')
+
     useEffect(() => {
         // Perform localStorage action
         // const item = localStorage.getItem('key')
@@ -27,17 +29,12 @@ export default function AdminDetails(){
     // fetch data from store
     const { admin, isAdminLoading, isAdminSuccess, isAdminError, isAdminMessage } = useSelector((state) => state.auth)
 
-    console.log(admin, isAdminLoading, isAdminSuccess, isAdminError, isAdminMessage)
-
     // handle show error messages
     useEffect(() => {
         if(isAdminMessage){
             setShowErrors(true)
         }
     }, [isAdminMessage])
-
-    // variables to trigger navigation
-    const [allowNavigation, setAllowNavigation] = useState(false)
 
     // handle submit
     const submitAdminDetails = (values, actions) => {
@@ -56,19 +53,20 @@ export default function AdminDetails(){
         user_type: 'admin',
         tenant_id: tenantInfo.tenant_id
        }))
-
-       // Set the state variable to trigger the navigation
-    //    setAllowNavigation(true)
     }
 
     useEffect(() => {
         if(isAdminError){
-            setShowErrors(true)
+            toast.error(isAdminMessage, {
+                position: 'top-center'
+            })
         }
         // navigate to next page if admin was registered successfully
         if (isAdminSuccess && admin) {
           router.push('invite-members');
         }
+
+        // reset admin registration state
         dispatch(resetAuthStateValues())
       }, [isAdminSuccess, admin, router, isAdminError, dispatch]);
 

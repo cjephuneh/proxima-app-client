@@ -1,4 +1,7 @@
 import Navbar from "@/components/auth/Navbar";
+// react toastify
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify';
 
 export default function Layout({children}){
     return (
@@ -9,6 +12,7 @@ export default function Layout({children}){
                     {children}
                 </div>
             </div>
+            <ToastContainer />
         </div>
     )
 }

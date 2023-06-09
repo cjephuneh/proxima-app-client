@@ -7,7 +7,7 @@ export default function PaymentMethod(){
     const router = useRouter()
 
     const handlePayment = () => {
-        router.push('username')
+        router.push('admin-details')
     } 
     return (
         <Layout>

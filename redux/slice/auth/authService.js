@@ -16,10 +16,14 @@ const signin = async(userData) => {
 
                 return data
             } else {
-                return { error: 'This user does not belong to any organization' }
+                return { error: 'This user does not belong to any organization. Use the mobile application if you are a customer.' }
             }
         } else {
-            return { error: data }
+            if(data.message.error[0]){
+                return { error: data.message.error[0]}
+            }
+            // console.log(data.message.error[0])
+            // return { error: data }
         }
     } catch (error) {
         throw error
@@ -36,7 +40,18 @@ const admin = async(adminData) => {
 
             return data
         } else {
-            return { error: data }
+            if(data.message.username && data.message.email){
+                return { error: 'username and email already registered' }
+            }
+
+            if(data.message.username && !data.message.email){
+                return { error: 'username already registered' }
+            }
+
+            if(!data.message.username && data.message.email){
+                return { error: 'email already registered' }
+            }
+            // return { error: data }
         }
     } catch (error) {
         throw error

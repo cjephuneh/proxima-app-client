@@ -96,8 +96,6 @@ export const register_admin = createAsyncThunk('auth/admin', async (adminData, t
     try {
         const response = await authService.admin(adminData)
 
-        console.log('response', response)
-
         if(response.error){
             return thunkAPI.rejectWithValue(response.error)
         }
