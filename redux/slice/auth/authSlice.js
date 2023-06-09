@@ -201,6 +201,11 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        // logout
+        logout: (state) => {
+            state.user = null
+        },
+
         // function to reset values to initial state
         resetAuthStateValues: (state) => {
             state.isAdminLoading = false
@@ -213,7 +218,7 @@ export const authSlice = createSlice({
             state.isUserSuccess = false
             state.isUserError = false
             state.isUserMessage = ''
-        }
+        },
     },
     // asynchronous fxns
     extraReducers: (builder) => {
@@ -370,6 +375,6 @@ export const authSlice = createSlice({
     }
 })
 
-export const { resetAuthStateValues, resetUserStateValues } = authSlice.actions
+export const { logout, resetAuthStateValues, resetUserStateValues } = authSlice.actions
 
 export default authSlice.reducer
