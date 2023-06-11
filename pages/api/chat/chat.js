@@ -13,13 +13,26 @@ import axios from "axios"
 
 export default async function handler(req, res) {
   if(req.method === 'POST'){
-    const { tenant, guest_client, chat_owner, client_satisfaction } = req.body
+    const { tenant, tenant_id, guest_client, chat_owner, client_satisfaction } = req.body
 
     // retrieve all chats belonging to a client
     if(chat_owner && !tenant && !guest_client && !client_satisfaction){
       const { data } = await axios.get(`${ApiUrls.chat}?chat_owner=${chat_owner}`)
 
       res.json(data)
+    }
+
+    // create chat
+    if(tenant_id && chat_owner && client_satisfaction && guest_client){
+      try {
+        const { data } = await axios.post(ApiUrls.chat, {
+          tenant_id, chat_owner, client_satisfaction, guest_client
+        })
+
+        res.json(data);
+      } catch (error) {
+        res.json({ message: error.response.data });
+      }
     }
   }
 
