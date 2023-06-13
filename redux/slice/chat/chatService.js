@@ -11,9 +11,18 @@ import axios from "axios";
 
  */
 const chat = async(chatData) => {
-    const res = await axios.post('/api/chat/chat', chatData)
+    // const res = await axios.post('/api/chat/chat', chatData)
 
-    return res.data
+    // return res.data
+    try {
+        const { data } = await axios.post('/api/chat/chat', chatData)
+
+        console.log('chat', data)
+
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 
@@ -25,9 +34,17 @@ const chat = async(chatData) => {
 
  */
 const message = async(chatData) => {
-    const res = await axios.post('/api/chat/message', chatData)
+    // const res = await axios.post('/api/chat/message', chatData)
 
-    return res.data
+    // return res.data
+    console.log('jdvhew', chatData)
+    try {
+        const { data } = await axios.post('/api/chat/message', chatData)
+
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 

@@ -16,10 +16,10 @@ export default async function handler(req, res){
             }
         }
 
-        // add a fav community
+        // add or remove a fav community'username', 'email', 'first_name', 'last_name'
         if(client_id && community_id){
             try {
-                const { data } = await axios.post(ApiUrls, { client_id, community_id })
+                const { data } = await axios.post(ApiUrls.favoritecommunities, { client_id, community_id })
 
                 res.json(data)
             } catch (error) {

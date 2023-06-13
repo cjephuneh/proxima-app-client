@@ -22,8 +22,15 @@ export default async function handler(req, res) {
       res.json(data)
     }
 
+    // retrieve all chats belonging to a tenant
+    if(tenant_id && !tenant && !guest_client && !chat_owner && !client_satisfaction){
+      const { data } = await axios.get(`${ApiUrls.chat}?tenant_id=${tenant_id}`)
+
+      res.json(data)
+    }
+
     // create chat
-    if(tenant_id && chat_owner && client_satisfaction && guest_client){
+    if(tenant_id && chat_owner && client_satisfaction){
       try {
         const { data } = await axios.post(ApiUrls.chat, {
           tenant_id, chat_owner, client_satisfaction, guest_client
