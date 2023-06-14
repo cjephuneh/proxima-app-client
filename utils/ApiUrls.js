@@ -84,6 +84,7 @@ export const ApiUrls = {
     likecomment: COMMUNITY_ENDPOINT + '/likecomment/',
     dislikecomment: COMMUNITY_ENDPOINT + '/dislikecomment/',
     likeordislikecomment: COMMUNITY_ENDPOINT + '/likeordislikecomment/',
+    favoritecommunities: COMMUNITY_ENDPOINT + '/favoritecommunities/',
 
     // survey
     survey: SURVEY_ENDPOINT + '/survey/',

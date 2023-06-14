@@ -9,6 +9,7 @@ import { MdOutlineBatchPrediction } from "react-icons/md";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowDetails } from "@/redux/slice/dashutils/indexSlice";
+import { logout } from "@/redux/slice/auth/authSlice";
 
 export default function DashNav(){
         const dispatch = useDispatch()
@@ -16,6 +17,16 @@ export default function DashNav(){
         const showDetails = useSelector((state) => state.dashUtils.showDetails)
 
         const { pathname } = useRouter()
+
+        const router = useRouter()
+
+        // log out the user
+        const logoutUser = () => {
+            dispatch(logout())
+            localStorage.removeItem("proxima_tenant")
+            localStorage.removeItem("proxima_admin_details")
+            // router.replace('/auth/login')
+        }
 
     return (
         <aside data-testid='side-nav' className="p-4 h-screen flex flex-col  justify-between shadow">
@@ -76,9 +87,9 @@ export default function DashNav(){
                     <p className={showDetails ? (pathname.includes('settings') ? "text-[#2DABB1]" : "text-gray-500") : "hidden"}>Settings</p>
                 </Link>
 
-                <button className="flex mb-6 items-center gap-2">
+                <button onClick={() => logoutUser()} className="flex mb-6 items-center gap-2">
                     <TbLogout className={showDetails ? "h-5 w-5" : "h-8 w-8"} color="gray" />
-                    <p className={showDetails ? "text-gray-500" : "hidden"}>Logout</p>
+                    <p className={showDetails ? "text-gray-500" : "hidden"}>Log out</p>
                 </button>
             </div>
         </aside>

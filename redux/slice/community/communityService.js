@@ -1,3 +1,4 @@
+import { ClientApiUrls } from "@/utils/ClientApiUrls";
 import axios from "axios";
 
 // retrieve a tenant community
@@ -30,9 +31,16 @@ const thread = async(communityData) => {
 
 // submit and Retrieve issues
 const issue = async(communityData) => {
-    const res = await axios.post('/api/community/issue', communityData)
+    // const res = await axios.post('/api/community/issue', communityData)
 
-    return res.data
+    // return res.data
+    try {
+        const { data } = await axios.post(ClientApiUrls.issue, communityData)
+
+        return data
+    } catch (error) {
+        throw error
+    }
 }
 
 // add and retrieve comments

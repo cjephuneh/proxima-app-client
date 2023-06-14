@@ -10,6 +10,7 @@ const initialState = {
     communicationchannels: null,
     engagementfrequency: null,
     hourlyaverageresponsetime: null,
+    averageresponsetime: null,
     hourlyclientsatisfaction: null,
     leasttopics: null,
     clientsatisfaction: null,
@@ -30,6 +31,35 @@ const initialState = {
     averagevoicemessageperchat: null,
     issueuserrelation: null,
     commentsuserrelation: null,
+    surveyratings: null,
+    surveyresponserate: null,
+    averagesurveyrunperiod: null,
+    totalsurveys: null,
+
+    // => added
+    // surveyratings,
+    isSurveyRatingsError: false,
+    isSurveyRatingsSuccess: false,
+    isSurveyRatingsLoading: false,
+    isSurveyRatingsMessage: '',
+
+    // surveyresponserate,
+    isSurveyResponseRateError: false, 
+    isSurveyResponseRateSuccess: false,
+    isSurveyResponseRateLoading: false,
+    isSurveyResponseRateMessage: '',   
+
+    // averagesurveyrunperiod,
+    isAverageSurveyRunPeriodError: false, 
+    isAverageSurveyRunPeriodSuccess: false,
+    isAverageSurveyRunPeriodLoading: false,
+    isAverageSurveyRunPeriodMessage: '',
+
+    // totalsurveys,
+    isTotalSurveysError: false,
+    isTotalSurveysSuccess: false,
+    isTotalSurveysLoading: false,
+    isTotalSurveysMessage: false,
 
     // average comments
     isAverageCommentsError: false,
@@ -151,6 +181,12 @@ const initialState = {
     isHourlyAverageResponseTimeLoading: false,
     isHourlyAverageResponseTimeMessage: '',
 
+    // average response time
+    isAverageResponseTimeError: false,
+    isAverageResponseTimeSuccess: false,
+    isAverageResponseTimeLoading: false,
+    isAverageResponseTimeMessage: '',
+
     // hourly count escalated issues
     isHourlyCountEscalatedIssuesError: false,
     isHourlyCountEscalatedIssuesSuccess: false,
@@ -175,7 +211,7 @@ const initialState = {
     isStateDistributionLoading: false,
     isStateDistributionMessage: '',
 
-    // state distribution
+    // unique comments
     isUniqueCommentsError: false,
     isUniqueCommentsSuccess: false,
     isUniqueCommentsLoading: false,
@@ -195,7 +231,7 @@ const initialState = {
 }
 
 // Average number of comments per issue for a tenant
-export const issueuserrelation = createAsyncThunk('analytics/issueuserrelation', async (user, thunkAPI) => {
+export const descriptive_issueuserrelation = createAsyncThunk('analytics/issueuserrelation', async (user, thunkAPI) => {
     try {
         return await analyticsService.issueuserrelation(user)
     } catch(error) {
@@ -206,7 +242,7 @@ export const issueuserrelation = createAsyncThunk('analytics/issueuserrelation',
 })
 
 // Average number of comments per issue for a tenant
-export const commentsuserrelation = createAsyncThunk('analytics/commentsuserrelation', async (user, thunkAPI) => {
+export const descriptive_commentsuserrelation = createAsyncThunk('analytics/commentsuserrelation', async (user, thunkAPI) => {
     try {
         return await analyticsService.commentsuserrelation(user)
     } catch(error) {
@@ -217,7 +253,7 @@ export const commentsuserrelation = createAsyncThunk('analytics/commentsuserrela
 })
 
 // Average number of comments per issue for a tenant
-export const averagecomments = createAsyncThunk('analytics/averagecomments', async (user, thunkAPI) => {
+export const descriptive_averagecomments = createAsyncThunk('analytics/averagecomments', async (user, thunkAPI) => {
     try {
         return await analyticsService.averagecomments(user)
     } catch(error) {
@@ -228,7 +264,7 @@ export const averagecomments = createAsyncThunk('analytics/averagecomments', asy
 })
 
 // Average number of voice messages sent in a chat
-export const averagevoicemessageperchat = createAsyncThunk('analytics/averagevoicemessageperchat', async (user, thunkAPI) => {
+export const descriptive_averagevoicemessageperchat = createAsyncThunk('analytics/averagevoicemessageperchat', async (user, thunkAPI) => {
     try {
         return await analyticsService.averagevoicemessageperchat(user)
     } catch(error) {
@@ -239,7 +275,7 @@ export const averagevoicemessageperchat = createAsyncThunk('analytics/averagevoi
 })
 
 // City distribution of clients talking to a tenant
-export const clientcitydistribution = createAsyncThunk('analytics/clientcitydistribution', async (user, thunkAPI) => {
+export const descriptive_clientcitydistribution = createAsyncThunk('analytics/clientcitydistribution', async (user, thunkAPI) => {
     try {
         return await analyticsService.clientcitydistribution(user)
     } catch(error) {
@@ -250,7 +286,7 @@ export const clientcitydistribution = createAsyncThunk('analytics/clientcitydist
 })
 
 // All client satisfaction chats beetween a tenant and it's clients
-export const clientsatisfaction = createAsyncThunk('analytics/clientsatisfaction', async (user, thunkAPI) => {
+export const descriptive_clientsatisfaction = createAsyncThunk('analytics/clientsatisfaction', async (user, thunkAPI) => {
     try {
         return await analyticsService.clientsatisfaction(user)
     } catch(error) {
@@ -261,7 +297,7 @@ export const clientsatisfaction = createAsyncThunk('analytics/clientsatisfaction
 })
 
 // Average age of clients talking to a tenant
-export const clientsaverageage = createAsyncThunk('analytics/clientsaverageage', async (user, thunkAPI) => {
+export const descriptive_clientsaverageage = createAsyncThunk('analytics/clientsaverageage', async (user, thunkAPI) => {
     try {
         return await analyticsService.clientsaverageage(user)
     } catch(error) {
@@ -272,7 +308,7 @@ export const clientsaverageage = createAsyncThunk('analytics/clientsaverageage',
 })
 
 // Clients communication channels with their tenants
-export const communicationchannels = createAsyncThunk('analytics/communicationchannels', async (user, thunkAPI) => {
+export const descriptive_communicationchannels = createAsyncThunk('analytics/communicationchannels', async (user, thunkAPI) => {
     try {
         return await analyticsService.communicationchannels(user)
     } catch(error) {
@@ -283,7 +319,7 @@ export const communicationchannels = createAsyncThunk('analytics/communicationch
 })
 
 // How the community is growing
-export const communitygrowthrate = createAsyncThunk('analytics/communitygrowthrate', async (user, thunkAPI) => {
+export const descriptive_communitygrowthrate = createAsyncThunk('analytics/communitygrowthrate', async (user, thunkAPI) => {
     try {
         return await analyticsService.communitygrowthrate(user)
     } catch(error) {
@@ -294,7 +330,7 @@ export const communitygrowthrate = createAsyncThunk('analytics/communitygrowthra
 })
 
 // Total number of members belonging to a particular community in atea tenant
-export const communitymembers = createAsyncThunk('analytics/communitymembers', async (user, thunkAPI) => {
+export const descriptive_communitymembers = createAsyncThunk('analytics/communitymembers', async (user, thunkAPI) => {
     try {
         return await analyticsService.communitymembers(user)
     } catch(error) {
@@ -305,7 +341,7 @@ export const communitymembers = createAsyncThunk('analytics/communitymembers', a
 })
 
 // Community rating based on users
-export const communityrating = createAsyncThunk('analytics/communityrating', async (user, thunkAPI) => {
+export const descriptive_communityrating = createAsyncThunk('analytics/communityrating', async (user, thunkAPI) => {
     try {
         return await analyticsService.communityrating(user)
     } catch(error) {
@@ -316,7 +352,7 @@ export const communityrating = createAsyncThunk('analytics/communityrating', asy
 })
 
 // all tenant chats
-export const countchats = createAsyncThunk('analytics/countchats', async (user, thunkAPI) => {
+export const descriptive_countchats = createAsyncThunk('analytics/countchats', async (user, thunkAPI) => {
     try {
         return await analyticsService.countchats(user)
     } catch(error) {
@@ -327,7 +363,7 @@ export const countchats = createAsyncThunk('analytics/countchats', async (user, 
 })
 
 // Count all escalated issues in for a tenant
-export const countescalatedissues = createAsyncThunk('analytics/countescalatedissues', async (user, thunkAPI) => {
+export const descriptive_countescalatedissues = createAsyncThunk('analytics/countescalatedissues', async (user, thunkAPI) => {
     try {
         return await analyticsService.countescalatedissues(user)
     } catch(error) {
@@ -338,7 +374,7 @@ export const countescalatedissues = createAsyncThunk('analytics/countescalatedis
 })
 
 // All tanant chats in the last hour
-export const counthourlychats = createAsyncThunk('analytics/counthourlychats', async (user, thunkAPI) => {
+export const descriptive_counthourlychats = createAsyncThunk('analytics/counthourlychats', async (user, thunkAPI) => {
     try {
         return await analyticsService.counthourlychats(user)
     } catch(error) {
@@ -349,7 +385,7 @@ export const counthourlychats = createAsyncThunk('analytics/counthourlychats', a
 })
 
 // Country distribution of clients talking to a tenant
-export const countrydistribution = createAsyncThunk('analytics/countrydistribution', async (user, thunkAPI) => {
+export const descriptive_countrydistribution = createAsyncThunk('analytics/countrydistribution', async (user, thunkAPI) => {
     try {
         return await analyticsService.countrydistribution(user)
     } catch(error) {
@@ -360,7 +396,7 @@ export const countrydistribution = createAsyncThunk('analytics/countrydistributi
 })
 
 // Cumulative comments issue threads for all issues for tenant
-export const cumulativecomments = createAsyncThunk('analytics/cumulativecomments', async (user, thunkAPI) => {
+export const descriptive_cumulativecomments = createAsyncThunk('analytics/cumulativecomments', async (user, thunkAPI) => {
     try {
         return await analyticsService.cumulativecomments(user)
     } catch(error) {
@@ -371,7 +407,7 @@ export const cumulativecomments = createAsyncThunk('analytics/cumulativecomments
 })
 
 // All tanant chats in the last hour
-export const cumulativehourlychats = createAsyncThunk('analytics/cumulativehourlychats', async (user, thunkAPI) => {
+export const descriptive_cumulativehourlychats = createAsyncThunk('analytics/cumulativehourlychats', async (user, thunkAPI) => {
     try {
         return await analyticsService.cumulativehourlychats(user)
     } catch(error) {
@@ -382,7 +418,7 @@ export const cumulativehourlychats = createAsyncThunk('analytics/cumulativehourl
 })
 
 // All issues related to a tenant
-export const cumulativeissues = createAsyncThunk('analytics/cumulativeissues', async (user, thunkAPI) => {
+export const descriptive_cumulativeissues = createAsyncThunk('analytics/cumulativeissues', async (user, thunkAPI) => {
     try {
         return await analyticsService.cumulativeissues(user)
     } catch(error) {
@@ -393,7 +429,7 @@ export const cumulativeissues = createAsyncThunk('analytics/cumulativeissues', a
 })
 
 // Total number of voice messages sent to all chat associated with a particular tenant
-export const cumulativevoicemessage = createAsyncThunk('analytics/cumulativevoicemessage', async (user, thunkAPI) => {
+export const descriptive_cumulativevoicemessage = createAsyncThunk('analytics/cumulativevoicemessage', async (user, thunkAPI) => {
     try {
         return await analyticsService.cumulativevoicemessage(user)
     } catch(error) {
@@ -404,7 +440,7 @@ export const cumulativevoicemessage = createAsyncThunk('analytics/cumulativevoic
 })
 
 // How frequent clients engage with tenants
-export const engagementfrequency = createAsyncThunk('analytics/engagementfrequency', async (user, thunkAPI) => {
+export const descriptive_engagementfrequency = createAsyncThunk('analytics/engagementfrequency', async (user, thunkAPI) => {
     try {
         return await analyticsService.engagementfrequency(user)
     } catch(error) {
@@ -415,7 +451,7 @@ export const engagementfrequency = createAsyncThunk('analytics/engagementfrequen
 })
 
 // Gender distribution of clients talking to a tenant
-export const genderdistribution = createAsyncThunk('analytics/genderdistribution', async (user, thunkAPI) => {
+export const descriptive_genderdistribution = createAsyncThunk('analytics/genderdistribution', async (user, thunkAPI) => {
     try {
         return await analyticsService.genderdistribution(user)
     } catch(error) {
@@ -426,7 +462,18 @@ export const genderdistribution = createAsyncThunk('analytics/genderdistribution
 })
 
 // // hourly average response time during ineractions
-export const hourlyaverageresponsetime = createAsyncThunk('analytics/hourlyaverageresponsetime', async (user, thunkAPI) => {
+export const descriptive_hourlyaverageresponsetime = createAsyncThunk('analytics/hourlyaverageresponsetime', async (user, thunkAPI) => {
+    try {
+        return await analyticsService.hourlyaverageresponsetime(user)
+    } catch(error) {
+        console.error(error)
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+// average response time during ineractions
+export const descriptive_averageresponsetime = createAsyncThunk('analytics/averageresponsetime', async (user, thunkAPI) => {
     try {
         return await analyticsService.hourlyaverageresponsetime(user)
     } catch(error) {
@@ -437,7 +484,7 @@ export const hourlyaverageresponsetime = createAsyncThunk('analytics/hourlyavera
 })
 
 // Countr all escalated issues in the last one hour for a tenant
-export const hourlycountescalatedissues = createAsyncThunk('analytics/hourlycountescalatedissues', async (user, thunkAPI) => {
+export const descriptive_hourlycountescalatedissues = createAsyncThunk('analytics/hourlycountescalatedissues', async (user, thunkAPI) => {
     try {
         return await analyticsService.hourlycountescalatedissues(user)
     } catch(error) {
@@ -448,7 +495,7 @@ export const hourlycountescalatedissues = createAsyncThunk('analytics/hourlycoun
 })
 
 // Least enanaged topics for a tenant
-export const leasttopics = createAsyncThunk('analytics/leasttopics', async (user, thunkAPI) => {
+export const descriptive_leasttopics = createAsyncThunk('analytics/leasttopics', async (user, thunkAPI) => {
     try {
         return await analyticsService.leasttopics(user)
     } catch(error) {
@@ -459,7 +506,7 @@ export const leasttopics = createAsyncThunk('analytics/leasttopics', async (user
 })
 
 // Most popular topics for a tenant
-export const populartopics = createAsyncThunk('analytics/populartopics', async (user, thunkAPI) => {
+export const descriptive_populartopics = createAsyncThunk('analytics/populartopics', async (user, thunkAPI) => {
     try {
         return await analyticsService.populartopics(user)
     } catch(error) {
@@ -470,7 +517,7 @@ export const populartopics = createAsyncThunk('analytics/populartopics', async (
 })
 
 // State distribution of clients talking to a tenant
-export const statedistribution = createAsyncThunk('analytics/statedistribution', async (user, thunkAPI) => {
+export const descriptive_statedistribution = createAsyncThunk('analytics/statedistribution', async (user, thunkAPI) => {
     try {
         return await analyticsService.statedistribution(user)
     } catch(error) {
@@ -481,7 +528,7 @@ export const statedistribution = createAsyncThunk('analytics/statedistribution',
 })
 
 // Unique comments by clients on issues of a tenant
-export const uniquecomments = createAsyncThunk('analytics/uniquecomments', async (user, thunkAPI) => {
+export const descriptive_uniquecomments = createAsyncThunk('analytics/uniquecomments', async (user, thunkAPI) => {
     try {
         return await analyticsService.uniquecomments(user)
     } catch(error) {
@@ -490,6 +537,53 @@ export const uniquecomments = createAsyncThunk('analytics/uniquecomments', async
         return thunkAPI.rejectWithValue(message)
     }
 })
+
+// => additions
+
+// survey ratings
+export const descriptive_surveyratings = createAsyncThunk('analytics/surveyratings', async (analyticsData, thunkAPI) => {
+    try {
+        return await analyticsService.surveyratings(analyticsData)
+    } catch (error) {
+        console.error(error)
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+// survey response rate
+export const descriptive_surveyresponserate = createAsyncThunk('analytics/surveyresponserate', async (analyticsData, thunkAPI) => {
+    try {
+        return await analyticsService.surveyresponserate(analyticsData)
+    } catch (error) {
+        console.error(error)
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+// survey run period
+export const descriptive_averagesurveyrunperiod = createAsyncThunk('analytics/averagesurveyrunperiod', async (analyticsData, thunkAPI) => {
+    try {
+        return await analyticsService.averagesurveyrunperiod(analyticsData)
+    } catch (error) {
+        console.error(error)
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
+// survey ratings
+export const descriptive_totalsurveys = createAsyncThunk('analytics/totalsurveys', async (analyticsData, thunkAPI) => {
+    try {
+        return await analyticsService.totalsurveys(analyticsData)
+    } catch (error) {
+        console.error(error)
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 
 
 export const analyticsSlice = createSlice({
@@ -509,15 +603,15 @@ export const analyticsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             // average comments
-            .addCase(averagecomments.pending, (state) => {
+            .addCase(descriptive_averagecomments.pending, (state) => {
                 state.isAverageCommentsLoading = true
             })
-            .addCase(averagecomments.fulfilled, (state, action) => {
+            .addCase(descriptive_averagecomments.fulfilled, (state, action) => {
                 state.isAverageCommentsLoading = false
                 state.isAverageCommentsSuccess = true
                 state.averagecomments = action.payload
             })
-            .addCase(averagecomments.rejected, (state, action) => {
+            .addCase(descriptive_averagecomments.rejected, (state, action) => {
                 state.isAverageCommentsLoading = false
                 state.isAverageCommentsError = true
                 state.isAverageCommentsMessage = action.payload
@@ -525,15 +619,15 @@ export const analyticsSlice = createSlice({
             })
 
             // average voice messages per chat
-            .addCase(averagevoicemessageperchat.pending, (state) => {
+            .addCase(descriptive_averagevoicemessageperchat.pending, (state) => {
                 state.isAverageVoiceMessagesPerChatLoading = true
             })
-            .addCase(averagevoicemessageperchat.fulfilled, (state, action) => {
+            .addCase(descriptive_averagevoicemessageperchat.fulfilled, (state, action) => {
                 state.isAverageVoiceMessagesPerChatLoading = false
                 state.isAverageVoiceMessagesPerChatSuccess = true
                 state.averagevoicemessageperchat= action.payload
             })
-            .addCase(averagevoicemessageperchat.rejected, (state, action) => {
+            .addCase(descriptive_averagevoicemessageperchat.rejected, (state, action) => {
                 state.isAverageVoiceMessagesPerChatLoading = false
                 state.isAverageVoiceMessagesPerChatError = true
                 state.isAverageVoiceMessagesPerChatMessage = action.payload
@@ -541,15 +635,15 @@ export const analyticsSlice = createSlice({
             })
 
             // client city distribution
-            .addCase(clientcitydistribution.pending, (state) => {
+            .addCase(descriptive_clientcitydistribution.pending, (state) => {
                 state.isClientCityDistributionLoading = true
             })
-            .addCase(clientcitydistribution.fulfilled, (state, action) => {
+            .addCase(descriptive_clientcitydistribution.fulfilled, (state, action) => {
                 state.isClientCityDistributionLoading = false
                 state.isClientCityDistributionSuccess = true
                 state.clientcitydistribution = action.payload
             })
-            .addCase(clientcitydistribution.rejected, (state, action) => {
+            .addCase(descriptive_clientcitydistribution.rejected, (state, action) => {
                 state.isClientCityDistributionLoading = false
                 state.isClientCityDistributionError = true
                 state.isClientCityDistributionMessage = action.payload
@@ -557,15 +651,15 @@ export const analyticsSlice = createSlice({
             })
 
             // client satisfaction
-            .addCase(clientsatisfaction.pending, (state) => {
+            .addCase(descriptive_clientsatisfaction.pending, (state) => {
                 state.isClientSatisfactionLoading = true
             })
-            .addCase(clientsatisfaction.fulfilled, (state, action) => {
+            .addCase(descriptive_clientsatisfaction.fulfilled, (state, action) => {
                 state.isClientSatisfactionLoading = false
                 state.isClientSatisfactionSuccess = true
                 state.clientsatisfaction = action.payload
             })
-            .addCase(clientsatisfaction.rejected, (state, action) => {
+            .addCase(descriptive_clientsatisfaction.rejected, (state, action) => {
                 state.isClientSatisfactionLoading = false
                 state.isClientSatisfactionError = true
                 state.isClientSatisfactionMessage = action.payload
@@ -573,15 +667,15 @@ export const analyticsSlice = createSlice({
             })
 
             // clients average age
-            .addCase(clientsaverageage.pending, (state) => {
+            .addCase(descriptive_clientsaverageage.pending, (state) => {
                 state.isClientsAverageAgeLoading = true
             })
-            .addCase(clientsaverageage.fulfilled, (state, action) => {
+            .addCase(descriptive_clientsaverageage.fulfilled, (state, action) => {
                 state.isClientsAverageAgeLoading = false
                 state.isClientsAverageAgeSuccess = true
                 state.clientsaverageage = action.payload
             })
-            .addCase(clientsaverageage.rejected, (state, action) => {
+            .addCase(descriptive_clientsaverageage.rejected, (state, action) => {
                 state.isClientsAverageAgeLoading = false
                 state.isClientsAverageAgeError = true
                 state.isClientsAverageAgeMessage = action.payload
@@ -589,15 +683,15 @@ export const analyticsSlice = createSlice({
             })
 
             // communication channels
-            .addCase(communicationchannels.pending, (state) => {
+            .addCase(descriptive_communicationchannels.pending, (state) => {
                 state.isCommunicationChannelsLoading = true
             })
-            .addCase(communicationchannels.fulfilled, (state, action) => {
+            .addCase(descriptive_communicationchannels.fulfilled, (state, action) => {
                 state.isCommunicationChannelsLoading = false
                 state.isCommunicationChannelsSuccess = true
                 state.communicationchannels = action.payload
             })
-            .addCase(communicationchannels.rejected, (state, action) => {
+            .addCase(descriptive_communicationchannels.rejected, (state, action) => {
                 state.isCommunicationChannelsLoading = false
                 state.isCommunicationChannelsError = true
                 state.isCommunicationChannelsMessage = action.payload
@@ -605,15 +699,15 @@ export const analyticsSlice = createSlice({
             })
 
             // community growth rate
-            .addCase(communitygrowthrate.pending, (state) => {
+            .addCase(descriptive_communitygrowthrate.pending, (state) => {
                 state.isCommunityGrowthRateLoading = true
             })
-            .addCase(communitygrowthrate.fulfilled, (state, action) => {
+            .addCase(descriptive_communitygrowthrate.fulfilled, (state, action) => {
                 state.isCommunityGrowthRateLoading = false
                 state.isCommunityGrowthRateSuccess = true
                 state.communitygrowthrate = action.payload
             })
-            .addCase(communitygrowthrate.rejected, (state, action) => {
+            .addCase(descriptive_communitygrowthrate.rejected, (state, action) => {
                 state.isCommunityGrowthRateLoading = false
                 state.isCommunityGrowthRateError = true
                 state.isCommunityGrowthRateMessage = action.payload
@@ -621,15 +715,15 @@ export const analyticsSlice = createSlice({
             })
 
             // community members
-            .addCase(communitymembers.pending, (state) => {
+            .addCase(descriptive_communitymembers.pending, (state) => {
                 state.isCommunityMembersLoading = true
             })
-            .addCase(communitymembers.fulfilled, (state, action) => {
+            .addCase(descriptive_communitymembers.fulfilled, (state, action) => {
                 state.isCommunityMembersLoading = false
                 state.isCommunityMembersSuccess = true
                 state.communitymembers = action.payload
             })
-            .addCase(communitymembers.rejected, (state, action) => {
+            .addCase(descriptive_communitymembers.rejected, (state, action) => {
                 state.isCommunityMembersLoading = false
                 state.isCommunityMembersError = true
                 state.isCommunityMembersMessage = action.payload
@@ -637,15 +731,15 @@ export const analyticsSlice = createSlice({
             })
 
             // community rating
-            .addCase(communityrating.pending, (state) => {
+            .addCase(descriptive_communityrating.pending, (state) => {
                 state.isCommunityRatingLoading = true
             })
-            .addCase(communityrating.fulfilled, (state, action) => {
+            .addCase(descriptive_communityrating.fulfilled, (state, action) => {
                 state.isCommunityRatingLoading = false
                 state.isCommunityRatingSuccess = true
                 state.communityrating = action.payload
             })
-            .addCase(communityrating.rejected, (state, action) => {
+            .addCase(descriptive_communityrating.rejected, (state, action) => {
                 state.isCommunityRatingLoading = false
                 state.isCommunityRatingError = true
                 state.isCommunityRatingMessage = action.payload
@@ -653,15 +747,15 @@ export const analyticsSlice = createSlice({
             })
 
             // count chats
-            .addCase(countchats.pending, (state) => {
+            .addCase(descriptive_countchats.pending, (state) => {
                 state.isCountChatsLoading = true
             })
-            .addCase(countchats.fulfilled, (state, action) => {
+            .addCase(descriptive_countchats.fulfilled, (state, action) => {
                 state.isCountChatsLoading = false
                 state.isCountChatsSuccess = true
                 state.countchats = action.payload
             })
-            .addCase(countchats.rejected, (state, action) => {
+            .addCase(descriptive_countchats.rejected, (state, action) => {
                 state.isCountChatsLoading = false
                 state.isCountChatsError = true
                 state.isCountChatsMessage = action.payload
@@ -669,15 +763,15 @@ export const analyticsSlice = createSlice({
             })
 
             // count escalated issues
-            .addCase(countescalatedissues.pending, (state) => {
+            .addCase(descriptive_countescalatedissues.pending, (state) => {
                 state.isCountEscalatedIssuesLoading = true
             })
-            .addCase(countescalatedissues.fulfilled, (state, action) => {
+            .addCase(descriptive_countescalatedissues.fulfilled, (state, action) => {
                 state.isCountEscalatedIssuesLoading = false
                 state.isCountEscalatedIssuesSuccess = true
                 state.countescalatedissues = action.payload
             })
-            .addCase(countescalatedissues.rejected, (state, action) => {
+            .addCase(descriptive_countescalatedissues.rejected, (state, action) => {
                 state.isCountEscalatedIssuesLoading = false
                 state.isCountEscalatedIssuesError = true
                 state.isCountEscalatedIssuesMessage = action.payload
@@ -685,15 +779,15 @@ export const analyticsSlice = createSlice({
             })
 
             // count hourly chats
-            .addCase(counthourlychats.pending, (state) => {
+            .addCase(descriptive_counthourlychats.pending, (state) => {
                 state.isCountHourlyChatsLoading = true
             })
-            .addCase(counthourlychats.fulfilled, (state, action) => {
+            .addCase(descriptive_counthourlychats.fulfilled, (state, action) => {
                 state.isCountHourlyChatsLoading = false
                 state.isCountHourlyChatsSuccess = true
                 state.counthourlychats = action.payload
             })
-            .addCase(counthourlychats.rejected, (state, action) => {
+            .addCase(descriptive_counthourlychats.rejected, (state, action) => {
                 state.isCountHourlyChatsLoading = false
                 state.isCountHourlyChatsError = true
                 state.isCountHourlyChatsMessage = action.payload
@@ -701,15 +795,15 @@ export const analyticsSlice = createSlice({
             })
 
             // country distribution
-            .addCase(countrydistribution.pending, (state) => {
+            .addCase(descriptive_countrydistribution.pending, (state) => {
                 state.isCountryDistributionLoading = true
             })
-            .addCase(countrydistribution.fulfilled, (state, action) => {
+            .addCase(descriptive_countrydistribution.fulfilled, (state, action) => {
                 state.isCountryDistributionLoading = false
                 state.isCountryDistributionSuccess = true
                 state.countrydistribution = action.payload
             })
-            .addCase(countrydistribution.rejected, (state, action) => {
+            .addCase(descriptive_countrydistribution.rejected, (state, action) => {
                 state.isCountryDistributionLoading = false
                 state.isCountryDistributionError = true
                 state.isCountryDistributionMessage = action.payload
@@ -717,15 +811,15 @@ export const analyticsSlice = createSlice({
             })
 
             // cumulative comments
-            .addCase(cumulativecomments.pending, (state) => {
+            .addCase(descriptive_cumulativecomments.pending, (state) => {
                 state.isCumulativeCommentsLoading = true
             })
-            .addCase(cumulativecomments.fulfilled, (state, action) => {
+            .addCase(descriptive_cumulativecomments.fulfilled, (state, action) => {
                 state.isCumulativeCommentsLoading = false
                 state.isCumulativeCommentsSuccess = true
                 state.cumulativecomments = action.payload
             })
-            .addCase(cumulativecomments.rejected, (state, action) => {
+            .addCase(descriptive_cumulativecomments.rejected, (state, action) => {
                 state.isCumulativeCommentsLoading = false
                 state.isCumulativeCommentsError = true
                 state.isCumulativeCommentsMessage = action.payload
@@ -733,15 +827,15 @@ export const analyticsSlice = createSlice({
             })
 
             // cumulative hourly chats
-            .addCase(cumulativehourlychats.pending, (state) => {
+            .addCase(descriptive_cumulativehourlychats.pending, (state) => {
                 state.isCumulativeHourlyChatsLoading = true
             })
-            .addCase(cumulativehourlychats.fulfilled, (state, action) => {
+            .addCase(descriptive_cumulativehourlychats.fulfilled, (state, action) => {
                 state.isCumulativeHourlyChatsLoading = false
                 state.isCumulativeHourlyChatsSuccess = true
                 state.cumulativehourlychats = action.payload
             })
-            .addCase(cumulativehourlychats.rejected, (state, action) => {
+            .addCase(descriptive_cumulativehourlychats.rejected, (state, action) => {
                 state.isCumulativeHourlyChatsLoading = false
                 state.isCumulativeHourlyChatsError = true
                 state.isCumulativeHourlyChatsMessage = action.payload
@@ -749,15 +843,15 @@ export const analyticsSlice = createSlice({
             })
 
             // cumulative issues
-            .addCase(cumulativeissues.pending, (state) => {
+            .addCase(descriptive_cumulativeissues.pending, (state) => {
                 state.isCumulativeIssuesLoading = true
             })
-            .addCase(cumulativeissues.fulfilled, (state, action) => {
+            .addCase(descriptive_cumulativeissues.fulfilled, (state, action) => {
                 state.isCumulativeIssuesLoading = false
                 state.isCumulativeIssuesSuccess = true
                 state.cumulativeissues = action.payload
             })
-            .addCase(cumulativeissues.rejected, (state, action) => {
+            .addCase(descriptive_cumulativeissues.rejected, (state, action) => {
                 state.isCumulativeIssuesLoading = false
                 state.isCumulativeIssuesError = true
                 state.isCumulativeIssuesMessage = action.payload
@@ -765,15 +859,15 @@ export const analyticsSlice = createSlice({
             })
 
             // cumulative voice message
-            .addCase(cumulativevoicemessage.pending, (state) => {
+            .addCase(descriptive_cumulativevoicemessage.pending, (state) => {
                 state.isCumulativeVoiceMessageLoading = true
             })
-            .addCase(cumulativevoicemessage.fulfilled, (state, action) => {
+            .addCase(descriptive_cumulativevoicemessage.fulfilled, (state, action) => {
                 state.isCumulativeVoiceMessageLoading = false
                 state.isCumulativeVoiceMessageSuccess = true
                 state.cumulativevoicemessage = action.payload
             })
-            .addCase(cumulativevoicemessage.rejected, (state, action) => {
+            .addCase(descriptive_cumulativevoicemessage.rejected, (state, action) => {
                 state.isCumulativeVoiceMessageLoading = false
                 state.isCumulativeVoiceMessageError = true
                 state.isCumulativeVoiceMessageMessage = action.payload
@@ -781,15 +875,15 @@ export const analyticsSlice = createSlice({
             })
 
             // engagement frequency
-            .addCase(engagementfrequency.pending, (state) => {
+            .addCase(descriptive_engagementfrequency.pending, (state) => {
                 state.isEngagementFrequencyLoading = true
             })
-            .addCase(engagementfrequency.fulfilled, (state, action) => {
+            .addCase(descriptive_engagementfrequency.fulfilled, (state, action) => {
                 state.isEngagementFrequencyLoading = false
                 state.isEngagementFrequencySuccess = true
                 state.engagementfrequency = action.payload
             })
-            .addCase(engagementfrequency.rejected, (state, action) => {
+            .addCase(descriptive_engagementfrequency.rejected, (state, action) => {
                 state.isEngagementFrequencyLoading = false
                 state.isEngagementFrequencyError = true
                 state.isEngagementFrequencyMessage = action.payload
@@ -797,15 +891,15 @@ export const analyticsSlice = createSlice({
             })
 
             // gender distribution
-            .addCase(genderdistribution.pending, (state) => {
+            .addCase(descriptive_genderdistribution.pending, (state) => {
                 state.isGenderDistributionLoading = true
             })
-            .addCase(genderdistribution.fulfilled, (state, action) => {
+            .addCase(descriptive_genderdistribution.fulfilled, (state, action) => {
                 state.isGenderDistributionLoading = false
                 state.isGenderDistributionSuccess = true
                 state.genderdistribution = action.payload
             })
-            .addCase(genderdistribution.rejected, (state, action) => {
+            .addCase(descriptive_genderdistribution.rejected, (state, action) => {
                 state.isGenderDistributionLoading = false
                 state.isGenderDistributionError = true
                 state.isGenderDistributionMessage = action.payload
@@ -813,15 +907,15 @@ export const analyticsSlice = createSlice({
             })
 
             // hourly avarage response time
-            .addCase(hourlyaverageresponsetime.pending, (state) => {
+            .addCase(descriptive_hourlyaverageresponsetime.pending, (state) => {
                 state.isHourlyAverageResponseTimeLoading = true
             })
-            .addCase(hourlyaverageresponsetime.fulfilled, (state, action) => {
+            .addCase(descriptive_hourlyaverageresponsetime.fulfilled, (state, action) => {
                 state.isHourlyAverageResponseTimeLoading = false
                 state.isHourlyAverageResponseTimeSuccess = true
                 state.hourlyaverageresponsetime = action.payload
             })
-            .addCase(hourlyaverageresponsetime.rejected, (state, action) => {
+            .addCase(descriptive_hourlyaverageresponsetime.rejected, (state, action) => {
                 state.isHourlyAverageResponseTimeLoading = false
                 state.isHourlyAverageResponseTimeError = true
                 state.isHourlyAverageResponseTimeMessage = action.payload
@@ -829,15 +923,15 @@ export const analyticsSlice = createSlice({
             })
 
             // hourly count escalated issues
-            .addCase(hourlycountescalatedissues.pending, (state) => {
+            .addCase(descriptive_hourlycountescalatedissues.pending, (state) => {
                 state.isHourlyCountEscalatedIssuesLoading = true
             })
-            .addCase(hourlycountescalatedissues.fulfilled, (state, action) => {
+            .addCase(descriptive_hourlycountescalatedissues.fulfilled, (state, action) => {
                 state.isHourlyCountEscalatedIssuesLoading = false
                 state.isHourlyCountEscalatedIssuesSuccess = true
                 state.hourlycountescalatedissues = action.payload
             })
-            .addCase(hourlycountescalatedissues.rejected, (state, action) => {
+            .addCase(descriptive_hourlycountescalatedissues.rejected, (state, action) => {
                 state.isHourlyCountEscalatedIssuesLoading = false
                 state.isHourlyCountEscalatedIssuesError = true
                 state.isHourlyCountEscalatedIssuesMessage = action.payload
@@ -845,15 +939,15 @@ export const analyticsSlice = createSlice({
             })
 
             // least topics
-            .addCase(leasttopics.pending, (state) => {
+            .addCase(descriptive_leasttopics.pending, (state) => {
                 state.isLeastTopicsLoading = true
             })
-            .addCase(leasttopics.fulfilled, (state, action) => {
+            .addCase(descriptive_leasttopics.fulfilled, (state, action) => {
                 state.isLeastTopicsLoading = false
                 state.isLeastTopicsSuccess = true
                 state.leasttopics = action.payload
             })
-            .addCase(leasttopics.rejected, (state, action) => {
+            .addCase(descriptive_leasttopics.rejected, (state, action) => {
                 state.isLeastTopicsLoading = false
                 state.isLeastTopicsError = true
                 state.isLeastTopicsMessage = action.payload
@@ -861,15 +955,15 @@ export const analyticsSlice = createSlice({
             })
 
             // popular topics
-            .addCase(populartopics.pending, (state) => {
+            .addCase(descriptive_populartopics.pending, (state) => {
                 state.isPopularTopicsLoading = true
             })
-            .addCase(populartopics.fulfilled, (state, action) => {
+            .addCase(descriptive_populartopics.fulfilled, (state, action) => {
                 state.isPopularTopicsLoading = false
                 state.isPopularTopicsSuccess = true
                 state.populartopics = action.payload
             })
-            .addCase(populartopics.rejected, (state, action) => {
+            .addCase(descriptive_populartopics.rejected, (state, action) => {
                 state.isPopularTopicsLoading = false
                 state.isPopularTopicsError = true
                 state.isPopularTopicsMessage = action.payload
@@ -877,15 +971,15 @@ export const analyticsSlice = createSlice({
             })
 
             // state distribution
-            .addCase(statedistribution.pending, (state) => {
+            .addCase(descriptive_statedistribution.pending, (state) => {
                 state.isStateDistributionLoading = true
             })
-            .addCase(statedistribution.fulfilled, (state, action) => {
+            .addCase(descriptive_statedistribution.fulfilled, (state, action) => {
                 state.isStateDistributionLoading = false
                 state.isStateDistributionSuccess = true
                 state.statedistribution = action.payload
             })
-            .addCase(statedistribution.rejected, (state, action) => {
+            .addCase(descriptive_statedistribution.rejected, (state, action) => {
                 state.isStateDistributionLoading = false
                 state.isStateDistributionError = true
                 state.isStateDistributionMessage = action.payload
@@ -893,15 +987,15 @@ export const analyticsSlice = createSlice({
             })
 
             // unique comments
-            .addCase(uniquecomments.pending, (state) => {
+            .addCase(descriptive_uniquecomments.pending, (state) => {
                 state.isUniqueCommentsLoading = true
             })
-            .addCase(uniquecomments.fulfilled, (state, action) => {
+            .addCase(descriptive_uniquecomments.fulfilled, (state, action) => {
                 state.isUniqueCommentsLoading = false
                 state.isUniqueCommentsSuccess = true
                 state.uniquecomments = action.payload
             })
-            .addCase(uniquecomments.rejected, (state, action) => {
+            .addCase(descriptive_uniquecomments.rejected, (state, action) => {
                 state.isUniqueCommentsLoading = false
                 state.isUniqueCommentsError = true
                 state.isUniqueCommentsMessage = action.payload
@@ -909,15 +1003,15 @@ export const analyticsSlice = createSlice({
             })
 
             // issue user relation
-            .addCase(issueuserrelation.pending, (state) => {
+            .addCase(descriptive_issueuserrelation.pending, (state) => {
                 state.isIssueUserRelationLoading = true
             })
-            .addCase(issueuserrelation.fulfilled, (state, action) => {
+            .addCase(descriptive_issueuserrelation.fulfilled, (state, action) => {
                 state.isIssueUserRelationLoading = false
                 state.isIssueUserRelationSuccess = true
                 state.issueuserrelation = action.payload
             })
-            .addCase(issueuserrelation.rejected, (state, action) => {
+            .addCase(descriptive_issueuserrelation.rejected, (state, action) => {
                 state.isIssueUserRelationLoading = false
                 state.isIssueUserRelationError = true
                 state.isIssueUserRelationMessage = action.payload
@@ -925,19 +1019,101 @@ export const analyticsSlice = createSlice({
             })
 
             // comments user relation
-            .addCase(commentsuserrelation.pending, (state) => {
+            .addCase(descriptive_commentsuserrelation.pending, (state) => {
                 state.isCommentsUserRelationLoading = true
             })
-            .addCase(commentsuserrelation.fulfilled, (state, action) => {
+            .addCase(descriptive_commentsuserrelation.fulfilled, (state, action) => {
                 state.isCommentsUserRelationLoading = false
                 state.isCommentsUserRelationSuccess = true
                 state.issueuserrelation = action.payload
             })
-            .addCase(commentsuserrelation.rejected, (state, action) => {
+            .addCase(descriptive_commentsuserrelation.rejected, (state, action) => {
                 state.isCommentsUserRelationLoading = false
                 state.isCommentsUserRelationError = true
                 state.isCommentsUserRelationMessage = action.payload
                 state.issueuserrelation = null 
+            })
+
+            // => additions
+
+            // survey ratings
+            .addCase(descriptive_surveyratings.pending, (state) => {
+                state.isSurveyRatingsLoading = true
+            })
+            .addCase(descriptive_surveyratings.fulfilled, (state, action) => {
+                state.isSurveyRatingsLoading = false
+                state.isSurveyRatingsSuccess = true
+                state.surveyratings = action.payload
+            })
+            .addCase(descriptive_surveyratings.rejected, (state, action) => {
+                state.isSurveyRatingsLoading = false
+                state.isSurveyRatingsError = true
+                state.isSurveyRatingsMessage = action.payload
+                state.surveyratings = null 
+            })
+
+            // surveyresponserate
+            .addCase(descriptive_surveyresponserate.pending, (state) => {
+                state.isSurveyResponseRateLoading = true
+            })
+            .addCase(descriptive_surveyresponserate.fulfilled, (state, action) => {
+                state.isSurveyResponseRateLoading = false
+                state.isSurveyResponseRateSuccess = true
+                state.surveyresponserate = action.payload
+            })
+            .addCase(descriptive_surveyresponserate.rejected, (state, action) => {
+                state.isSurveyResponseRateLoading = false
+                state.isSurveyResponseRateError = true
+                state.isSurveyResponseRateMessage = action.payload
+                state.surveyresponserate = null 
+            })
+
+            // averagesurveyrunperiod
+            .addCase(descriptive_averagesurveyrunperiod.pending, (state) => {
+                state.isAverageSurveyRunPeriodLoading = true
+            })
+            .addCase(descriptive_averagesurveyrunperiod.fulfilled, (state, action) => {
+                state.isAverageSurveyRunPeriodLoading = false
+                state.isAverageSurveyRunPeriodSuccess = true
+                state.averagesurveyrunperiod = action.payload
+            })
+            .addCase(descriptive_averagesurveyrunperiod.rejected, (state, action) => {
+                state.isAverageSurveyRunPeriodLoading = false
+                state.isAverageSurveyRunPeriodError = true
+                state.isAverageSurveyRunPeriodMessage = action.payload
+                state.averagesurveyrunperiod = null 
+            })
+
+            // totalsurveys
+            .addCase(descriptive_totalsurveys.pending, (state) => {
+                state.isTotalSurveysLoading = true
+            })
+            .addCase(descriptive_totalsurveys.fulfilled, (state, action) => {
+                state.isTotalSurveysLoading = false
+                state.isTotalSurveysSuccess = true
+                state.totalsurveys = action.payload
+            })
+            .addCase(descriptive_totalsurveys.rejected, (state, action) => {
+                state.isTotalSurveysLoading = false
+                state.isTotalSurveysError = true
+                state.isTotalSurveysMessage = action.payload
+                state.totalsurveys = null 
+            })
+
+            // averageresponsetime
+            .addCase(descriptive_averageresponsetime.pending, (state) => {
+                state.isAverageResponseTimeLoading = true
+            })
+            .addCase(descriptive_averageresponsetime.fulfilled, (state, action) => {
+                state.isAverageResponseTimeLoading = false
+                state.isAverageResponseTimeSuccess = true
+                state.averageresponsetime = action.payload
+            })
+            .addCase(descriptive_averageresponsetime.rejected, (state, action) => {
+                state.isAverageResponseTimeLoading = false
+                state.isAverageResponseTimeError = true
+                state.isAverageResponseTimeMessage = action.payload
+                state.averageresponsetime = null 
             })
     }
 })

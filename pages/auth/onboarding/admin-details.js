@@ -2,34 +2,122 @@ import Layout from "@/components/auth/Layout";
 import { useRouter } from "next/router";
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import { useDispatch, useSelector } from "react-redux";
+import { register_admin, resetAuthStateValues } from "@/redux/slice/auth/authSlice";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function AdminDetails(){
     const router = useRouter()
+    const dispatch = useDispatch()
+
+    // handle registration errors
+    const [showErrors, setShowErrors] = useState(false)
+
+    // fetch tenant data from local storage
+    const [tenantInfo, setTenantInfo] = useState(null)
+
+    const getTenantInfo = () => localStorage.getItem('proxima_tenant')
+
+    useEffect(() => {
+        // Perform localStorage action
+        // const item = localStorage.getItem('key')
+        const tenantData = getTenantInfo()
+        setTenantInfo(JSON.parse(tenantData))
+    }, [])
+      
+    // fetch data from store
+    const { admin, isAdminLoading, isAdminSuccess, isAdminError, isAdminMessage } = useSelector((state) => state.auth)
+
+    // handle show error messages
+    useEffect(() => {
+        if(isAdminMessage){
+            setShowErrors(true)
+        }
+    }, [isAdminMessage])
 
     // handle submit
     const submitAdminDetails = (values, actions) => {
-       console.log(values)
+       if(!tenantInfo) return
 
-        router.push('invite-members')
+       dispatch(register_admin({
+        username: values.username,
+        email: values.email,
+        first_name: values.firstname,
+        last_name: values.lastname,
+        phonenumber: values.phonenumber,
+        gender: values.gender,
+        DOB: values.DOB,
+        password: values.password,
+        confirm_password: values.confirmPassword,
+        user_type: 'admin',
+        tenant_id: tenantInfo.tenant_id
+       }))
     }
+
+    useEffect(() => {
+        if(isAdminError){
+            toast.error(isAdminMessage, {
+                position: 'top-center'
+            })
+        }
+        // navigate to next page if admin was registered successfully
+        if (isAdminSuccess && admin) {
+          router.push('invite-members');
+        }
+
+        // reset admin registration state
+        dispatch(resetAuthStateValues())
+      }, [isAdminSuccess, admin, router, isAdminError, dispatch]);
 
     // validation schema
     const adminDetailsSchema = yup.object().shape({
         firstname: yup.string().required('Required'),
         lastname: yup.string().required('Required'),
-        middlename: yup.string().required('Required'),
         email: yup.string().email('Invalid email address').required('Email is required'),
         gender: yup.string().required('Required'),
+        username: yup.string().required('Required'),
+        password: yup
+                    .string()
+                    .required('Required')
+                    .min(8, 'Password must be at least 8 characters long')
+                    .matches(
+                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?.&])[A-Za-z\d@$!%*#?.&]+$/,
+                    'Password must contain at least one letter, one number, and one special character'
+                    ),
+        confirmPassword: yup
+                            .string()
+                            .oneOf([yup.ref('password'), null], 'Passwords must match')
+                            .required('Required'),
+        phonenumber: yup.string().required('Required'),
+        DOB: yup
+                .string()
+                .required('Required')
+                .matches(
+                /^\d{4}-\d{2}-\d{2}$/,
+                'Must be in the format yyyy-mm-dd'
+                )
+                .transform((value, originalValue) => {
+                // Modify the input value to remove any whitespace or additional characters
+                if (originalValue) {
+                    return originalValue.trim();
+                }
+                return value;
+                }),
     })
 
     // formik form validation
     const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
         initialValues: {
-            firstname: '',
-            lastname: '',
-            middlename: '',
-            email: '',
-            gender: ''
+            firstname: 'kim',
+            lastname: 'kam',
+            email: 'kam@email.com',
+            gender: 'Male',
+            username: 'qwertykim',
+            password: 'Password123!',
+            confirmPassword: 'Password123!',
+            phonenumber: '254758202697',
+            DOB: '2000-12-12',
         },
         validationSchema: adminDetailsSchema,
         onSubmit: submitAdminDetails
@@ -41,8 +129,31 @@ export default function AdminDetails(){
                 <h2 className="font-semibold text-3xl">Let us know more about you</h2>
                 <p className="mt-3 text-gray-500 text-center">Enter your details below</p>
 
-                <form className="mt-8" onSubmit={handleSubmit}>
+                {/* {
+                    showErrors && (
+                        <div className="mt-3 space-y-1">
+                            {
+                                Object.entries(isAdminMessage.message).map(message => <p className="text-sm text-red-500">{message[1][0]}</p>)
+                            }
+                        </div>
+                    )
+                } */}
+
+                <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
                     <div className="flex gap-6">
+                        <div className="flex flex-col">
+                            <label>Username</label>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                aria-label="username-input" 
+                                value={values.username} 
+                                onChange={handleChange} 
+                                onBlur={handleBlur} 
+                                className={errors.username && touched.username ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
+                            />
+                            {touched.username && errors?.username && (<p className='text-red-500 text-sm'>{errors.username}</p>)}
+                        </div>
                         <div className="flex flex-col">
                             <label>First name</label>
                             <input 
@@ -56,23 +167,8 @@ export default function AdminDetails(){
                             />
                             {touched.firstname && errors?.firstname && (<p className='text-red-500 text-sm'>{errors.firstname}</p>)}
                         </div>
-
                         <div className="flex flex-col">
-                            <label>Middle name</label>
-                            <input 
-                                type="text"
-                                id="middlename" 
-                                aria-label="middle-name-input" 
-                                value={values.middlename} 
-                                onChange={handleChange} 
-                                onBlur={handleBlur}
-                                className={errors.middlename && touched.middlename ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
-                            />
-                            {touched.middlename && errors?.middlename && (<p className='text-red-500 text-sm'>{errors.middlename}</p>)}
-                        </div>
-
-                        <div className="flex flex-col">
-                            <label>Last name</label>
+                            <label>Last Name</label>
                             <input 
                                 type="text"
                                 id="lastname" 
@@ -86,36 +182,93 @@ export default function AdminDetails(){
                         </div>
                     </div>
 
-                    <div className="flex flex-col w-96 mx-auto mt-12">
-                        <label>Email address</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            aria-label="email-input" 
-                            value={values.email} 
-                            onChange={handleChange} 
-                            onBlur={handleBlur} 
-                            className={errors.email && touched.email ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
-                        />
-                        {touched.email && errors?.email && (<p className='text-red-500 text-sm'>{errors.email}</p>)}
+                    <div className="flex gap-6">
+                        <div className="flex flex-col">
+                            <label>Date of Birth</label>
+                            <input 
+                                type="text" 
+                                id="DOB" 
+                                aria-label="dob-input" 
+                                value={values.DOB} 
+                                onChange={handleChange} 
+                                onBlur={handleBlur} 
+                                className={errors.DOB && touched.DOB ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
+                            />
+                            {touched.DOB && errors?.DOB && (<p className='text-red-500 text-sm'>{errors.DOB}</p>)}
+                        </div>
+                        
+                        <div className="flex flex-col">
+                            <label>Email Address</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                aria-label="email-input" 
+                                value={values.email} 
+                                onChange={handleChange} 
+                                onBlur={handleBlur} 
+                                className={errors.email && touched.email ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
+                            />
+                            {touched.email && errors?.email && (<p className='text-red-500 text-sm'>{errors.email}</p>)}
+                        </div>
+                        <div className="flex flex-col">
+                            <label>Phone Number</label>
+                            <input 
+                                type="text" 
+                                id="phonenumber" 
+                                aria-label="phonenumber-input" 
+                                value={values.phonenumber} 
+                                onChange={handleChange} 
+                                onBlur={handleBlur} 
+                                className={errors.phonenumber && touched.phonenumber ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
+                            />
+                            {touched.phonenumber && errors?.phonenumber && (<p className='text-red-500 text-sm'>{errors.phonenumber}</p>)}
+                        </div>
                     </div>
 
-                    <div className="flex flex-col w-96 mx-auto mt-8">
-                        <label>What’s your gender?</label>
-                        <select 
-                            aria-label="gender-input"
-                            id="gender" 
-                            value={values.gender}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            className={errors.gender && touched.gender ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
+                    <div className="flex gap-6">
+                        <div className="flex flex-col w-full">
+                            <label>Gender?</label>
+                            <select 
+                                aria-label="gender-input"
+                                id="gender" 
+                                value={values.gender}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                className={errors.gender && touched.gender ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
 
-                        >
-                            <option value=''></option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                        {touched.gender && errors?.gender && (<p className='text-red-500 text-sm'>{errors.gender}</p>)}
+                            >
+                                <option value=''></option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            {touched.gender && errors?.gender && (<p className='text-red-500 text-sm'>{errors.gender}</p>)}
+                        </div>
+                        <div className="flex flex-col w-full relative">
+                            <label>Password</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                aria-label="password-input" 
+                                value={values.password} 
+                                onChange={handleChange} 
+                                onBlur={handleBlur} 
+                                className={errors.password && touched.password ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
+                            />
+                            {touched.password && errors?.password && (<p className='absolute -bottom-5 text-red-500 break-words text-sm'>{errors.password}</p>)}
+                        </div>
+                        <div className="flex flex-col w-full">
+                            <label>Confirm Password</label>
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                aria-label="confirmPassword-input" 
+                                value={values.confirmPassword} 
+                                onChange={handleChange} 
+                                onBlur={handleBlur} 
+                                className={errors.confirmPassword && touched.confirmPassword ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
+                            />
+                            {touched.confirmPassword && errors?.confirmPassword && (<p className='text-red-500 text-sm'>{errors.confirmPassword}</p>)}
+                        </div>
                     </div>
 
                     <div className="flex items-center justify-center">

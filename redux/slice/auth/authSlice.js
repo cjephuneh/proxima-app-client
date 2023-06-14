@@ -75,9 +75,15 @@ const initialState = {
 }
 
 // allow all users to sign in
-export const signin = createAsyncThunk('auth/signin', async (user, thunkAPI) => {
+export const signin = createAsyncThunk('auth/signin', async (userData, thunkAPI) => {
     try {
-        return await authService.signin(user)
+        const response = await authService.signin(userData)
+
+        if(response.error){
+            return thunkAPI.rejectWithValue(response.error)
+        }
+
+        return response
     } catch(error) {
         console.error(error)
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
@@ -86,9 +92,14 @@ export const signin = createAsyncThunk('auth/signin', async (user, thunkAPI) => 
 })
 
 // register organization admin user
-export const admin = createAsyncThunk('auth/admin', async (user, thunkAPI) => {
+export const register_admin = createAsyncThunk('auth/admin', async (adminData, thunkAPI) => {
     try {
-        return await authService.admin(user)
+        const response = await authService.admin(adminData)
+
+        if(response.error){
+            return thunkAPI.rejectWithValue(response.error)
+        }
+        return response
     } catch(error) {
         console.error(error)
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
@@ -188,13 +199,24 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        // logout
+        logout: (state) => {
+            state.user = null
+        },
+
         // function to reset values to initial state
-        reset: (state) => {
-            state.isLoading = false
-            state.isSuccess = false
-            state.isError = false
-            state.isMessage = ''
-        }
+        resetAuthStateValues: (state) => {
+            state.isAdminLoading = false
+            state.isAdminSuccess = false
+            state.isAdminError = false
+            state.isAdminMessage = ''
+        },
+        resetUserStateValues: (state) => {
+            state.isUserLoading = false
+            state.isUserSuccess = false
+            state.isUserError = false
+            state.isUserMessage = ''
+        },
     },
     // asynchronous fxns
     extraReducers: (builder) => {
@@ -214,15 +236,15 @@ export const authSlice = createSlice({
                 state.user = null 
             })
 
-            .addCase(admin.pending, (state) => {
+            .addCase(register_admin.pending, (state) => {
                 state.isAdminLoading = true
             })
-            .addCase(admin.fulfilled, (state, action) => {
+            .addCase(register_admin.fulfilled, (state, action) => {
                 state.isAdminLoading = false
                 state.isAdminSuccess = true
                 state.admin = action.payload
             })
-            .addCase(admin.rejected, (state, action) => {
+            .addCase(register_admin.rejected, (state, action) => {
                 state.isAdminLoading = false
                 state.isAdminError = true
                 state.isAdminMessage = action.payload
@@ -351,6 +373,6 @@ export const authSlice = createSlice({
     }
 })
 
-export const { reset } = authSlice.actions
+export const { logout, resetAuthStateValues, resetUserStateValues } = authSlice.actions
 
 export default authSlice.reducer

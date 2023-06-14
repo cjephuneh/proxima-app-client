@@ -1,12 +1,25 @@
 import DashLayout from "@/components/dashboard/DashLayout";
 import SurveyCloseWarning from "@/components/dashboard/surveys/SurveyCloseWarning";
+import { tenant_survey } from "@/redux/slice/survey/surveySlice";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineCloseSquare, AiOutlinePlus } from 'react-icons/ai'
 import { FcSurvey } from 'react-icons/fc'
+import { useDispatch, useSelector } from "react-redux";
+import FadeLoader from "react-spinners/FadeLoader";
 
 
 export default function Surveys(){
+  const dispatch = useDispatch()
+
+  const { survey, isSurveyError, isSurveySuccess, isSurveyLoading, isSurveyMessage } = useSelector((state) => state.survey)
+
+  // fetch latest surveys
+  useEffect(() => {
+      dispatch(tenant_survey({
+          tenant_id: 1
+      }))
+  }, [dispatch])
     const surveys = [
         {
           title: "Product satisfaction survey",
@@ -140,16 +153,19 @@ export default function Surveys(){
                         {/* survey listing */}
                         <div className=" space-y-2">
                             {
-                                surveys.map((survey, id) => (
-                                    <button key={id} onClick={() => setSelectedSurvey(survey)} className="flex w-full py-2 px-4 bg-white gap-2 rounded">
+                              isSurveyLoading ? <FadeLoader color="#36d7b7" /> : (
+                                isSurveySuccess && survey &&
+                                  survey.map((srv) => (
+                                    <button key={srv.survey_id} onClick={() => setSelectedSurvey(srv)} className="flex w-full py-2 px-4 bg-white gap-2 rounded">
                                         <FcSurvey size={24} />
 
                                         <div>
-                                            <p className="font-semibold">{survey.title}</p>
-                                            <p className="text-sm text-gray-500 text-left">{survey.numOfRespondents} respondents</p>
+                                            <p className="font-semibold">{srv.survey_topic.length > 20 ? srv.survey_topic.slice(0, 20) + '...' : srv.survey_topic}</p>
+                                            <p className="text-sm text-gray-500 text-left">20 respondents</p>
                                         </div>
                                     </button>
-                                ))
+                                )) 
+                              )
                             }
                         </div>
                         
@@ -161,9 +177,12 @@ export default function Surveys(){
                                 <p className="text-center text-gray-500">Select a survey to view details</p> :
 
                                 <div className="">
-                                    <div className="flex gap-3 items-center">
-                                        <FcSurvey size={24} />
-                                        <p className="font-semibold text-xl">{selectedSurvey.title}</p>
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex gap-3">
+                                          <FcSurvey size={24} />
+                                          <p className="font-semibold text-xl">{selectedSurvey.survey_topic}</p>
+                                        </div>
+                                        <p className="text-sm text-gray-500">{selectedSurvey.start_day ? selectedSurvey.start_day : ''} - {selectedSurvey.end_day ? selectedSurvey.end_day : ''}</p>
                                     </div>
 
                                     <div className="mt-4 flex justify-between">
@@ -179,7 +198,7 @@ export default function Surveys(){
                                     </div>
                                     
                                     <div className="mt-4 space-y-3">
-                                        {
+                                        {/* {
                                             selectedSurvey.questions.map((question, id) => (
                                                 <div key={id} className="border rounded p-2">
                                                     <h5>{id + 1}. {question.question}</h5>
@@ -195,6 +214,13 @@ export default function Surveys(){
                                                     </div>
                                                 </div>
                                             ))
+                                        } */}
+                                        {
+                                          Object.entries(selectedSurvey.survey_questions).map(([key, value]) => (
+                                            <p key={key}>
+                                              {key}: {value}
+                                            </p>
+                                          ))
                                         }
                                     </div>
                                 </div>

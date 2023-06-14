@@ -1,17 +1,61 @@
+import { ClientApiUrls } from '@/utils/ClientApiUrls'
 import axios from 'axios'
 
 // sign in a user
 const signin = async(userData) => {
-    const res = await axios.post('/api/auth/signin', userData)
+    // const res = await axios.post('/api/auth/signin', userData)
 
-    return res.data
+    // return res.data
+
+    try {
+        const { data } = await axios.post(ClientApiUrls.signin, userData)
+
+        if(data.token){
+            if(data.user_type === 'admin' || data.user_type === 'employee'){
+                localStorage.setItem('proxima_admin_details', JSON.stringify(data))
+
+                return data
+            } else {
+                return { error: 'This user does not belong to any organization. Use the mobile application if you are a customer.' }
+            }
+        } else {
+            if(data.message.error[0]){
+                return { error: data.message.error[0]}
+            }
+            // console.log(data.message.error[0])
+            // return { error: data }
+        }
+    } catch (error) {
+        throw error
+    }
 }
 
 // register organization admin user
-const admin = async(userData) => {
-    const res = await axios.post('/api/auth/admin', userData)
+const admin = async(adminData) => {
+    try {
+        const { data } = await axios.post(ClientApiUrls.admin, adminData)
 
-    return res.data
+        if(data.token){
+            localStorage.setItem('proxima_admin_details', JSON.stringify(data))
+
+            return data
+        } else {
+            if(data.message.username && data.message.email){
+                return { error: 'username and email already registered' }
+            }
+
+            if(data.message.username && !data.message.email){
+                return { error: 'username already registered' }
+            }
+
+            if(!data.message.username && data.message.email){
+                return { error: 'email already registered' }
+            }
+            // return { error: data }
+        }
+    } catch (error) {
+        throw error
+    }
 }
 
 
