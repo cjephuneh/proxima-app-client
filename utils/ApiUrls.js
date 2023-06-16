@@ -24,6 +24,7 @@ export const ApiUrls = {
     // chat
     chat: CHAT_ENDPOINT + '/chat/',
     message: CHAT_ENDPOINT + '/message/',
+    voice: CHAT_ENDPOINT + '/voice/',
 
     // descriptive
     countchats: DESCRIPTIVE_ENDPOINT + '/countchats/',
