@@ -6,6 +6,7 @@ import * as yup from 'yup'
 import { useDispatch, useSelector } from "react-redux";
 import { resetUserStateValues, signin } from "@/redux/slice/auth/authSlice";
 import { useEffect } from "react";
+import { toast } from 'react-toastify';
 
 export default function Login(){
     const router  = useRouter()
@@ -29,7 +30,10 @@ export default function Login(){
     // handle user object changes
     useEffect(() => {
         if(isUserError){
-            console.log(isUserMessage)
+            toast.error(isUserMessage, {
+                position: 'top-center',
+                // autoClose: false
+            })
         }
 
         if(isUserSuccess && user){
@@ -37,7 +41,7 @@ export default function Login(){
         }
 
         dispatch(resetUserStateValues())
-    }, [isUserError, isUserSuccess, user, dispatch, router])
+    }, [isUserError, isUserSuccess, isUserMessage, user, dispatch, router])
 
     // validation schema
     const loginSchema = yup.object().shape({
@@ -48,8 +52,8 @@ export default function Login(){
     // formik form validation
     const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
         initialValues: {
-            email: '',
-            password: ''
+            email: 'kim@email33.com',
+            password: '12345678'
         },
         validationSchema: loginSchema,
         onSubmit: submitLoginDetails
@@ -58,8 +62,8 @@ export default function Login(){
     return(
         <Layout>
             <div className="flex flex-col items-center mt-16">
-                <h2 className="font-semibold text-3xl">Welcome back</h2>
-                <p className="mt-3 text-gray-500 text-center">Login to proceed</p>
+                <h2 className="font-semibold text-3xl">Welcome back!</h2>
+                <p className="mt-3 text-gray-500 text-center">Log in to proceed</p>
 
                 <form onSubmit={handleSubmit} className="mt-12 space-y-4">
                     <div className="flex flex-col">

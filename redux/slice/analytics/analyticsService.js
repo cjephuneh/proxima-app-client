@@ -262,7 +262,7 @@ const statedistribution  = async(analyticsData) => {
 
 const uniquecomments  = async(analyticsData) => {
     try {
-        const { data } = await axios.post('/api/analytics/statedistribution', analyticsData)
+        const { data } = await axios.post('/api/analytics/uniquecomments', analyticsData)
 
         return data
     } catch (error) {
@@ -272,7 +272,7 @@ const uniquecomments  = async(analyticsData) => {
 
 const issueuserrelation  = async(analyticsData) => {
     try {
-        const { data } = await axios.post('/api/analytics/statedistribution', analyticsData)
+        const { data } = await axios.post('/api/analytics/issueuserrelation', analyticsData)
 
         return data
     } catch (error) {
@@ -282,7 +282,7 @@ const issueuserrelation  = async(analyticsData) => {
 
 const commentsuserrelation  = async(analyticsData) => {
     try {
-        const { data } = await axios.post('/api/analytics/statedistribution', analyticsData)
+        const { data } = await axios.post('/api/analytics/commentsuserrelation', analyticsData)
 
         return data
     } catch (error) {

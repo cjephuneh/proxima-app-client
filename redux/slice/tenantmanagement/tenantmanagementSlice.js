@@ -87,7 +87,13 @@ const tenantManagementSlice = createSlice({
     name: 'tenantManagemnt',
     initialState,
     reducers: {
-
+        // reset tenant state values
+        resetTenantStateValues: (state) => {
+            state.isTenantLoading = false,
+            state.isTenantError = false,
+            state.isTenantSuccess = false,
+            state.isTenantMessage = ''
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -156,5 +162,7 @@ const tenantManagementSlice = createSlice({
             })
     }
 })
+
+export const { resetTenantStateValues } = tenantManagementSlice.actions
 
 export default tenantManagementSlice.reducer

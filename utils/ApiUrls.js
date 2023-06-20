@@ -24,6 +24,7 @@ export const ApiUrls = {
     // chat
     chat: CHAT_ENDPOINT + '/chat/',
     message: CHAT_ENDPOINT + '/message/',
+    voice: CHAT_ENDPOINT + '/voice/',
 
     // descriptive
     countchats: DESCRIPTIVE_ENDPOINT + '/countchats/',
@@ -84,6 +85,7 @@ export const ApiUrls = {
     likecomment: COMMUNITY_ENDPOINT + '/likecomment/',
     dislikecomment: COMMUNITY_ENDPOINT + '/dislikecomment/',
     likeordislikecomment: COMMUNITY_ENDPOINT + '/likeordislikecomment/',
+    favoritecommunities: COMMUNITY_ENDPOINT + '/favoritecommunities/',
 
     // survey
     survey: SURVEY_ENDPOINT + '/survey/',

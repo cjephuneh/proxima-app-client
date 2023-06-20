@@ -32,6 +32,7 @@ import BounceLoader from 'react-spinners/BounceLoader'
 
 export default function DashLayout({ children }) {
   const searchWindowVisible = useSelector((state) => state.search.isSearchWindowVisible);
+  const user = useSelector((state) => state.auth.user)
   const router = useRouter();
   const [loading, setLoading] = useState(true)
 
@@ -39,7 +40,7 @@ export default function DashLayout({ children }) {
     const checkAuthentication = async () => {
       // await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate a delay of 5 seconds
       
-      const isAuthenticated = !!localStorage.getItem("proxima_admin_details"); // Check if a token exists in local storage
+      const isAuthenticated = !!localStorage.getItem("proxima_admin_details"); // Check if a admin details exist in local storage
 
       if (!isAuthenticated) {
         // Redirect to the login page if not authenticated
@@ -50,7 +51,7 @@ export default function DashLayout({ children }) {
     };
 
     checkAuthentication();
-  }, []);
+  }, [user]);
 
   if (loading) {
     return <div className="h-screen w-screen overflow-hidden flex items-center justify-center"> <BounceLoader color="#36d7b7" />; </div> // Render a loading state while authentication check is in progress

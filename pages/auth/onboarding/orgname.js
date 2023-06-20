@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from "react-redux";
-import { register_tenant } from "@/redux/slice/tenantmanagement/tenantmanagementSlice";
+import { register_tenant, resetTenantStateValues } from "@/redux/slice/tenantmanagement/tenantmanagementSlice";
 import { useEffect } from "react";
+import { toast } from 'react-toastify';
 
 export default function OrgName(){
     const router = useRouter()
@@ -12,8 +13,6 @@ export default function OrgName(){
 
     // fetch tenant data from store
     const { tenant, isTenantError, isTenantSuccess, isTenantLoading, isTenantMessage } = useSelector((state) => state.tenant)
-
-    console.log(tenant, isTenantLoading, isTenantSuccess)
 
     // register a tenant
     const submitOrgName = (values, actions) => {
@@ -23,12 +22,27 @@ export default function OrgName(){
             tenant_name: values.orgName,
             industry: values.industry
         }))
+    }
+
+    useEffect(() => {
+        // handle errors
+        if(isTenantError){
+            toast.error(isTenantMessage, {
+                position: 'top-center'
+            })
+            toast.info('Please try to log in', {
+                position: 'top-center'
+            })
+        }
 
         // check if tenant was registered and navigate to next page
         if(isTenantSuccess && tenant){
             router.push('payment-plan')
         }
-    }
+
+        // reset tenant values
+        dispatch(resetTenantStateValues())
+    }, [dispatch, isTenantError, isTenantMessage, isTenantSuccess, tenant, router])
 
     
     // validation schema
@@ -52,10 +66,11 @@ export default function OrgName(){
             <form onSubmit={handleSubmit} className="flex flex-col items-center mt-32">
                 {/* <h2 className="font-semibold text-3xl">What is your organization name?</h2> */}
                 <h2 className="font-semibold text-3xl">Please provide your organization details</h2> 
+                <p className="mt-3 text-gray-500 text-center">These details will help your employees and customers to easily identify your organization</p>
                 <div className="mt-4 space-y-3">
                     <div className="">
                         {/* <p className="mt-3 text-gray-500 text-center">Your organization name will allow people to join your organization?</p> */}
-                        <p className="text-gray-500">Organization name</p>
+                        <p className="">Organization name</p>
 
                         <input 
                             type="text" 
@@ -71,7 +86,7 @@ export default function OrgName(){
                     </div>
                     <div className="">
                         {/* <p className="mt-3 text-gray-500 text-center">Your organization name will allow people to join your organization?</p> */}
-                        <p className="text-gray-500">Industry</p>
+                        <p className="">Industry</p>
 
                         <input 
                             type="text" 

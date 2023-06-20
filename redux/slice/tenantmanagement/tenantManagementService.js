@@ -9,12 +9,15 @@ const tenant = async (tenantData) => {
     try {
         const { data } = await axios.post(ClientApiUrls.tenant, tenantData)
 
+        // console.log(data.message.error)
+
+
         if(data.tenant_id){
             localStorage.setItem('proxima_tenant', JSON.stringify(data))
 
             return data
         } else {
-            return { error: data.error }
+            return { error: data.message.error }
         }
     } catch (error) {
         throw error

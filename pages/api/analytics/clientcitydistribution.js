@@ -3,13 +3,16 @@
 import { ApiUrls } from "@/utils/ApiUrls"
 import axios from "axios"
 
-export default function handler(req, res) {
-  if(req.method === 'GET'){
-    const { tenant } = req.body
+export default async function handler(req, res) {
+  if(req.method === 'POST'){
+    try {
+      const { tenant } = req.body
 
-    axios.get(`${ApiUrls.clientcitydistribution}?tenant=${tenant}`)
-      .then(({ data }) => {
-        res.status(200).json(data)
-      })
+      const { data } = await axios.get(`${ApiUrls.clientcitydistribution}?tenant=${tenant}`)
+
+      res.json(data)
+    } catch (error) {
+      res.json({ message: error.response.data });
+    }
   }
 }

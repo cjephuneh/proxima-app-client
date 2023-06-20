@@ -3,13 +3,16 @@
 import { ApiUrls } from "@/utils/ApiUrls"
 import axios from "axios"
 
-export default function handler(req, res) {
-  if(req.method === 'GET'){
-    const { thread } = req.body
+export default async function handler(req, res) {
+  if(req.method === 'POST'){
+    try {
+      const { thread } = req.body
 
-    axios.get(`${ApiUrls.commentsuserrelation}?thread=${thread}`)
-      .then(({ data }) => {
-        res.status(200).json(data)
-      })
+      const { data } = await axios.get(`${ApiUrls.commentsuserrelation}?thread=${thread}`)
+
+      res.json(data)
+    } catch (error) {
+      res.json({ message: error.response.data });
+    }
   }
 }
