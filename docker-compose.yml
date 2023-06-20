@@ -2,7 +2,6 @@ version: '3.9'
 services:
   appclient:
     build: .
-    # container_name: proxima-crm-client
     ports:
       - 3004:3000
     restart: always
@@ -14,13 +13,11 @@ services:
       - "traefik.http.routers.appclient.tls.certresolver=letsencrypt"
       - "traefik.http.services.appclient.loadbalancer.server.port=3000"
       # use compression
-      - "traefik.http.routers.webclient.middlewares=test-compress"
+      - "traefik.http.routers.appclient.middlewares=test-compress"
       - "traefik.http.middlewares.test-compress.compress=true"
-#    networks:
- #     - traefik_proxy
-
 networks:
   default:
     external:
       name: traefik_proxy
+
 
