@@ -19,7 +19,7 @@ FROM node:latest AS production
 WORKDIR /app
 
 # Copy production build files from the builder phase
-COPY --from=build /app/.next ./.next
+#COPY --from=build /app/.next ./.next
 COPY --from=build /app/__test_utils__ ./__test_utils__
 COPY --from=build /app/components ./components
 #COPY --from=build /app/__test__ ./__test__
@@ -56,3 +56,4 @@ EXPOSE 3000
 
 # Start the application
 CMD ["npm", "run", "dev"]
+
