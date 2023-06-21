@@ -15,9 +15,10 @@ res:
  */
 
 export default async function handler(req, res) {
+    // Run the middleware
+    await runMiddleware(req, res)
+    
     if(req.method === 'POST'){
-        // Run the middleware
-        await runMiddleware(req, res)
         try {
             const {email, password} = req.body
             const { data } = await axios.post(ApiUrls.signin, {
