@@ -1,9 +1,12 @@
 // Retrieve thread of a particular issue
 
 import { ApiUrls } from "@/utils/ApiUrls"
+import runMiddleware from "@/utils/cors"
 import axios from "axios"
 
 export default async function handler(req, res) {
+  // Run the middleware
+  await runMiddleware(req, res)
   if(req.method === 'POST'){
     const { thread_id, issue_id } = req.body
 

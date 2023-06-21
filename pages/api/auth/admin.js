@@ -1,6 +1,7 @@
 //  Register organization admin user
 
 import { ApiUrls } from "@/utils/ApiUrls"
+import runMiddleware from "@/utils/cors"
 import axios from "axios"
 
 /* Route
@@ -25,6 +26,8 @@ Response
 
 
 export default async function handler(req, res) {  
+    // Run the middleware
+  await runMiddleware(req, res)
     if(req.method === 'POST'){
         // register admin
         try {

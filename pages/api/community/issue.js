@@ -4,9 +4,12 @@
 */
 
 import { ApiUrls } from "@/utils/ApiUrls"
+import runMiddleware from "@/utils/cors"
 import axios from "axios"
 
 export default async function handler(req, res) {
+  // Run the middleware
+  await runMiddleware(req, res)
     // retrieve issue
   if(req.method === 'POST'){
     const { community_id, client_id, issue_id, issue, description, solved } = req.body

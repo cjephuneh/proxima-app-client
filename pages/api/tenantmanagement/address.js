@@ -2,9 +2,12 @@
 // Create tenant address
 
 import { ApiUrls } from "@/utils/ApiUrls"
+import runMiddleware from "@/utils/cors"
 import axios from "axios"
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
+  // Run the middleware
+  await runMiddleware(req, res)
   if(req.method === 'POST'){
     const { tenant_id, city, country, postal_code, state, payment_number } = req.body
 

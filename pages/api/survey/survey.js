@@ -3,9 +3,12 @@
  */
 
 import { ApiUrls } from "@/utils/ApiUrls"
+import runMiddleware from "@/utils/cors"
 import axios from "axios"
 
 export default async function handler(req, res) {
+    // Run the middleware
+  await runMiddleware(req, res)
     // create survey
     if(req.method === 'POST'){
     const { tenant_id, survey_topic, survey_description, survey_context, survey_questions, target_audience, survey_type, start_day, end_day } = req.body

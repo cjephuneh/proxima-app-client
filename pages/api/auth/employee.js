@@ -1,5 +1,7 @@
 // Register organization employee
 
+import runMiddleware from "@/utils/cors"
+
 /*
 Request
 
@@ -21,7 +23,9 @@ Response
 
 */
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
+    // Run the middleware
+  await runMiddleware(req, res)
   const { username, first_name, last_name, phonenumber, gender, DOB, user_type, email, password } = req.body
 
   if(req.method === 'POST'){
