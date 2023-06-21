@@ -1,10 +1,13 @@
 // Create a tenant
 
 import { ApiUrls } from "@/utils/ApiUrls"
+import runMiddleware from "@/utils/cors"
 import axios from "axios"
 
 // register tenant
 export default async function handler(req, res) {
+    // Run the middleware
+  await runMiddleware(req, res)
   if(req.method === 'POST'){
         try {
             const { tenant_name, industry } = req.body

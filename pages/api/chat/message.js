@@ -7,9 +7,12 @@
  */
 
 import { ApiUrls } from "@/utils/ApiUrls"
+import runMiddleware from "@/utils/cors"
 import axios from "axios"
 
 export default async function handler(req, res) {
+  // Run the middleware
+  await runMiddleware(req, res)
   if(req.method === 'POST'){
     const { chat_id, text_content, voice_content, message_sender, escalated, channel, topic } = req.body
 

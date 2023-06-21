@@ -1,9 +1,12 @@
 // Retrieve a tenant community
 
 import { ApiUrls } from "@/utils/ApiUrls"
+import runMiddleware from "@/utils/cors"
 import axios from "axios"
 
 export default async function handler(req, res) {
+  // Run the middleware
+  await runMiddleware(req, res)
     // const { community_id, tenant_id } = req.body
 
     // axios.get(`${ApiUrls.averagecomments}?community_id=${community_id}&tenant_id=${tenant_id}`)

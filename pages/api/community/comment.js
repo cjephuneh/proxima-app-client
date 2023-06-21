@@ -7,9 +7,12 @@
 */
 
 import { ApiUrls } from "@/utils/ApiUrls"
+import runMiddleware from "@/utils/cors"
 import axios from "axios"
 
 export default async function handler(req, res) {
+    // Run the middleware
+  await runMiddleware(req, res)
     if(req.method === 'POST'){
         const { thread_id, client_id, comment_id, comment_description } = req.body
     

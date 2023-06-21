@@ -1,3 +1,4 @@
+import runMiddleware from '@/utils/cors';
 import multer from 'multer';
 
 const upload = multer({
@@ -15,6 +16,8 @@ export const config = {
 
 
 export default async function handler(req, res) {
+  // Run the middleware
+  await runMiddleware(req, res)
   try {
     upload.single('audio')(req, res, (err) => {
       if (err instanceof multer.MulterError) {

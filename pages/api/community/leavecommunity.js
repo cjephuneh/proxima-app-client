@@ -1,9 +1,12 @@
 // Let users leave the community
 
 import { ApiUrls } from "@/utils/ApiUrls";
+import runMiddleware from "@/utils/cors";
 import axios from "axios";
 
 export default async function handler(req, res) {
+  // Run the middleware
+  await runMiddleware(req, res)
   if(req.method === 'POST'){
     const { client_id, community_id} = req.body
 
