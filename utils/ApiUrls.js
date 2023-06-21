@@ -1,4 +1,4 @@
-const BASE_URI = 'http://localhost:8000/api'
+const BASE_URI = 'https://core.proximaai.co/api'
 const AUTH_ENDPOINT = BASE_URI + '/auth'
 const TENANT_ENDPOINT = BASE_URI + '/tenantmanagement'
 const CHAT_ENDPOINT = BASE_URI + '/chat'
