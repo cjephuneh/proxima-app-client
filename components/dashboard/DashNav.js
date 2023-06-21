@@ -71,9 +71,9 @@ export default function DashNav(){
                     <p className={showDetails ? (pathname.includes('tickets') ? "text-[#2DABB1]" : "text-gray-500") : "hidden"}>Tickets</p>
                 </Link>
 
-                <Link href={'/dashboard'} className="flex mb-8 items-center gap-2">
-                    <BsPerson className={showDetails ? "h-5 w-5" : "h-8 w-8"} color="gray" />
-                    <p className={showDetails ? "text-gray-500" : "hidden"}>Agents</p>
+                <Link href={'/dashboard/agents'} className="flex mb-8 items-center gap-2">
+                    <BsPerson className={showDetails ? (pathname.includes('agents') ? "h-5 w-5 text-[#2DABB1]" : "h-5 w-5 text-gray-500") : (pathname.includes('agents') ? "h-8 w-8 text-[#2DABB1]" : "h-8 w-8 text-gray-500")} />
+                    <p className={showDetails ? (pathname.includes('agents') ? "text-[#2DABB1]" : "text-gray-500") : "hidden"}>Agents</p>
                 </Link>
 
                 <Link href={'/dashboard/surveys'} className="flex mb-8 items-center gap-2">
