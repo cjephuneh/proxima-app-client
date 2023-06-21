@@ -1,5 +1,7 @@
 // Enable all users to signin
 
+import { ApiUrls } from "@/utils/ApiUrls";
+import axios from "axios";
 import runMiddleware from "@/utils/cors";
 
 /**
@@ -17,7 +19,7 @@ res:
 export default async function handler(req, res) {
     // Run the middleware
     await runMiddleware(req, res)
-    
+
     if(req.method === 'POST'){
         try {
             const {email, password} = req.body
