@@ -109,15 +109,15 @@ export default function AdminDetails(){
     // formik form validation
     const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
         initialValues: {
-            firstname: 'kim',
-            lastname: 'kam',
-            email: 'kam@email.com',
-            gender: 'Male',
-            username: 'qwertykim',
-            password: 'Password123!',
-            confirmPassword: 'Password123!',
-            phonenumber: '254758202697',
-            DOB: '2000-12-12',
+            firstname: '',
+            lastname: '',
+            email: '',
+            gender: '',
+            username: '',
+            password: '',
+            confirmPassword: '',
+            phonenumber: '',
+            DOB: '',
         },
         validationSchema: adminDetailsSchema,
         onSubmit: submitAdminDetails

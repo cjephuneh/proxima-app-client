@@ -8,7 +8,7 @@ export default function PredictedEscalatedIssues() {
             <h2 className='font-semibold text-3xl'>Escalated Issues </h2>
             <p className='text-gray-500'>Issues that require human agents attention</p>
           </div>
-            <h2 className='text-6xl font-semibold'>320</h2>
+            <h2 className='text-6xl font-semibold'>0</h2>
         </div>
 
         <div className="space-y-8 mx-6 flex flex-col">
@@ -28,7 +28,7 @@ export default function PredictedEscalatedIssues() {
                 conic-gradient(#50E471 
  
 
-                    12%, #FFE5D3 0)
+                    0%, #FFE5D3 0)
                 `
             
             }}>

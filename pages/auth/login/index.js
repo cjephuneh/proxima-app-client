@@ -52,8 +52,8 @@ export default function Login(){
     // formik form validation
     const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
         initialValues: {
-            email: 'kim@email33.com',
-            password: '12345678'
+            email: '',
+            password: ''
         },
         validationSchema: loginSchema,
         onSubmit: submitLoginDetails
