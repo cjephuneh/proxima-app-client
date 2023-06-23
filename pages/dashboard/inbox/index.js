@@ -4,19 +4,19 @@ import { CiMail } from "react-icons/ci";
 export default function Inbox(){
     const mails = [
         {
-            title: '',
-            preview: '',
-            time: ''
+            title: 'New survey response',
+            preview: '25 responses so far',
+            time: '12:45 PM'
         },
         {
-            title: '',
-            preview: '',
-            time: ''
+            title: 'New issue raised',
+            preview: 'Juma Aindu just raised an issue',
+            time: '6:45 PM'
         },
         {
-            title: '',
-            preview: '',
-            time: ''
+            title: 'New survey response',
+            preview: '25 responses so far',
+            time: '12:45 PM'
         },
     ]
     return (
