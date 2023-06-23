@@ -103,7 +103,7 @@ export default function OrgName(){
                 </div>
 
                 <div className="mt-10">
-                    <button data-testid='proceed-btn' type="submit" className="border px-20 py-2 rounded bg-[#2DABB1] text-white">{isTenantLoading ? 'Regitering...' : 'Proceed'}</button>
+                    <button data-testid='proceed-btn' type="submit" className="border px-20 py-2 rounded bg-[#2DABB1] text-white">{isTenantLoading ? 'Registering...' : 'Proceed'}</button>
                 </div>
             </form>
         </Layout>
