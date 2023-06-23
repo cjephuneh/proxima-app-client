@@ -42,13 +42,14 @@ export default function GeneralizedMetrics(){
     } = useSelector((state) => state.analytics)
 
     return (
-        <div className="mt-5 bg-white rounded p-4">
-            <h5 className="font-semibold text-xl">Generalized Metrics</h5>
+        <>
+        <div className="p-4 mt-5 bg-white rounded">
+            <h5 className="text-xl font-semibold">Generalized Metrics</h5>
 
             <div className="mt-5 space-y-3">
                 <h5 className="text-lg text-gray-700">Community Metrics</h5>
                 <div className="flex gap-6">
-                    <div className="border-l p-3 flex flex-col">
+                    <div className="flex flex-col p-3 border-l">
                         <p className="text-gray-500">Average comments</p>
                         {
                             isAverageCommentsLoading ? <BounceLoader color="#36d7b7" size={20} /> : 
@@ -65,7 +66,7 @@ export default function GeneralizedMetrics(){
                             )
                         }
                     </div>
-                    <div className="border-l p-3 flex flex-col">
+                    <div className="flex flex-col p-3 border-l">
                         <p className="text-gray-500">Community Growth Rate</p>
                         {
                             isCommunityGrowthRateLoading ? <BounceLoader color="#36d7b7" size={20} /> : 
@@ -82,7 +83,7 @@ export default function GeneralizedMetrics(){
                             )
                         }
                     </div>
-                    <div className="border-l p-3 flex flex-col">
+                    <div className="flex flex-col p-3 border-l">
                         <p className="text-gray-500">Community Members</p>
                         {
                             isCommunityMembersLoading ? <BounceLoader color="#36d7b7" size={20} /> : 
@@ -99,7 +100,7 @@ export default function GeneralizedMetrics(){
                             )
                         }
                     </div>
-                    <div className="border-l p-3 flex flex-col">
+                    <div className="flex flex-col p-3 border-l">
                         <p className="text-gray-500">Community Rating</p>
                         {
                             isCommunityRatingLoading ? <BounceLoader color="#36d7b7" size={20} /> : 
@@ -119,7 +120,7 @@ export default function GeneralizedMetrics(){
                 </div>
 
                 <div className="flex gap-6">
-                    <div className="border-l p-3 flex flex-col">
+                    <div className="flex flex-col p-3 border-l">
                         <p className="text-gray-500">Cumulative Comments</p>
                         {
                             isCumulativeCommentsLoading ? <BounceLoader color="#36d7b7" size={20} /> : 
@@ -136,7 +137,7 @@ export default function GeneralizedMetrics(){
                             )
                         }
                     </div>
-                    <div className="border-l p-3 flex flex-col">
+                    <div className="flex flex-col p-3 border-l">
                         <p className="text-gray-500">Cumulative issues</p>
                         {
                             isCumulativeIssuesLoading ? <BounceLoader color="#36d7b7" size={20} /> : 
@@ -153,13 +154,13 @@ export default function GeneralizedMetrics(){
                             )
                         }
                     </div>
-                    <div className="border-l p-3 flex flex-col">
+                    <div className="flex flex-col p-3 border-l">
                         <p className="text-gray-500">Unique Comments per Issue</p>
                         {
                             isUniqueCommentsLoading ? <BounceLoader color="#36d7b7" size={20} /> : 
 
                             (
-                                isUniqueCommentsSuccess && uniquecomments ?
+                                isUniqueCommentsSuccess && Array.isArray(uniquecomments) ?
                                 <p className="text-xl font-semibold">{uniquecomments.reduce((accumulator, element) => accumulator + element.total, 0)}</p> :
 
                                 (
@@ -170,7 +171,7 @@ export default function GeneralizedMetrics(){
                             )
                         }
                     </div>
-                    <div className="border-l p-3 flex flex-col">
+                    <div className="flex flex-col p-3 border-l">
                         <p className="text-gray-500">Cumulative Voice messages</p>
                         {
                             isCumulativeVoiceMessageLoading ? <BounceLoader color="#36d7b7" size={20} /> : 
@@ -190,7 +191,7 @@ export default function GeneralizedMetrics(){
                 </div>
 
                 <div className="flex gap-6">
-                    <div className="border-l p-3 flex flex-col">
+                    <div className="flex flex-col p-3 border-l">
                         <p className="text-gray-500">Average Voice Messages per chat</p>
                         {
                             isAverageVoiceMessagesPerChatLoading ? <BounceLoader color="#36d7b7" size={20} /> : 
@@ -207,7 +208,7 @@ export default function GeneralizedMetrics(){
                             )
                         }
                     </div>
-                    <div className="border-l p-3 flex flex-col">
+                    <div className="flex flex-col p-3 border-l">
                         <p className="text-gray-500">Total Surveys</p>
                         {
                             isTotalSurveysLoading ? <BounceLoader color="#36d7b7" size={20} /> : 
@@ -224,7 +225,7 @@ export default function GeneralizedMetrics(){
                             )
                         }
                     </div>
-                    <div className="border-l p-3 flex flex-col">
+                    <div className="flex flex-col p-3 border-l">
                         <p className="text-gray-500">Survey Response Rate</p>
                         {
                             isSurveyResponseRateLoading ? <BounceLoader color="#36d7b7" size={20} /> : 
@@ -244,5 +245,6 @@ export default function GeneralizedMetrics(){
                 </div>
             </div>
         </div>
+        </>
     )
 }

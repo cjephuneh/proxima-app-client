@@ -109,15 +109,15 @@ export default function AdminDetails(){
     // formik form validation
     const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
         initialValues: {
-            firstname: 'kim',
-            lastname: 'kam',
-            email: 'kam@email.com',
-            gender: 'Male',
-            username: 'qwertykim',
-            password: 'Password123!',
-            confirmPassword: 'Password123!',
-            phonenumber: '254758202697',
-            DOB: '2000-12-12',
+            firstname: '',
+            lastname: '',
+            email: '',
+            gender: '',
+            username: '',
+            password: '',
+            confirmPassword: '',
+            phonenumber: '',
+            DOB: '',
         },
         validationSchema: adminDetailsSchema,
         onSubmit: submitAdminDetails
@@ -126,8 +126,8 @@ export default function AdminDetails(){
     return(
         <Layout>
             <div className="flex flex-col items-center mt-16">
-                <h2 className="font-semibold text-3xl">Let us know more about you</h2>
-                <p className="mt-3 text-gray-500 text-center">Enter your details below</p>
+                <h2 className="text-3xl font-semibold">Let us know more about you</h2>
+                <p className="mt-3 text-center text-gray-500">Enter your details below</p>
 
                 {/* {
                     showErrors && (
@@ -152,7 +152,7 @@ export default function AdminDetails(){
                                 onBlur={handleBlur} 
                                 className={errors.username && touched.username ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
                             />
-                            {touched.username && errors?.username && (<p className='text-red-500 text-sm'>{errors.username}</p>)}
+                            {touched.username && errors?.username && (<p className='text-sm text-red-500'>{errors.username}</p>)}
                         </div>
                         <div className="flex flex-col">
                             <label>First name</label>
@@ -165,7 +165,7 @@ export default function AdminDetails(){
                                 onBlur={handleBlur} 
                                 className={errors.firstname && touched.firstname ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
                             />
-                            {touched.firstname && errors?.firstname && (<p className='text-red-500 text-sm'>{errors.firstname}</p>)}
+                            {touched.firstname && errors?.firstname && (<p className='text-sm text-red-500'>{errors.firstname}</p>)}
                         </div>
                         <div className="flex flex-col">
                             <label>Last Name</label>
@@ -178,7 +178,7 @@ export default function AdminDetails(){
                                 onBlur={handleBlur} 
                                 className={errors.lastname && touched.lastname ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
                             />
-                            {touched.lastname && errors?.lastname && (<p className='text-red-500 text-sm'>{errors.lastname}</p>)}
+                            {touched.lastname && errors?.lastname && (<p className='text-sm text-red-500'>{errors.lastname}</p>)}
                         </div>
                     </div>
 
@@ -194,7 +194,7 @@ export default function AdminDetails(){
                                 onBlur={handleBlur} 
                                 className={errors.DOB && touched.DOB ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
                             />
-                            {touched.DOB && errors?.DOB && (<p className='text-red-500 text-sm'>{errors.DOB}</p>)}
+                            {touched.DOB && errors?.DOB && (<p className='text-sm text-red-500'>{errors.DOB}</p>)}
                         </div>
                         
                         <div className="flex flex-col">
@@ -208,7 +208,7 @@ export default function AdminDetails(){
                                 onBlur={handleBlur} 
                                 className={errors.email && touched.email ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
                             />
-                            {touched.email && errors?.email && (<p className='text-red-500 text-sm'>{errors.email}</p>)}
+                            {touched.email && errors?.email && (<p className='text-sm text-red-500'>{errors.email}</p>)}
                         </div>
                         <div className="flex flex-col">
                             <label>Phone Number</label>
@@ -221,7 +221,7 @@ export default function AdminDetails(){
                                 onBlur={handleBlur} 
                                 className={errors.phonenumber && touched.phonenumber ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
                             />
-                            {touched.phonenumber && errors?.phonenumber && (<p className='text-red-500 text-sm'>{errors.phonenumber}</p>)}
+                            {touched.phonenumber && errors?.phonenumber && (<p className='text-sm text-red-500'>{errors.phonenumber}</p>)}
                         </div>
                     </div>
 
@@ -241,9 +241,9 @@ export default function AdminDetails(){
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
-                            {touched.gender && errors?.gender && (<p className='text-red-500 text-sm'>{errors.gender}</p>)}
+                            {touched.gender && errors?.gender && (<p className='text-sm text-red-500'>{errors.gender}</p>)}
                         </div>
-                        <div className="flex flex-col w-full relative">
+                        <div className="relative flex flex-col w-full">
                             <label>Password</label>
                             <input 
                                 type="password" 
@@ -254,7 +254,7 @@ export default function AdminDetails(){
                                 onBlur={handleBlur} 
                                 className={errors.password && touched.password ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
                             />
-                            {touched.password && errors?.password && (<p className='absolute -bottom-5 text-red-500 break-words text-sm'>{errors.password}</p>)}
+                            {touched.password && errors?.password && (<p className='absolute text-sm text-red-500 break-words -bottom-5'>{errors.password}</p>)}
                         </div>
                         <div className="flex flex-col w-full">
                             <label>Confirm Password</label>
@@ -267,7 +267,7 @@ export default function AdminDetails(){
                                 onBlur={handleBlur} 
                                 className={errors.confirmPassword && touched.confirmPassword ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
                             />
-                            {touched.confirmPassword && errors?.confirmPassword && (<p className='text-red-500 text-sm'>{errors.confirmPassword}</p>)}
+                            {touched.confirmPassword && errors?.confirmPassword && (<p className='text-sm text-red-500'>{errors.confirmPassword}</p>)}
                         </div>
                     </div>
 
