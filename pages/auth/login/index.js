@@ -52,8 +52,8 @@ export default function Login(){
     // formik form validation
     const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
         initialValues: {
-            email: 'kim@email33.com',
-            password: '12345678'
+            email: '',
+            password: ''
         },
         validationSchema: loginSchema,
         onSubmit: submitLoginDetails
@@ -62,8 +62,8 @@ export default function Login(){
     return(
         <Layout>
             <div className="flex flex-col items-center mt-16">
-                <h2 className="font-semibold text-3xl">Welcome back!</h2>
-                <p className="mt-3 text-gray-500 text-center">Log in to proceed</p>
+                <h2 className="text-3xl font-semibold">Welcome back!</h2>
+                <p className="mt-3 text-center text-gray-500">Log in to proceed</p>
 
                 <form onSubmit={handleSubmit} className="mt-12 space-y-4">
                     <div className="flex flex-col">
@@ -79,7 +79,7 @@ export default function Login(){
                             placeholder="example@domain.com" 
                             className={errors.email && touched.email ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
                         />
-                        {touched.email && errors?.email && (<p className='text-red-500 text-sm'>{errors.email}</p>)}
+                        {touched.email && errors?.email && (<p className='text-sm text-red-500'>{errors.email}</p>)}
                     </div>
 
                     <div className="flex flex-col">
@@ -95,7 +95,7 @@ export default function Login(){
                             placeholder="password" 
                             className={errors.password && touched.password ? 'focus:outline-none border-2 border-red-500 rounded px-4 py-2 bg-white' : 'focus:outline-none border rounded px-4 py-2 bg-white'}
                         />
-                        {touched.password && errors?.password && (<p className='text-red-500 text-sm'>{errors.password}</p>)}
+                        {touched.password && errors?.password && (<p className='text-sm text-red-500'>{errors.password}</p>)}
                     </div>
 
                     <div className="flex items-center justify-center">
