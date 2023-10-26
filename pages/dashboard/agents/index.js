@@ -5,7 +5,9 @@ export default function VirtualAgentsConfiguration(){
     return (
         <DashLayout>
             <div className="w-full h-full overflow-hidden">
-                <h1 className="font-semibold text-2xl">Virtual Agents</h1>
+                <h1 className="font-semibold text-2xl">Virtua
+        
+    l Agents</h1>
                 <div className="mt-5 flex gap-6 h-full">
                    <div className="bg-white w-[10%] rounded p-4 h-fit space-y-3">
                         <button className="w-full bg-[#2DABB1] rounded py-1 text-center text-white">Profile</button>
